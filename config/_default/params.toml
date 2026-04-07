@@ -1,0 +1,51 @@
+mainSections   = ["post"]
+rssFullContent = true
+SortBy         = "default"
+
+[footer]
+  since      = 2026
+  customText = ""
+
+[dateFormat]
+  published   = "2006-01-02"
+  lastUpdated = "2006-01-02"
+
+[sidebar]
+  compact  = false
+  emoji    = "🔥"
+  subtitle = "探索无限，从月球基地开始"
+  avatar   = "img/avatar.jpg"
+
+[article]
+  headingAnchor = true
+  math          = false
+  toc           = true
+  readingTime   = true
+
+  [article.list]
+    showTags = true
+
+  [article.license]
+    enabled = false
+
+[widgets]
+  homepage = [
+    { type = "search" },
+    { type = "archives", params = { limit = 5 } },
+    { type = "tag-cloud", params = { limit = 10 } },
+  ]
+  page = [{ type = "toc" }]
+
+[colorScheme]
+  toggle  = true
+  default = "auto"
+
+[imageProcessing]
+  [imageProcessing.content]
+    widths  = [800, 1600, 2400]
+    enabled = true
+  [imageProcessing.thumbnail]
+    enabled = true
+
+[comments]
+  enabled = false

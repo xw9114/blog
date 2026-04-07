@@ -1,0 +1,78 @@
+.section-card {
+    @include card-style;
+    padding: var(--small-card-padding);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+
+    --separation: 15px;
+
+    .section-term {
+        font-size: 2.2rem;
+        margin: 0;
+        color: var(--card-text-color-main);
+    }
+
+    .section-description {
+        font-weight: normal;
+        color: var(--card-text-color-secondary);
+        font-size: 1.6rem;
+        margin: 0;
+    }
+
+    .section-details {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .section-image {
+        img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
+    }
+
+    .section-count {
+        color: var(--card-text-color-tertiary);
+        font-size: 1.4rem;
+        margin: 0;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+
+.subsection-list {
+    --shadow-overlap-x: calc(var(--shadow-l2-blur) + 4px);
+    --shadow-overlap-y: calc(var(--shadow-l2-blur) + var(--shadow-l2-y) + 4px);
+
+    overflow-x: auto;
+
+    /// These values are computed from the shadow of the article-list--tile (which uses shadow-l1 and shadow-l2)
+    /// so that the shadow is not cut off
+    margin-left: calc(var(--shadow-overlap-x) * -1);
+    margin-right: calc(var(--shadow-overlap-x) * -1);
+    margin-bottom: calc(var(--shadow-overlap-y) * -1);
+    
+    .article-list--tile {
+        display: flex;
+        padding: var(--spacing-xs) var(--shadow-overlap-x) var(--shadow-overlap-y) var(--shadow-overlap-x);
+        width: max-content;
+        gap: var(--spacing-lg);
+
+        article {
+            flex-shrink: 0;
+
+            .article-title {
+                margin: 0;
+                font-size: 1.8rem;
+            }
+
+            .article-details {
+                padding: var(--spacing-lg);
+            }
+        }
+    }
+}

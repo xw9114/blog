@@ -1,0 +1,9 @@
+// 限制文章列表封面图高度，防止图片过大撑开卡片
+.article-image {
+    img {
+        max-height: 200px;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}

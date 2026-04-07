@@ -1,0 +1,27 @@
+baseURL = "http://localhost:1313/"
+languageCode = "zh-CN"
+defaultContentLanguage = "zh-cn"
+hasCJKLanguage = true
+title = "月球基地"
+theme = "Stack"
+
+[pagination]
+  pagerSize = 5
+
+[permalinks]
+  post = "/p/:slug/"
+  page = "/:slug/"
+
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

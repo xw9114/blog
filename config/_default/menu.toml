@@ -1,0 +1,52 @@
+[[main]]
+  identifier = "home"
+  name       = "主页"
+  url        = "/"
+  weight     = 1
+
+  [main.params]
+    icon = "home"
+
+[[main]]
+  identifier = "archives"
+  name       = "归档"
+  url        = "/archives/"
+  weight     = 2
+
+  [main.params]
+    icon = "archives"
+
+[[main]]
+  identifier = "search"
+  name       = "搜索"
+  url        = "/search/"
+  weight     = 3
+
+  [main.params]
+    icon = "search"
+
+[[main]]
+  identifier = "about"
+  name       = "关于"
+  url        = "/about/"
+  weight     = 4
+
+  [main.params]
+    icon = "user"
+
+[[main]]
+  identifier = "links"
+  name       = "链接"
+  url        = "/links/"
+  weight     = 5
+
+  [main.params]
+    icon = "link"
+
+[[social]]
+  identifier = "github"
+  name       = "GitHub"
+  url        = "https://github.com/"
+
+  [social.params]
+    icon = "brand-github"
