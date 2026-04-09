@@ -6,7 +6,7 @@ draft: false
 description: "博客搭建完成，记录一下搭建过程"
 tags: ["Hugo", "博客", "静态站点"]
 categories: ["教程"]
-image: "Gemini_Generated_Image_jfc581jfc581jfc5.png"
+image: 'cover.jpg'
 ---
 
 ## 博客搭建完成
