@@ -11,6 +11,6 @@ slug: "about"
 
 本站使用 [Hugo](https://gohugo.io/) 构建，主题为 [Stack](https://github.com/CaiJimmy/hugo-theme-stack)
 
-本站内容全借助ai生成,可能存在问题
+由于我的能力问题,文档可能存在错误(希望谅解)
 
-本站初衷:记录学习过程，分享学习资料
+本站初衷:记录学习过程，分享学习资料，实用学习工具
