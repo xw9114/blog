@@ -34,7 +34,6 @@ P2 &= 0x1F;              // 3. 关闭锁存器，锁定数据
 ```c
 #include <STC15F2K60S2.H>
 #include <absacc.h>
-
 // ================== 核心外设内存地址映射 ==================
 #define LED_ADDR         0x8000  // 译码器 Y4C 通道
 #define BEEP_RELAY_ADDR  0xA000  // 译码器 Y5C 通道
