@@ -32,6 +32,25 @@ image: ""
  * @brief 模拟协议解析中心
  * @param rx_buffer 串口接收缓冲区
  */
+int strcmp(const char *str1, const char *str2);
+//返回 0： 两个字符串完全一模一样。（这是我们最常用的判断条件）
+//返回 > 0 的数： 在第一个不相同的字符上，str1 的 ASCII 码大于 str2。
+//返回 < 0 的数： 在第一个不相同的字符上，str1 的 ASCII 码小于 str2。
+int sscanf(const char *str, const char *format, ...);
+//sscanf 的返回值只与一件事有关：成功匹配并提取赋值的变量个数。
+
+// 案例 A：完美匹配
+// 期望提取 3 个变量，实际也成功了 3 个
+int count1 = sscanf("12 3.14 hello", "%d %f %s", &a, &b, str);
+// 结果：count1 的值是 3。
+
+// 案例 B：半路夭折（部分匹配）
+// 期望提取 3 个变量。提取了 12 给 a (成功1个)。
+// 接着想提取浮点数给 b，但是遇到了字母 "abc"，匹配失败！
+// sscanf 会在这里立刻停下，不再管后面的变量。
+int count2 = sscanf("12 abc hello", "%d %f %s", &a, &b, str);
+// 结果：count2 的值是 1。a 变成了 12，b 和 str 保持原样不动。
+
 void Protocol_Handler(const char *rx_buffer) {
     // 场景 A: 使用 strcmp 进行轻量级匹配 (适用于 8位/32位全平台)
     // 匹配简单的开关指令
