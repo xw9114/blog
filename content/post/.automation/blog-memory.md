@@ -11,6 +11,7 @@
 - 2026-04-21: MPU6050 姿态解算与零偏校准 -> `D:/blog/content/post/14/mpu6050.md`
 - 2026-04-21: STM32 硬件定时器与中断机制 -> `D:/blog/content/post/16/timer.md`
 - 2026-04-22: OpenCV 基础图像处理与颜色识别 -> `D:/blog/content/post/17/opencv-color.md`
+- 2026-04-22: 电机驱动 (TB6612FNG) 与死区控制 -> `D:/blog/content/post/18/tb6612-deadzone.md`
 
 ## 运行记录
 
@@ -41,3 +42,23 @@
   - 实现约束: 代码采用 OpenCV C++ 风格，覆盖 HSV 阈值、色相回绕、形态学净化、轮廓质心提取、像素到控制坐标的线性映射与边界限幅处理。
   - 提交状态: 已调用 `D:/blog/content/post/.automation/push-blog-auto.bat`，但自动提交失败。
   - 失败原因: `git add` 无法创建 `D:/blog/.git/index.lock`，且当前不存在残留 `index.lock` 文件，属于 `.git` 目录写入权限受限。
+
+- 2026-04-22 10:08:50 +08:00
+  - 修复动作: 在允许写入 `.git` 后重试提交链路，确认问题仅为沙箱权限限制，而非 Git 锁文件残留。
+  - 验证结果: 沙箱外执行 `git add` 正常，随后重新调用 `D:/blog/content/post/.automation/push-blog-auto.bat` 成功。
+  - 最近提交: `b772c4052cd90fdcbf788dbe75fd5630133e7543`
+  - 提交说明: `auto(blog): skill-opencv-image-processing-color-recognition`
+
+- 2026-04-22 10:12:27 +08:00
+  - 状态判断: 文章生成链路与提交脚本本身均已验证可用。
+  - 自动化前提: 下次是否可无人值守成功，取决于自动化运行环境是否持续拥有 `.git` 写权限，或已持久放行 `D:/blog/content/post/.automation/push-blog-auto.bat` 这条提交前缀。
+  - 风险提示: 若权限仍回到受限沙箱，失败点仍会落在 `git add` 创建 `D:/blog/.git/index.lock`。
+
+- 2026-04-22 10:21:42 +08:00
+  - 输出文章: `D:/blog/content/post/18/tb6612-deadzone.md`
+  - 决策说明: 在剩余未重复主题 I2C/UART、PID、TB6612FNG 三项中随机选中 TB6612FNG 方向，继续保证与此前自动生成主题不重复。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从数字控制到物理执行链路”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，覆盖 H 桥方向控制、启动死区补偿、换向死区保护、PWM 映射公式、短刹车与边界限幅处理。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat`。
+  - 提交状态: 已调用 `D:/blog/content/post/.automation/push-blog-auto.bat`，但自动提交失败。
+  - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
