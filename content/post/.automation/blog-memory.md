@@ -10,6 +10,7 @@
 
 - 2026-04-21: MPU6050 姿态解算与零偏校准 -> `D:/blog/content/post/14/mpu6050.md`
 - 2026-04-21: STM32 硬件定时器与中断机制 -> `D:/blog/content/post/16/timer.md`
+- 2026-04-22: OpenCV 基础图像处理与颜色识别 -> `D:/blog/content/post/17/opencv-color.md`
 
 ## 运行记录
 
@@ -32,3 +33,11 @@
 - 2026-04-21 21:30:00 +08:00
   - 提交状态: 已调用 `D:/blog/content/post/.automation/push-blog-auto.bat`，但自动提交失败。
   - 失败原因: `git add` 无法创建 `D:/blog/.git/index.lock`，返回 `Permission denied`。
+
+- 2026-04-22 10:00:31 +08:00
+  - 输出文章: `D:/blog/content/post/17/opencv-color.md`
+  - 决策说明: 按主题池排除已使用的 MPU6050 与 STM32 定时器主题后，随机选中 OpenCV 方向，并继续避开仓库内已较充分展开的 I2C/UART 与 H 桥主线。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从物理到数字映射”的叙述风格。
+  - 实现约束: 代码采用 OpenCV C++ 风格，覆盖 HSV 阈值、色相回绕、形态学净化、轮廓质心提取、像素到控制坐标的线性映射与边界限幅处理。
+  - 提交状态: 已调用 `D:/blog/content/post/.automation/push-blog-auto.bat`，但自动提交失败。
+  - 失败原因: `git add` 无法创建 `D:/blog/.git/index.lock`，且当前不存在残留 `index.lock` 文件，属于 `.git` 目录写入权限受限。
