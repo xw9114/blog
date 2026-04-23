@@ -8,6 +8,11 @@
 
 ## 已用主题
 
+- 2026-04-23
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: 无
+  - 文章路径: `D:/blog/content/post/20/can-arbitration.md`
 - 2026-04-21
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: MPU6050 姿态解算与零偏校准
@@ -36,6 +41,17 @@
 
 ## 运行记录
 
+- 2026-04-23 19:04:40 +08:00
+  - 输出文章: `D:/blog/content/post/20/can-arbitration.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: 无
+  - 决策说明: 最近几篇已覆盖 MCU 架构、视觉与电机控制维度，因此优先切换到尚未使用的工业总线方向；在剩余未用一级主题中选择 CAN 仲裁，重点放在线与电路、位时序、采样点、错误封闭与优先级映射，而不是停留在 HAL API 调用层。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从物理线路到时域契约”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，覆盖标准 ID 位域设计、位时序搜索公式、采样点约束、发送邮箱限流与 Bus-Off 最小恢复逻辑。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/20/can-arbitration.md" "auto(blog): skill-can-bus-arbitration-wired-and-non-destructive-contention"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
 - 2026-04-21 20:10:52 +08:00
   - 输出文章: `D:/blog/content/post/14/mpu6050.md`
   - 决策说明: 避开仓库中已有的 I2C 与 H 桥相关主题，选择未重复的 MPU6050 主题。
