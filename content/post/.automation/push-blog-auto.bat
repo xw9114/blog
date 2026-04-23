@@ -3,7 +3,7 @@ setlocal
 
 cd /d "D:\blog" || goto :error
 
-:: 若存在残留 index.lock，则先尝试清理。
+REM Cleanup stale index.lock before staging.
 if exist ".git\index.lock" (
     echo Detected Git lock file. Cleaning up...
     del /f /q ".git\index.lock"
@@ -20,7 +20,7 @@ set "article=%~1"
 set "msg=%~2"
 if "%msg%"=="" set "msg=auto(blog): add daily post"
 
-:: 根据是否提供文章路径进行添加。
+REM Stage the target article and automation memory.
 if "%article%"=="" (
     git add -- "content/post"
 ) else (
@@ -28,7 +28,7 @@ if "%article%"=="" (
 )
 if errorlevel 1 goto :error
 
-:: 检查是否有变动需要提交。
+REM Commit only when staged content is present.
 git diff --cached --quiet
 set "diff_rc=%errorlevel%"
 

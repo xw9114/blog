@@ -9,6 +9,11 @@
 ## 已用主题
 
 - 2026-04-23
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
+  - 二级技术切面: 无
+  - 文章路径: `D:/blog/content/post/21/kalman-filter.md`
+- 2026-04-23
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
   - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
   - 二级技术切面: 无
@@ -41,6 +46,17 @@
 
 ## 运行记录
 
+- 2026-04-23 21:23:39 +08:00
+  - 输出文章: `D:/blog/content/post/21/kalman-filter.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
+  - 二级技术切面: 无
+  - 决策说明: 最近几篇已覆盖工业总线、MCU 架构、视觉与电机控制维度，因此优先回到最近几篇未覆盖的控制理论方向；在未使用一级主题中进一步避开仓库里已有的 UART、I2C、SPI、MPU6050 与基础通信旧文后，选择卡尔曼滤波，并把重点放在离散状态方程、协方差传播、创新量与先验信任分配，而不是停留在“滤波更平滑”的表层叙述。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从概率预算回到物理时基”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 使用场景，覆盖 2 状态角度/零偏模型、状态方程离散化、Joseph Form 协方差更新、dt 限幅、方差边界保护与 MPU6050 原始量到姿态角的映射。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/21/kalman-filter.md" "auto(blog): skill-kalman-filter-derivation-and-prior-belief"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 首次执行时 `cmd` 将批处理中的中文 `::` 注释误解析为命令；将 `push-blog-auto.bat` 的 3 处注释改为 ASCII `REM` 后重试，最终失败点仍为 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`。
 - 2026-04-23 19:04:40 +08:00
   - 输出文章: `D:/blog/content/post/20/can-arbitration.md`
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
