@@ -3,6 +3,16 @@ setlocal
 
 cd /d "D:\blog" || goto :error
 
+:: 若存在残留 index.lock，则先尝试清理。
+if exist ".git\index.lock" (
+    echo Detected Git lock file. Cleaning up...
+    del /f /q ".git\index.lock"
+    if exist ".git\index.lock" (
+        echo Failed to remove .git\index.lock
+        goto :error
+    )
+)
+
 for /f "delims=" %%i in ('git rev-parse --abbrev-ref HEAD 2^>nul') do set "branch=%%i"
 if not defined branch goto :error
 
@@ -10,7 +20,7 @@ set "article=%~1"
 set "msg=%~2"
 if "%msg%"=="" set "msg=auto(blog): add daily post"
 
-rem Stage only the generated article and in-repo automation memory when provided.
+:: 根据是否提供文章路径进行添加。
 if "%article%"=="" (
     git add -- "content/post"
 ) else (
@@ -18,11 +28,18 @@ if "%article%"=="" (
 )
 if errorlevel 1 goto :error
 
-rem Exit early when there is nothing staged for commit.
+:: 检查是否有变动需要提交。
 git diff --cached --quiet
-if not errorlevel 1 (
+set "diff_rc=%errorlevel%"
+
+if "%diff_rc%"=="0" (
     echo No staged blog changes to commit.
     goto :end
+)
+
+if not "%diff_rc%"=="1" (
+    echo [Error] Failed to inspect staged changes.
+    goto :error
 )
 
 git commit -m "%msg%"
@@ -35,7 +52,9 @@ echo Auto push finished: origin/%branch%
 goto :end
 
 :error
-echo Auto push failed. Please check git output above.
+echo Auto push failed.
+echo Please check git output above.
+endlocal & exit /b 1
 
 :end
-endlocal
+endlocal & exit /b 0
