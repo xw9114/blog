@@ -8,10 +8,31 @@
 
 ## 已用主题
 
-- 2026-04-21: MPU6050 姿态解算与零偏校准 -> `D:/blog/content/post/14/mpu6050.md`
-- 2026-04-21: STM32 硬件定时器与中断机制 -> `D:/blog/content/post/16/timer.md`
-- 2026-04-22: OpenCV 基础图像处理与颜色识别 -> `D:/blog/content/post/17/opencv-color.md`
-- 2026-04-22: 电机驱动 (TB6612FNG) 与死区控制 -> `D:/blog/content/post/18/tb6612-deadzone.md`
+- 2026-04-21
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: MPU6050 姿态解算与零偏校准
+  - 二级技术切面: 无
+  - 文章路径: `D:/blog/content/post/14/mpu6050.md`
+- 2026-04-21
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 硬件定时器与中断机制
+  - 二级技术切面: 无
+  - 文章路径: `D:/blog/content/post/16/timer.md`
+- 2026-04-22
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 基础图像处理与颜色识别
+  - 二级技术切面: 无
+  - 文章路径: `D:/blog/content/post/17/opencv-color.md`
+- 2026-04-22
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: 电机驱动 (TB6612FNG) 与死区控制
+  - 二级技术切面: 无
+  - 文章路径: `D:/blog/content/post/18/tb6612-deadzone.md`
+- 2026-04-23
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
+  - 二级技术切面: 无
+  - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
 
@@ -61,4 +82,16 @@
   - 实现约束: 代码采用 STM32 HAL 风格，覆盖 H 桥方向控制、启动死区补偿、换向死区保护、PWM 映射公式、短刹车与边界限幅处理。
   - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat`。
   - 提交状态: 已调用 `D:/blog/content/post/.automation/push-blog-auto.bat`，但自动提交失败。
+  - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
+
+- 2026-04-23 09:03:50 +08:00
+  - 输出文章: `D:/blog/content/post/19/stm32-adc-dma.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
+  - 二级技术切面: 无
+  - 决策说明: 避开已使用的 MPU6050、定时器、OpenCV 颜色识别与 TB6612FNG 后，优先切回最近几篇未覆盖的 MCU 架构维度，选择未重复的 ADC + DMA 主题，并把重点放在采样保持、通道时序、环形 DMA 窗口和物理量映射。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从模拟量进入数字内存”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，覆盖定时触发、交错缓冲区索引公式、半缓冲处理、分压还原、电流映射、死区限幅与快照一致性控制。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/19/stm32-adc-dma.md" "auto(blog): skill-stm32-dma-multi-channel-adc-memory-transport"`。
+  - 提交状态: 自动提交失败。
   - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
