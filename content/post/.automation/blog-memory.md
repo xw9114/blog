@@ -8,6 +8,11 @@
 
 ## 已用主题
 
+- 2026-04-24
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 相机标定与物理世界的三维重建
+  - 二级技术切面: 无
+  - 文章路径: `D:/blog/content/post/22/opencv-calibration.md`
 - 2026-04-23
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
@@ -46,6 +51,16 @@
 
 ## 运行记录
 
+- 2026-04-24 09:04:39 +08:00
+  - 输出文章: `D:/blog/content/post/22/opencv-calibration.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 相机标定与物理世界的三维重建
+  - 二级技术切面: 无
+  - 决策说明: 最近两篇已覆盖控制理论与工业总线维度，因此优先切回近期未覆盖的视觉方向；在未使用一级主题中继续避开仓库里已有的 UART、I2C、SPI 基础通信旧文与已写过的 OpenCV 颜色识别主题后，选择“OpenCV 相机标定与物理世界的三维重建”，把重点放在针孔模型、畸变参数、重投影误差以及像素到世界平面的几何反投影，而不是停留在标定板采集流程或 API 调用层。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从像素平面回到三维物理世界”的叙述风格。
+  - 实现约束: 代码采用 OpenCV C++ 风格，覆盖棋盘格对象点建模、亚像素角点提取、单目标定、重投影误差计算、PnP 位姿求解与像素射线到 `Z=0` 工作平面的求交，显式写出投影与反投影公式以及误差阈值边界处理。
+  - 提交动作: 完成文章与记忆写入后，不执行任何 Git 命令，也不调用 `D:/blog/content/post/.automation/push-blog-auto.bat`；改为向 `C:/Users/19890/.codex/automations/automation/pending-pushes.jsonl` 追加待同步记录。
+  - 提交状态: 已入队，等待本机 Git 同步任务处理。
 - 2026-04-23 21:23:39 +08:00
   - 输出文章: `D:/blog/content/post/21/kalman-filter.md`
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
