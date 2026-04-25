@@ -8,6 +8,11 @@
 
 ## 已用主题
 
+- 2026-04-25
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 三相电流到 d/q 电流闭环的坐标变换与电压矢量限幅
+  - 文章路径: `D:/blog/content/post/24/foc-clarke-park.md`
 - 2026-04-24
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
   - 一级主题: OpenCV 相机标定与物理世界的三维重建
@@ -51,6 +56,16 @@
 
 ## 运行记录
 
+- 2026-04-25 09:38:36 +08:00
+  - 输出文章: `D:/blog/content/post/24/foc-clarke-park.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 三相电流到 d/q 电流闭环的坐标变换与电压矢量限幅
+  - 决策说明: 最近三篇文章分别覆盖视觉、控制理论与工业总线维度，因此本次优先切到近期未连续覆盖的高阶电机方向；在尚未使用的一级主题中选择数学映射与物理约束最强的 FOC，并把重点放在三相电流约束、Clarke / Park 坐标变换、电角度、PWM 中点采样、d/q 电流 PI 与母线电压矢量限幅，而不是停留在“电机更平滑”或 HAL 初始化层。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从旋转磁场回到数字闭环”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 使用场景，覆盖两电阻电流采样重构、Clarke / Park 变换、离散 PI 电流环、dq 电压矢量限幅、逆 Park 与带共模注入的三相 PWM 映射，显式写出 ADC 到电流、abc 到 alpha/beta、alpha/beta 到 d/q 以及电压到占空比的线性公式，并做边界限幅处理。
+  - 提交动作: 完成文章与记忆写入后，不执行任何 Git 命令，也不调用 `D:/blog/content/post/.automation/push-blog-auto.bat`；改为向 `C:/Users/19890/.codex/automations/automation/pending-pushes.jsonl` 追加待同步记录。
+  - 提交状态: 已入队，等待本机 Git 同步任务处理。
 - 2026-04-24 09:04:39 +08:00
   - 输出文章: `D:/blog/content/post/22/opencv-calibration.md`
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
