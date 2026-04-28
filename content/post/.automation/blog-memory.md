@@ -13,6 +13,11 @@
   - 一级主题: 多传感器融合：视觉坐标系与 MPU6050 姿态的对齐
   - 二级技术切面: 相机外参、时间同步与像素射线的地平面姿态补偿
   - 文章路径: `D:/blog/content/post/27/vision-imu-alignment.md`
+- 2026-04-28
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 空闲时钟、首边沿与次边沿、片选建立时间预算
+  - 文章路径: `D:/blog/content/post/28/spi-cpol-cpha-timing.md`
 - 2026-04-26
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
   - 一级主题: I2C/UART 通信协议底层逻辑
@@ -74,6 +79,15 @@
   - 决策说明: 最近一篇已经回到 MCU 通信方向，控制理论与融合维度在最近几篇里没有连续覆盖；在仍有大量未用一级主题的前提下，本次优先选择“视觉坐标系与 MPU6050 姿态的对齐”，并把切口收束到相机内外参、姿态时间插值、地平面求交与误差传播，避免与已有的 MPU6050 姿态解算和 OpenCV 标定文章重复。
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从像素射线回到重力参考系”的叙述风格。
   - 实现约束: 代码采用 STM32 HAL 使用场景，假设视觉模块通过串口给出目标像素与帧时间戳，MPU6050 上游姿态滤波器给出机体系到重力对齐坐标系的四元数；示例覆盖姿态环形缓冲、四元数时间插值、相机到机体外参映射、像素归一化射线、姿态补偿后的地平面求交、几何退化判定与边界限幅，并显式写出 `r_c = normalize([(u-cx)/fx, (v-cy)/fy, 1])`、`r_l = R_lb * R_bc * r_c` 与 `lambda = -C_l.z / r_l.z` 的映射关系。
+- 2026-04-28 09:53:35 +08:00
+  - 输出文章: `D:/blog/content/post/28/spi-cpol-cpha-timing.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 空闲时钟、首边沿与次边沿、片选建立时间预算
+  - 决策说明: 最近三篇分别覆盖高阶电机、MCU 架构与控制融合维度，因此本次优先回到近几篇未覆盖的工业总线方向；在仍未使用的一级主题里选择 SPI，并刻意避开仓库旧文里“SPI 是什么、全双工是什么”的泛化叙述，把切口收束到 CPOL/CPHA、领先沿/滞后沿、半周期采样预算和 CS 建立保持时间这些更接近物理约束的底层问题。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从数字边沿回到时域合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕设备时序合同构建 SPI 主机封装，覆盖 `CLKPolarity/CLKPhase` 模式映射、基于 `T_sck / 2` 预算的安全 SCK 分频搜索、DWT 纳秒级 `CS` 建立/保持延时、全双工事务与 Dummy Byte 读寄存器流程，并显式写出 `T_sck / 2 >= max(t_do_master + t_flight + t_su_slave, t_co_slave + t_flight + t_su_master)` 与 `cycles = ceil(delay_ns * f_cpu / 1e9)` 的公式。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/28/spi-cpol-cpha-timing.md" "auto(blog): skill-spi-cpol-cpha-idle-polarity-and-sampling-edge-timing-contract"`。
 - 2026-04-26 10:05:36 +08:00
   - 输出文章: `D:/blog/content/post/25/i2c-bus-recovery.md`
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
