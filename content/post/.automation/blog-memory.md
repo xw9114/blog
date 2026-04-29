@@ -8,6 +8,11 @@
 
 ## 已用主题
 
+- 2026-04-29
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: 步进电机 S 型加减速算法：抑制机械谐振的微积分应用
+  - 二级技术切面: jerk 受限轨迹、短行程峰值约束与定时器脉冲映射
+  - 文章路径: `D:/blog/content/post/29/stepper-s-curve.md`
 - 2026-04-27
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: 多传感器融合：视觉坐标系与 MPU6050 姿态的对齐
@@ -71,6 +76,15 @@
 
 ## 运行记录
 
+- 2026-04-29 10:08:32 +08:00
+  - 输出文章: `D:/blog/content/post/29/stepper-s-curve.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: 步进电机 S 型加减速算法：抑制机械谐振的微积分应用
+  - 二级技术切面: jerk 受限轨迹、短行程峰值约束与定时器脉冲映射
+  - 决策说明: 最近三篇文章分别覆盖控制融合、工业总线与 MCU 架构，因此本次优先切回近几篇未覆盖的高阶运动控制方向；在尚未使用的一级主题里选择“步进电机 S 型加减速算法”，并把正文收束到 jerk 有限轨迹、短行程峰值速度求解、STEP 频率到定时器 ARR 的线性映射以及机械谐振抑制，避免与仓库里已写过的 FOC、TB6612FNG 和舵机文章重复。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从数字脉冲回到机电带宽”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 STEP / DIR 驱动器实现对称 S 曲线规划，覆盖整步到线位移映射、长行程与短行程分支求解、前半程解析式采样、减速时间镜像、速度到定时器 ARR / CCR 映射、最小脉宽约束、尾段补步与已发脉冲计数，并显式写出 `f_step = v / l_step`、`ARR ~= f_tim / f_step - 1` 与 `S_total = 2 * j * Tj^3` 等公式。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/29/stepper-s-curve.md" "auto(blog): skill-stepper-s-curve-jerk-limited-trajectory-and-resonance-suppression"`。
 - 2026-04-27 16:14:48 +08:00
   - 输出文章: `D:/blog/content/post/27/vision-imu-alignment.md`
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
