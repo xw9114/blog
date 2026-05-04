@@ -8,6 +8,16 @@
 
 ## 已用主题
 
+- 2026-05-04
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: 硬件中断的边界：触发沿逻辑与信号消抖的博弈
+  - 二级技术切面: EXTI 双沿触发、定时器确认窗与积分式数字消抖
+  - 文章路径: `D:/blog/content/post/31/exti-edge-debounce-window.md`
+- 2026-04-30
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenMV 动态目标追踪与空域滤波算法
+  - 二级技术切面: ROI 门控、3x3 空域滤波与 alpha-beta 质心预测
+  - 文章路径: `D:/blog/content/post/30/openmv-target-tracking.md`
 - 2026-04-29
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: 步进电机 S 型加减速算法：抑制机械谐振的微积分应用
@@ -76,6 +86,25 @@
 
 ## 运行记录
 
+- 2026-05-04 12:06:21 +08:00
+  - 输出文章: `D:/blog/content/post/31/exti-edge-debounce-window.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: 硬件中断的边界：触发沿逻辑与信号消抖的博弈
+  - 二级技术切面: EXTI 双沿触发、定时器确认窗与积分式数字消抖
+  - 决策说明: 最近四篇文章依次覆盖机器视觉、高阶运动控制、工业总线与控制融合，一级主题池中仍有多个未使用主题，因此本次禁止重访旧主题；在剩余可选项里，优先回到最近几篇未覆盖的 MCU 架构维度，并将切口从泛泛的“中断机制”收束到边沿检测、机械反弹、RC 充放电跨阈值、EXTI 挂起位与定时器确认窗这条更贴近物理约束的链路，避免与仓库中已写过的 STM32 定时器文章重复。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从模拟抖动回到离散状态机”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 EXTI 抢占捕获、TIM 周期采样、积分式数字消抖与稳定事件输出展开，显式写出 `V(t) = VDD * (1 - exp(-t / (R * C)))`、`t_rise = -R * C * ln(1 - V_IH / VDD)`、`T_confirm >= T_bounce_max + T_rc_th + T_margin` 与 `acc[k+1] = clamp(acc[k] + (2*x[k] - 1), 0, N)` 等映射关系，并加入共享 EXTI line 屏蔽、超时裁决与边界限幅处理。
+  - 仓库对齐: 运行前发现 `content/post/30/openmv-target-tracking.md` 仍是未跟踪文件，而仓库记忆已记录其为 2026-04-30 文章；本次发布会先将该遗留文件纳入暂存区，再与今日文章和记忆更新一并通过发布脚本提交，消除“记忆已记录但仓库未收录”的断层。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/31/exti-edge-debounce-window.md" "auto(blog): skill-exti-edge-trigger-and-timer-debounce-window"`。
+- 2026-04-30 10:08:29 +08:00
+  - 输出文章: `D:/blog/content/post/30/openmv-target-tracking.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenMV 动态目标追踪与空域滤波算法
+  - 二级技术切面: ROI 门控、3x3 空域滤波与 alpha-beta 质心预测
+  - 决策说明: 最近四篇文章依次覆盖高阶运动控制、工业总线、控制融合与 MCU 架构，视觉维度没有连续堆叠但也未在最近两篇出现；因此在所有未用一级主题里，优先对视觉方向加权，再做受约束随机，最终落到 OpenMV 主题，并把切口收束在曝光拖影、ROI 调度、3x3 空域滤波、连通域矩质心与 alpha-beta 预测这些更接近时空噪声管理的问题上，避免与仓库里已写过的 OpenCV 颜色识别、相机标定和视觉-IMU 对齐文章重复。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从像素噪声回到时空门控”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 OpenMV 式灰度追踪链路实现整帧到 ROI 的搜索收敛、3x3 均值滤波、二值多数滤波、最大连通域矩质心、alpha-beta 预测更新与像素到视轴角误差映射，并显式写出 `L_blur ≈ v_img * T_exp`、`cx = M10 / M00`、`x_new = x_pred + alpha * r` 与 `theta_yaw = atan((u - cx) / fx)` 等关系。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat \"content/post/30/openmv-target-tracking.md\" \"auto(blog): skill-openmv-dynamic-target-tracking-spatial-filtering-and-roi-gating\"`。
 - 2026-04-29 10:08:32 +08:00
   - 输出文章: `D:/blog/content/post/29/stepper-s-curve.md`
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
