@@ -8,6 +8,16 @@
 
 ## 已用主题
 
+- 2026-05-06
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: YOLO 边缘端部署：AI 模型的轻量化与量化裁剪
+  - 二级技术切面: INT8 量化映射、结构化通道剪枝与 NMS 尾延迟预算
+  - 文章路径: `D:/blog/content/post/33/yolo-edge-int8-pruning-nms.md`
+- 2026-05-05
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: PID 算法在平衡车中的应用
+  - 二级技术切面: 姿态环位置式 PD、速度环增量式 PI、采样周期抖动与抗积分饱和
+  - 文章路径: `D:/blog/content/post/32/balance-car-pid-discrete-cascade.md`
 - 2026-05-04
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
   - 一级主题: 硬件中断的边界：触发沿逻辑与信号消抖的博弈
@@ -86,6 +96,26 @@
 
 ## 运行记录
 
+- 2026-05-06 10:11:17 +08:00
+  - 输出文章: `D:/blog/content/post/33/yolo-edge-int8-pruning-nms.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: YOLO 边缘端部署：AI 模型的轻量化与量化裁剪
+  - 二级技术切面: INT8 量化映射、结构化通道剪枝与 NMS 尾延迟预算
+  - 决策说明: 当前一级主题池中仍有 ESP32 双核调度、YOLO 边缘部署与 PCB 高频布局三个未使用主题；最近两篇刚覆盖控制理论与 MCU 架构，因此本次优先切回近期未连续覆盖的视觉与边缘计算维度，并保持“一级主题仍有剩余时禁止重访旧主题”的约束。在剩余候选里，YOLO 主题最适合展开资源调度、误差来源与数学映射，因此正文刻意避开泛化的框架导出教程，把重点落在特征图带宽、结构化通道剪枝、INT8 仿射量化、量化域对象性预筛、letterbox 坐标回映以及 NMS 最坏时延预算，避免与仓库中已写过的 OpenCV、OpenMV 和视觉-IMU 文章重复。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从特征图带宽回到系统时序合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，假设卷积主干已由外部 NPU、DSP 或加速器完成，MCU 负责单检测头的量化后处理；示例覆盖 logit 阈值到 int8 域预筛的映射、仿射反量化、letterbox 坐标反变换、Top-K 候选框插入、带微秒预算的 NMS、边界限幅与最小框过滤，并显式写出 `x_real ≈ scale * (x_q - zero_point)`、`q_thr = round(logit(p_thr) / scale + zero_point)`、`u_f = (u_in - pad_x) / s` 与朴素 `NMS` 近似 `O(N^2)` 的关系。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/33/yolo-edge-int8-pruning-nms.md" "auto(blog): skill-yolo-edge-int8-pruning-and-nms-budget"`。
+- 2026-05-05 15:38:34 +08:00
+  - 输出文章: `D:/blog/content/post/32/balance-car-pid-discrete-cascade.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: PID 算法在平衡车中的应用
+  - 二级技术切面: 姿态环位置式 PD、速度环增量式 PI、采样周期抖动与抗积分饱和
+  - 决策说明: 当前一级主题池里仍有 ESP32 双核调度、YOLO 边缘部署、平衡车 PID 与 PCB 高频布局四个未使用主题；考虑到上一篇刚写完 MCU 架构，近期几篇又已覆盖视觉、工业总线与运动控制，因此本次避免继续停留在 MCU 维度，转而切回控制理论方向。在剩余未使用主题中，仓库只有零散的 PID 与平衡车提及，没有系统成文；于是选择“PID 算法在平衡车中的应用”，并把切口收束到倒立摆线性化、姿态环位置式 PD、速度环增量式 PI、定时采样抖动、执行饱和与 PWM 死区补偿，避免与既有的 MPU6050 姿态解算、Kalman 滤波和 TB6612FNG 驱动文章重复。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从倒立摆失稳回到带宽分配”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 TIM 定时控制步长、编码器测速、一阶低通、速度外环增量式 PI、姿态内环位置式 PD、电池电压到 PWM 的线性映射、跌倒保护与边界限幅展开，显式写出 `J * theta_ddot ≈ m * g * h * theta - tau_wheel`、`delta_u_v[k] = Kp_v * (e_v[k] - e_v[k-1]) + Ki_v * T_s * e_v[k]`、`v[k] = r * 2 * pi * delta_n / (N_rev * T_s)` 与 `PWM = PWM_dead + duty * (ARR - PWM_dead)` 等关系。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/32/balance-car-pid-discrete-cascade.md" "auto(blog): skill-balance-car-pid-discrete-cascade-and-anti-windup"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
 - 2026-05-04 12:06:21 +08:00
   - 输出文章: `D:/blog/content/post/31/exti-edge-debounce-window.md`
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
