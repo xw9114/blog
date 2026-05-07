@@ -8,6 +8,11 @@
 
 ## 已用主题
 
+- 2026-05-07
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: PCB 高频布局与混合信号干扰抑制
+  - 二级技术切面: 回流路径、开关节点 dV/dt 与 ADC 采样静默窗预算
+  - 文章路径: `D:/blog/content/post/34/pcb-return-path-adc-quiet-window.md`
 - 2026-05-06
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
   - 一级主题: YOLO 边缘端部署：AI 模型的轻量化与量化裁剪
@@ -96,6 +101,15 @@
 
 ## 运行记录
 
+- 2026-05-07 09:59:38 +08:00
+  - 输出文章: `D:/blog/content/post/34/pcb-return-path-adc-quiet-window.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: PCB 高频布局与混合信号干扰抑制
+  - 二级技术切面: 回流路径、开关节点 dV/dt 与 ADC 采样静默窗预算
+  - 决策说明: 当前一级主题池中未使用主题只剩 `ESP32 双核调度与 RTOS 任务间的通信机制` 与 `PCB 高频布局与混合信号干扰抑制` 两项；考虑到最近三篇已依次覆盖视觉、控制与 MCU 架构，而 2026-05-04 刚写过 MCU 底层，因此本次优先选择更能展开物理约束、误差链路与采样边界的 PCB 主题，避免立即回到相邻的 RTOS 调度叙事。正文刻意避开“分地经验谈”式泛化总结，把切口收束到回流路径、开关节点 `dV/dt`、地弹噪声、Kelvin 采样、ADC 参考漂移与 PWM 同步采样静默窗预算，确保内容与既有控制、传感器融合和电机文章不重复。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从寄生参数回到时间窗合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕中心对齐 PWM、TIM 触发 ADC、DMA 半缓冲处理、VREFINT 反推 VDDA、去极值均值与静默窗重算展开，显式写出 `V_L = L_parasitic * di/dt`、`e_settle = exp(-T_sample / (R_source * C_sh))`、`V_bus = V_pin * (R_top + R_bottom) / R_bottom` 与 `T_quiet = T_low_conduction - 2 * (T_dead + T_ring + T_aperture / 2)` 等映射关系，并加入静默窗失效与采样扩散超限的边界保护。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/34/pcb-return-path-adc-quiet-window.md" "auto(blog): skill-pcb-return-path-and-adc-quiet-window"`。
 - 2026-05-06 10:11:17 +08:00
   - 输出文章: `D:/blog/content/post/33/yolo-edge-int8-pruning-nms.md`
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
