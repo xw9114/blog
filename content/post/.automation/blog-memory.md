@@ -8,6 +8,11 @@
 
 ## 已用主题
 
+- 2026-05-11
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: ESP32 双核调度与 RTOS 任务间的通信机制
+  - 二级技术切面: 跨核任务通知、队列背压与中断到任务唤醒延迟预算
+  - 文章路径: `D:/blog/content/post/35/esp32-cross-core-notify-backpressure.md`
 - 2026-05-07
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: PCB 高频布局与混合信号干扰抑制
@@ -101,6 +106,17 @@
 
 ## 运行记录
 
+- 2026-05-11 09:03:57 +08:00
+  - 输出文章: `D:/blog/content/post/35/esp32-cross-core-notify-backpressure.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: ESP32 双核调度与 RTOS 任务间的通信机制
+  - 二级技术切面: 跨核任务通知、队列背压与中断到任务唤醒延迟预算
+  - 决策说明: 当前一级主题池中唯一剩余未使用主题已收敛为 `ESP32 双核调度与 RTOS 任务间的通信机制`，因此本次必须优先完成该主题，不能重访旧主题。正文刻意避开泛化的 FreeRTOS API 教程，把切口收束到核心亲和性、跨核任务通知、描述符队列、背压公式、自旋锁临界区以及 `ISR -> Worker -> Control` 的唤醒延迟预算，确保与既有的 STM32 定时器、ADC DMA、中断消抖和 PCB 采样窗口文章形成互补，而不是重复“任务怎么创建”的表层叙述。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从共享内存竞争回到实时合同”的叙述风格。
+  - 实现约束: 代码采用 ESP-IDF FreeRTOS 场景，而非 STM32 HAL；围绕 `xTaskCreateStaticPinnedToCore()`、静态队列、固定槽位、描述符传递、`vTaskNotifyGiveIndexedFromISR()`、`ulTaskNotifyTakeIndexed()`、`portMUX_TYPE` 自旋锁与快照式共享结果展开，显式写出 `B[k+1] = clamp(B[k] + a[k] - s[k], 0, Q)`、`T_overflow ≈ Q / (lambda_prod - mu_cons)`、`T_irq_to_run = T_entry + T_isr + T_ready + T_ipi + T_sched + T_cs_hold` 与 `C + J < T_p` 等关系，并加入队列丢包统计、唤醒预算超限统计与共享临界区缩短策略。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/35/esp32-cross-core-notify-backpressure.md" "auto(blog): skill-esp32-cross-core-notify-and-queue-backpressure"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
 - 2026-05-07 09:59:38 +08:00
   - 输出文章: `D:/blog/content/post/34/pcb-return-path-adc-quiet-window.md`
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
