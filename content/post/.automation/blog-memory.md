@@ -9,6 +9,12 @@
 ## 已用主题
 
 - 2026-05-11
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: 位时序容差、错误计数与 Bus-Off 恢复策略
+  - 文章路径: `D:/blog/content/post/36/can-bit-timing-bus-off-recovery.md`
+
+- 2026-05-11
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
   - 一级主题: ESP32 双核调度与 RTOS 任务间的通信机制
   - 二级技术切面: 跨核任务通知、队列背压与中断到任务唤醒延迟预算
@@ -105,6 +111,18 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-11 10:13:19 +08:00
+  - 输出文章: `D:/blog/content/post/36/can-bit-timing-bus-off-recovery.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: 位时序容差、错误计数与 Bus-Off 恢复策略
+  - 决策说明: 一级主题池已经全部覆盖完成，因此本次进入二级技术切面模式；考虑最近几篇文章连续落在 MCU、控制和视觉维度，本次优先回到近几篇未连续覆盖的工业总线方向。在已用一级主题中选择 CAN，但不重复“显性/隐性仲裁”的旧切口，而是转向采样点、SJW、振荡器相对漂移、TEC/REC 演化与 Bus-Off 最小恢复窗口，确保标题、slug、公式链路和工程问题都与旧文分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从时钟漂移回到故障隔离合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL `bxCAN` 场景，围绕位时序搜索、标准 ID 位域编码、Bus-Off 锁存与任务上下文恢复展开，显式写出 `T_bit = (1 + BS1 + BS2) * T_q`、`sample_point = (1 + BS1) / (1 + BS1 + BS2)`、`phase_error_max <= SJW * T_q`、`Delta_t_drift ≈ T_bit * ppm_rel / 10^6` 与 `T_recover_min = 128 * 11 / bitrate` 等关系，并加入波特率误差限幅、传播延迟约束和恢复等待边界。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/36/can-bit-timing-bus-off-recovery.md" "auto(blog): skill-can-bit-timing-error-budget-and-bus-off-recovery"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
 
 - 2026-05-11 09:03:57 +08:00
   - 输出文章: `D:/blog/content/post/35/esp32-cross-core-notify-backpressure.md`
