@@ -8,6 +8,24 @@
 
 ## 已用主题
 
+- 2026-05-13
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 相机标定与物理世界的三维重建
+  - 二级技术切面: 双目标定的基线误差、视差量化与深度误差传播
+  - 文章路径: `D:/blog/content/post/39/opencv-stereo-disparity-depth-error.md`
+
+- 2026-05-13
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: MPU6050 姿态解算与零偏校准
+  - 二级技术切面: 温漂零偏、静止窗口与零角速度约束
+  - 文章路径: `D:/blog/content/post/38/mpu6050-temp-bias-zero-rate.md`
+
+- 2026-05-12
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 单电阻母线采样窗口、死区补偿与低速电流重构误差
+  - 文章路径: `D:/blog/content/post/37/foc-single-shunt-reconstruction.md`
+
 - 2026-05-11
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
   - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
@@ -111,6 +129,42 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-13 09:04:13 +08:00
+  - 输出文章: `D:/blog/content/post/39/opencv-stereo-disparity-depth-error.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 相机标定与物理世界的三维重建
+  - 二级技术切面: 双目标定的基线误差、视差量化与深度误差传播
+  - 决策说明: 一级主题池已全覆盖，因此继续采用二级技术切面模式；最近三篇依次落在控制、高阶电机与工业总线方向，而视觉维度自 2026-05-06 的 YOLO 文章后未再覆盖，本次优先回到近期未连续出现的视觉主线。在已用一级主题中重访 OpenCV 标定，但避开旧文已经展开的针孔模型、单目标定与平面反投影主链，改把切口收束到双目刚体外参、极线校正残差、亚像素视差、`Z = f_x * B / d` 的深度映射以及 `Delta Z ≈ (Z^2 / (f_x * B)) * Delta d` 的误差传播，确保标题、slug、公式链路和工程问题均与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从基线尺规回到深度可信度合同”的叙述风格。
+  - 实现约束: 代码采用 OpenCV C++ 场景，围绕棋盘格双目标定、单目内参初始化、`stereoCalibrate()` 固定内参求 `R/T/E/F`、`stereoRectify()` 生成 `R1/R2/P1/P2/Q`、校正后平均行误差评估、`StereoSGBM` 亚像素视差计算、3x3 视差窗口稳健均值、`Z = f_x * B / d` 深度映射与 `Delta Z ≈ (f_x * B / d^2) * Delta d` 一阶误差传播展开，并加入有效图像对阈值、基线下限、最小可信视差、最大深度与深度不确定度占比限幅。
+  - 提交动作: 为避免仓库记忆继续指向未入库文章，发布前尝试先将未跟踪文章 `content/post/37/foc-single-shunt-reconstruction.md` 与 `content/post/38/mpu6050-temp-bias-zero-rate.md` 纳入暂存，然后按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/39/opencv-stereo-disparity-depth-error.md" "auto(blog): skill-opencv-stereo-calibration-disparity-depth-error-budget"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 在脚本调用前手动执行 `git add` 暂存 `content/post/37` 与 `content/post/38` 时即失败，脚本再次失败点相同，均为 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；当前工作区仍保留未跟踪目录 `content/post/37/`、`content/post/38/`、`content/post/39/` 与已修改的 `content/post/.automation/blog-memory.md`，说明本次仍受 `.git` 目录写权限限制，而不是提交消息或脚本参数错误。
+
+- 2026-05-13 08:23:51 +08:00
+  - 输出文章: `D:/blog/content/post/38/mpu6050-temp-bias-zero-rate.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: MPU6050 姿态解算与零偏校准
+  - 二级技术切面: 温漂零偏、静止窗口与零角速度约束
+  - 决策说明: 一级主题池已全覆盖，因此继续采用二级技术切面模式；最近三篇依次落在高阶电机、工业总线与 MCU 架构，本次切回近期未连续覆盖的控制与传感方向。在已用一级主题里重访 MPU6050，但避开旧文已经讲过的基础互补滤波与启动静态平均，把切口收束到温漂导致的零偏慢变量、静止窗口判定、零角速度约束与四元数离散积分漂移边界，确保标题、slug、公式链路和工程问题与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从慢变量偏置回到姿态基线合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 MPU6050 连续突发读取、参考温度零偏标定、温漂一阶补偿、静止窗口判定、零角速度约束在线更新、重力方向门控纠偏与四元数积分展开，显式写出 `T = raw_temp / 340 + 36.53`、`b_g(T) = b_g(T_ref) + k_T * (T - T_ref)`、`||omega|| < omega_th` 与 `q_{k+1} = normalize(q_k + 0.5 * Delta_t * Omega(omega_k - b_k) * q_k)`，并加入偏置限幅、温差限幅、静止计数门槛和加速度可信门控。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/38/mpu6050-temp-bias-zero-rate.md" "auto(blog): skill-mpu6050-temperature-bias-and-zero-rate-constraint"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；当前不存在残留 `index.lock`，更像是 `.git` 目录写入权限受限。
+
+- 2026-05-12 09:58:08 +08:00
+  - 输出文章: `D:/blog/content/post/37/foc-single-shunt-reconstruction.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 单电阻母线采样窗口、死区补偿与低速电流重构误差
+  - 决策说明: 一级主题池已全部覆盖，继续采用二级技术切面模式；最近两篇依次落在工业总线与 MCU 架构，视觉和控制维度在更早几篇也刚出现，因此本次优先切回近几篇未连续覆盖的高阶电机方向。在已用一级主题里重访 FOC，但避开旧文已经展开过的 Clarke/Park 基础变换与 dq 电流环主线，把切口收束到低速区真正决定能否稳定闭环的单电阻采样窗口、死区等效电压误差、扇区相关电流重构与不可观测周期退化策略，确保标题、slug、公式链路和工程问题均与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从时域窗口回到电流闭环合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 TIM1 中心对齐 PWM、单电阻母线分流、注入式 ADC 采样点规划、SVPWM 扇区映射、两次母线采样到三相电流重构、死区电压补偿与窗口失效退化展开，显式写出 `T_sample_valid = T_vec - T_dead - T_settle - T_aperture`、`Delta_V_phase ≈ sign(i_phase) * V_dc * T_dead / T_pwm`、`i_a + i_b + i_c = 0` 与 ADC 电压到母线电流的线性映射，并加入占空比限幅、窗口判定和连续失效计数保护。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/37/foc-single-shunt-reconstruction.md" "auto(blog): skill-foc-single-shunt-current-reconstruction-and-deadtime-compensation"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
 
 - 2026-05-11 10:13:19 +08:00
   - 输出文章: `D:/blog/content/post/36/can-bit-timing-bus-off-recovery.md`
