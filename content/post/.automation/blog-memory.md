@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-05-15
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 硬件定时器与中断机制
+  - 二级技术切面: 输入捕获溢出扩展、边沿时间戳与低速测速误差预算
+  - 文章路径: `D:/blog/content/post/40/stm32-input-capture-overflow-rpm.md`
+
 - 2026-05-13
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
   - 一级主题: OpenCV 相机标定与物理世界的三维重建
@@ -129,6 +135,18 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-15 18:17:03 +08:00
+  - 输出文章: `D:/blog/content/post/40/stm32-input-capture-overflow-rpm.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 硬件定时器与中断机制
+  - 二级技术切面: 输入捕获溢出扩展、边沿时间戳与低速测速误差预算
+  - 决策说明: 一级主题池已全覆盖，因此继续采用二级技术切面模式；最近四篇文章依次落在视觉、控制、高阶电机与工业总线维度，而 MCU 方向自 2026-05-11 的 ESP32 双核调度文章后未再覆盖，本次优先回到近期未连续出现的底层时序主线。在已用一级主题中重访 STM32 定时器，但避开旧文 `timer.md` 已经展开的时钟树、PSC/ARR、更新事件与通用中断链路，改把切口收束到输入捕获的边沿时间戳、16 位计数器溢出扩展、`UIF/CCxIF` 同周期竞态修正、`rpm = 60 * f_cnt / (N_ppr * Delta c)` 的倒数测速映射以及 `Delta rpm ≈ 60 * f_cnt / (N_ppr * Delta c^2) * Delta c` 的量化误差传播，确保标题、slug、公式链路和工程问题均与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从边沿时间戳回到速度可信度合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕输入捕获通道配置、16 位计数器的软件高位扩展、更新事件与捕获事件竞态修正、最小合法周期阈值、零速超时判定、倒数法 RPM 计算与一阶量化误差估计展开，并加入毛刺拒绝、最大物理转速限幅、超时归零与样本有效位，保证低速场景下的时间基连续与结果可审计。
+  - 提交动作: 完成文章与两份记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/40/stm32-input-capture-overflow-rpm.md" "auto(blog): skill-stm32-input-capture-overflow-and-low-speed-rpm-estimation"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本直接失败于 `git add` 阶段，输出为 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；当前工作区保留已修改的 `content/post/.automation/blog-memory.md` 与未跟踪目录 `content/post/40/`，说明问题仍是 `.git` 目录写权限受限，而不是文章路径、提交信息或脚本本身异常。
 
 - 2026-05-13 09:04:13 +08:00
   - 输出文章: `D:/blog/content/post/39/opencv-stereo-disparity-depth-error.md`
