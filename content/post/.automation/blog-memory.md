@@ -8,6 +8,18 @@
 
 ## 已用主题
 
+- 2026-05-17
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: 电机驱动 (TB6612FNG) 与死区控制
+  - 二级技术切面: PWM 频率选择、反电动势与刹车模式
+  - 文章路径: `D:/blog/content/post/42/tb6612-pwm-frequency-back-emf-brake-mode.md`
+
+- 2026-05-16
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: DMA 连续事务、片选保持与回读错位恢复
+  - 文章路径: `D:/blog/content/post/41/skill-spi-dma-chip-select-hold-and-readback-phase-recovery.md`
+
 - 2026-05-15
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
   - 一级主题: STM32 硬件定时器与中断机制
@@ -135,6 +147,30 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-17 09:32:00 +08:00
+  - 输出文章: `D:/blog/content/post/42/tb6612-pwm-frequency-back-emf-brake-mode.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: 电机驱动 (TB6612FNG) 与死区控制
+  - 二级技术切面: PWM 频率选择、反电动势与刹车模式
+  - 决策说明: 一级主题池已全覆盖，因此继续采用二级技术切面模式；最近几篇文章分别落在工业总线、MCU、视觉与控制方向，而高阶电机维度自 2026-05-12 的 FOC 低速电流重构文章后未再覆盖，本次优先回到近期未连续出现的执行器主线。在已用一级主题中重访 TB6612FNG，但避开旧文 `tb6612-deadzone.md` 已经展开的启动死区补偿、换向死区保护与基础 H 桥导通逻辑，改把切口收束到 PWM 频率与电流纹波、`e_b = K_e * omega` 的反电动势反写、滑行与短刹车的续流差异，以及反向切换前短刹空窗的能量交接，确保标题、slug、公式链路和工程问题均与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从时间分辨率回到能量调度合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 `f_pwm = f_tim / ((PSC + 1) * (ARR + 1))` 的频率配置、`Delta I_pp ~= Vbus / (4 * L * f_pwm)` 的电流纹波预估、`V_cmd ~= K_e * omega + I_ref * R_eq + sign(I_ref) * V_drop` 的占空比映射、滑行/短刹车/反向驱动状态切换与反向前短刹空窗展开，并加入 ARR 分辨率下限、占空比限幅、刹车保持迟滞与母线电压异常保护。
+  - 提交动作: 为避免仓库记忆继续指向未入库文章，发布前先尝试将未跟踪文章 `content/post/41/skill-spi-dma-chip-select-hold-and-readback-phase-recovery.md` 纳入暂存；该步骤即失败于 `.git` 写入权限。随后仍按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/42/tb6612-pwm-frequency-back-emf-brake-mode.md" "auto(blog): skill-tb6612fng-pwm-frequency-back-emf-and-brake-mode"` 验证真实发布结果。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 手动 `git add` 与发布脚本均失败于 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；当前工作区仍保留已修改的 `content/post/.automation/blog-memory.md` 与未跟踪目录 `content/post/41/`、`content/post/42/`，说明问题仍是 `.git` 目录写权限受限，而不是文章路径、slug、提交说明或脚本参数异常。
+
+- 2026-05-16 10:04:10 +08:00
+  - 输出文章: `D:/blog/content/post/41/skill-spi-dma-chip-select-hold-and-readback-phase-recovery.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: DMA 连续事务、片选保持与回读错位恢复
+  - 决策说明: 一级主题池已全覆盖，因此继续采用二级技术切面模式；最近四篇文章依次落在视觉、控制、高阶电机与 MCU 维度，而工业总线方向自 2026-05-11 的 CAN 位时序文章后未再覆盖，本次优先回到近期未连续出现的时序契约主线。在已用一级主题中重访 SPI，但避开旧文 `spi-cpol-cpha-timing.md` 已经展开的空闲时钟、领先沿/滞后沿与片选建立时间预算，改把切口收束到命令相位、Dummy Clock、DMA 连续搬运、`payload[i] = rx[1 + N_dummy + i]` 的相位映射、一字节回读错位来源与 `t_timeout ~= 8 * N_total / f_sck + margin` 的超时预算，确保标题、slug、公式链路和工程问题均与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从帧边界回到采样相位合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕一次性拼接命令/地址/Dummy/数据相位、RXNE/OVR 清理、DMA 完成后的 TXE/BSY 收尾等待、同步字节驱动的一字节错位检测与恢复展开，显式写出 `t_bus ~= 8 * N_total / f_sck`、`t_timeout = ceil(8 * N_total * 1e6 / f_sck) + margin`、`payload[i] = rx[1 + N_dummy + i]` 与 `cycles = ceil(delay_ns * f_cpu / 1e9)`，并加入帧长限幅、重试上限与 CS 建立/保持时间保护。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/41/skill-spi-dma-chip-select-hold-and-readback-phase-recovery.md" "auto(blog): skill-spi-dma-chip-select-hold-and-readback-phase-recovery"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本在 `git add` 阶段失败，输出为 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；当前工作区仍保留已修改的 `content/post/.automation/blog-memory.md` 与未跟踪目录 `content/post/41/`，说明问题仍是 `.git` 目录写权限受限，而不是文章路径、提交说明或脚本参数异常。
 
 - 2026-05-15 18:17:03 +08:00
   - 输出文章: `D:/blog/content/post/40/stm32-input-capture-overflow-rpm.md`
