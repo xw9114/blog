@@ -2,7 +2,7 @@ baseURL = "https://xw911-blog.vercel.app/"
 languageCode = "zh-CN"
 defaultContentLanguage = "zh-cn"
 hasCJKLanguage = true
-title = "月球基地"
+title = "月栖之地"
 theme = "Stack"
 
 [pagination]
