@@ -1,6 +1,8 @@
 ---
 title: "关于"
 slug: "about"
+sidebarTitle: "此间絮语"
+sidebarSubtitle: "知道自己知道什么，也知道自己不知道什么。"
 ---
 
 ## 关于我

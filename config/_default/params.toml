@@ -14,6 +14,8 @@ SortBy         = "default"
   compact  = false
   emoji    = "🔥"
   subtitle = "探索无限，从月球基地开始"
+  homeTitle = "月栖之地"
+  homeSubtitle = "探索无限，从月球基地开始"
   avatar   = "img/avatar.jpg"
 
 [article]

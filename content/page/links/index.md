@@ -2,6 +2,8 @@
 title: "链接"
 slug: "links"
 layout: "links"
+sidebarTitle: "星河同路"
+sidebarSubtitle: "我们因彼此的知识而变得更强。"
 links:
   - title: GitHub
     description: 全球最大开源平台
@@ -17,5 +19,3 @@ links:
     image:  https://www.w3school.com.cn/ui2019/logo-180.png
 comments: false
 ---
-
-
