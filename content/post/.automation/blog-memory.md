@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-05-20
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
+  - 二级技术切面: 归一化创新平方 NIS、异常观测门控与协方差恢复
+  - 文章路径: `D:/blog/content/post/43/kalman-nis-gating.md`
+
 - 2026-05-17
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: 电机驱动 (TB6612FNG) 与死区控制
@@ -147,6 +153,18 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-20 09:12:22 +08:00
+  - 输出文章: `D:/blog/content/post/43/kalman-nis-gating.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
+  - 二级技术切面: 归一化创新平方 NIS、异常观测门控与协方差恢复
+  - 决策说明: 一级主题池已全覆盖，因此继续采用二级技术切面模式；最近几篇已依次覆盖高阶电机、工业总线、MCU、视觉与控制中的 MPU6050 切口，而卡尔曼滤波自 2026-04-23 的基础推导文章后未再重访，本次回到控制理论主线，但避开旧文 `kalman-filter.md` 已经展开的离散状态方程、Joseph 形式和基础姿态融合推导，改把切口收束到创新一致性检验、`NIS = y^2 / S` 的无量纲异常判据、软门控放大 `R_eff`、硬拒绝坏观测以及连续失锁后的协方差恢复，确保标题、slug、公式链路和工程问题均与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从假观测回到信任预算”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 2 状态俯仰角卡尔曼滤波展开，显式写出 `y = z - Hx^-`、`S = H P^- H^T + R`、`NIS = y^2 / S`、软门控下的 `R_eff = R * scale` 与连续失锁后的协方差恢复逻辑，并加入加速度模长门控、采样周期限幅、方差上下界和 Joseph Form 更新，保证异常观测出现时估计不会被瞬间拖偏。
+  - 提交动作: 完成文章与两份记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/43/kalman-nis-gating.md" "auto(blog): skill-kalman-filter-nis-gating-and-covariance-recovery"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本直接失败于 `git add` 阶段，输出为 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；说明本次问题仍然是 `.git` 目录写权限受限，而不是文章路径、slug、提交说明或脚本参数异常。
 
 - 2026-05-17 09:32:00 +08:00
   - 输出文章: `D:/blog/content/post/42/tb6612-pwm-frequency-back-emf-brake-mode.md`
