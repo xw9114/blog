@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3f3f46"/>
+      <stop offset="55%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#facc15"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="600" fill="url(#bg)"/>
+  <g opacity="0.18" stroke="#ffffff" stroke-width="2.4" fill="none">
+    <rect x="128" y="128" width="326" height="292" rx="22"/>
+    <path d="M182 190h218M182 236h172M182 282h200"/>
+    <circle cx="212" cy="346" r="18"/>
+    <circle cx="292" cy="346" r="18"/>
+    <circle cx="372" cy="346" r="18"/>
+    <path d="M212 346l80 0 80 0"/>
+    <rect x="584" y="146" width="224" height="136" rx="18"/>
+    <path d="M634 214l34 34 92-100"/>
+    <rect x="574" y="340" width="254" height="80" rx="18"/>
+    <path d="M614 380h174"/>
+  </g>
+  <text x="72" y="470" fill="#ffffff" font-size="84" font-weight="700" font-family="Segoe UI, Microsoft YaHei, sans-serif">教程</text>
+  <text x="76" y="525" fill="#fef3c7" font-size="30" font-family="Segoe UI, Microsoft YaHei, sans-serif">步骤清晰 · 可复用 · 面向实践</text>
+</svg>

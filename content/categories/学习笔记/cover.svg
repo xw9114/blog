@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#164e63"/>
+      <stop offset="55%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="600" fill="url(#bg)"/>
+  <g opacity="0.18" stroke="#ffffff" stroke-width="2.2" fill="none">
+    <rect x="138" y="118" width="252" height="324" rx="22"/>
+    <path d="M190 170h142M190 210h142M190 250h110M190 320h150M190 360h126"/>
+    <rect x="484" y="144" width="320" height="240" rx="22"/>
+    <path d="M540 194h208M540 236h208M540 278h150"/>
+    <path d="M664 384l46 60 94-126"/>
+    <circle cx="842" cy="152" r="34"/>
+    <path d="M842 132v40M822 152h40"/>
+  </g>
+  <text x="70" y="470" fill="#ffffff" font-size="84" font-weight="700" font-family="Segoe UI, Microsoft YaHei, sans-serif">学习笔记</text>
+  <text x="76" y="525" fill="#e0f2fe" font-size="30" font-family="Segoe UI, Microsoft YaHei, sans-serif">概念整理 · 实践记录 · 阶段复盘</text>
+</svg>
