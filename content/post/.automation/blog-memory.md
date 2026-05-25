@@ -8,6 +8,18 @@
 
 ## 已用主题
 
+- 2026-05-25
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: ACK 缺失、自动重发与发送截止期预算
+  - 文章路径: `D:/blog/content/post/45/can-ack-retry-deadline-budget.md`
+
+- 2026-05-23
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: I2C/UART 通信协议底层逻辑
+  - 二级技术切面: UART 过采样、波特率误差与空闲帧重同步
+  - 文章路径: `D:/blog/content/post/44/uart-oversampling-baud-error-resync.md`
+
 - 2026-05-20
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
@@ -153,6 +165,29 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-25 14:17:26 +08:00
+  - 输出文章: `D:/blog/content/post/45/can-ack-retry-deadline-budget.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: ACK 缺失、自动重发与发送截止期预算
+  - 决策说明: 一级主题池已全部覆盖，因此继续从已用一级主题中派生新的二级技术切面；最近三篇依次落在 MCU 通信、控制滤波与高阶电机方向，工业总线维度自 2026-05-16 的 SPI DMA 连续事务后未再出现，因此本轮优先补回总线主题。在 CAN 主线下，历史文章已经覆盖了“非破坏性仲裁”与“位时序容差、错误计数和 Bus-Off 恢复”，本次刻意避开这些已写过的切口，把重点收束到 ACK 槽显性确认、ACK Error 触发的错误主动帧、自动重发对发送邮箱的持续占用，以及 `N_retry_max = floor(D_deadline / T_attempt)` 这类把可靠送达与截止期预算绑定到一起的实时约束，确保标题、slug、公式链路和工程问题都与旧文明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从链路层共识回到实时调度预算”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL `bxCAN` 场景，围绕标准帧最坏帧长估算、ACK 缺失后的错误主动帧时延、有限重试预算、发送邮箱回压统计和截止期过期丢弃展开，显式写出 `T_attempt ~= (N_frame_worst + 6 + 8 + 3) / bitrate` 与 `N_retry_max = floor(D_deadline / T_attempt) - 1` 的映射，并加入边界限幅、重试上限和中断到主循环的错误上抛处理。
+  - 提交动作: 完成文章与两份记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/45/can-ack-retry-deadline-budget.md" "auto(blog): skill-can-ack-missing-auto-retry-and-transmission-deadline-budget"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本返回 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`，失败点仍在 `git add` 阶段，说明问题依旧是 `.git` 目录写权限受限，而不是文章路径、slug、提交说明或脚本参数异常。
+- 2026-05-23 10:18:00 +08:00
+  - 输出文章: `D:/blog/content/post/44/uart-oversampling-baud-error-resync.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: I2C/UART 通信协议底层逻辑
+  - 二级技术切面: UART 过采样、波特率误差与空闲帧重同步
+  - 决策说明: 一级主题池已全覆盖，因此继续采用二级技术切面模式；最近几篇依次落在控制、高阶电机、工业总线与 MCU 定时器/输入捕获等切口，本次优先回到近期未连续出现、但历史只从 I2C 物理层写过一次的串行异步通信主线。在已用一级主题中重访 I2C/UART，但避开旧文 `i2c-bus-recovery.md` 已经展开的开漏上拉、时钟拉伸和总线恢复，改把切口收束到 UART 无共享时钟条件下的起始位重锁、16/8 倍过采样、`USARTDIV = f_ck / (OSR * baud)` 的分频量化、`Delta t_k ≈ k * (T_rx - T_tx)` 的累计相位漂移，以及 DMA 长收包场景里利用 IDLE 空闲窗做软重同步，确保标题、slug、公式链路和工程问题均与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从异步位时基回到报文边界合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 8/16 倍过采样时序选择、波特率误差与帧尾累计漂移估算、寄存器 `BRR` 量化、DMA + IDLE 切包、错误后的软重同步展开，显式写出 `baud_actual = f_ck / (OSR * USARTDIV_quantized)`、`drift_eof ~= frame_bits * |err|` 与 IDLE 包边界处理逻辑，并加入波特率误差上限、包长限幅、溢出/帧错误计数和坏状态清理。
+  - 提交动作: 完成文章与两份记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/44/uart-oversampling-baud-error-resync.md" "auto(blog): skill-uart-oversampling-baud-error-and-idle-resynchronization"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本返回 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；失败点仍在 `git add` 阶段，说明本次依旧是 `.git` 目录写权限受限，而不是文章路径、slug、提交说明或脚本参数异常。
 
 - 2026-05-20 09:12:22 +08:00
   - 输出文章: `D:/blog/content/post/43/kalman-nis-gating.md`
