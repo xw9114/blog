@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-05-26
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 基础图像处理与颜色识别
+  - 二级技术切面: 自动曝光、白平衡、伽马与 HSV 阈值回标定
+  - 文章路径: `D:/blog/content/post/46/opencv-hsv-recalibration-ae-awb-gamma.md`
+
 - 2026-05-25
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
   - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
@@ -165,6 +171,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-26 09:56:40 +08:00
+  - 输出文章: `D:/blog/content/post/46/opencv-hsv-recalibration-ae-awb-gamma.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 基础图像处理与颜色识别
+  - 二级技术切面: 自动曝光、白平衡、伽马与 HSV 阈值回标定
+  - 决策说明: 一级主题池已全部覆盖，因此继续从已用一级主题中派生新的二级技术切面；最近三篇依次落在工业总线、MCU 通信与控制滤波方向，视觉维度自 2026-05-13 的双目标定与深度误差传播后未再出现，因此本轮优先补回视觉主线。在 OpenCV 基础图像处理与颜色识别主题下，历史文章已经覆盖 HSV 阈值、色相回绕、形态学净化与轮廓质心，本次刻意避开这些基础切口，把重点收束到自动曝光、自动白平衡、伽马编码和 ISP 增益如何扭曲颜色空间，以及如何借助灰卡/白卡参考块、环形色相统计与阈值回标定把颜色检测重新绑回物理光照条件，确保标题、slug、公式链路和工程问题都与旧文明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从光谱积分回到阈值合同”的叙述风格。
+  - 实现约束: 代码采用 OpenCV C++ 场景，围绕灰参考 ROI 的通道增益估计、sRGB 近似逆伽马线性化、环形 Hue 均值/方差、S/V 分位数阈值重估、色相回绕掩码与最大连通域质心提取展开，显式写出 `I_c ≈ t_exp * g_c * ∫E(λ)ρ(λ)S_c(λ)dλ`、`g_c = Y_ref / mean(C_lin)` 与 `H_mean = atan2(Σsinθ_i, Σcosθ_i)` 的映射。
+  - 提交动作: 完成文章与两份记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/46/opencv-hsv-recalibration-ae-awb-gamma.md" "auto(blog): skill-opencv-hsv-threshold-recalibration-under-ae-awb-and-gamma-drift"`。
 
 - 2026-05-25 14:17:26 +08:00
   - 输出文章: `D:/blog/content/post/45/can-ack-retry-deadline-budget.md`
