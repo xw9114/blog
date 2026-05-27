@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-05-27
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: MPU6050 姿态解算与零偏校准
+  - 二级技术切面: DLPF 截止频率、采样分频与互补滤波相位裕量预算
+  - 文章路径: `D:/blog/content/post/47/mpu6050-dlpf-sample-divider-phase-margin.md`
+
 - 2026-05-26
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
   - 一级主题: OpenCV 基础图像处理与颜色识别
@@ -172,6 +178,18 @@
 
 ## 运行记录
 
+- 2026-05-27 14:18:50 +08:00
+  - 输出文章: `D:/blog/content/post/47/mpu6050-dlpf-sample-divider-phase-margin.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: MPU6050 姿态解算与零偏校准
+  - 二级技术切面: DLPF 截止频率、采样分频与互补滤波相位裕量预算
+  - 决策说明: 一级主题池已全覆盖，因此继续采用二级技术切面模式；最近五篇依次覆盖视觉、工业总线、MCU 通信、控制滤波与高阶电机，技术跨度已经拉开，本轮回到控制与传感主线，但避开旧文已经讲过的启动零偏、温漂补偿与零角速度约束，把切口收束到 MPU6050 内部 DLPF、`SMPLRT_DIV` 离散采样、互补滤波交越频率与闭环相位裕量预算之间的耦合，确保标题、slug、公式链路和工程问题与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从传感时延回到闭环边界”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 DLPF 档位表、采样分频量化、互补滤波 `alpha = exp(-2πf_cΔt)`、`T_delay ≈ T_dlpf + Δt/2 + T_sched + T_jitter` 与 `phi_delay_deg ≈ 360 f_x T_delay` 的相位预算展开，并加入采样率上限、交越频率约束、加速度模长门控与 `dt` 限幅。
+  - 提交动作: 完成文章与两份记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/47/mpu6050-dlpf-sample-divider-phase-margin.md" "auto(blog): skill-mpu6050-dlpf-sample-divider-and-complementary-filter-phase-margin-budget"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本返回 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；失败点仍在 `git add` 阶段，说明本轮问题依旧是 `.git` 目录写权限受限，而不是文章路径、slug、提交说明或脚本参数异常。
+
 - 2026-05-26 09:56:40 +08:00
   - 输出文章: `D:/blog/content/post/46/opencv-hsv-recalibration-ae-awb-gamma.md`
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
@@ -181,6 +199,9 @@
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从光谱积分回到阈值合同”的叙述风格。
   - 实现约束: 代码采用 OpenCV C++ 场景，围绕灰参考 ROI 的通道增益估计、sRGB 近似逆伽马线性化、环形 Hue 均值/方差、S/V 分位数阈值重估、色相回绕掩码与最大连通域质心提取展开，显式写出 `I_c ≈ t_exp * g_c * ∫E(λ)ρ(λ)S_c(λ)dλ`、`g_c = Y_ref / mean(C_lin)` 与 `H_mean = atan2(Σsinθ_i, Σcosθ_i)` 的映射。
   - 提交动作: 完成文章与两份记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/46/opencv-hsv-recalibration-ae-awb-gamma.md" "auto(blog): skill-opencv-hsv-threshold-recalibration-under-ae-awb-and-gamma-drift"`。
+  - 提交状态: 已自动提交并推送到 GitHub。
+  - 最近提交: `ab3fc5b249b1d16e1c3c7b491ce3cdd157c1e080`
+  - 提交说明: `auto(blog): skill-opencv-hsv-threshold-recalibration-under-ae-awb-and-gamma-drift`
 
 - 2026-05-25 14:17:26 +08:00
   - 输出文章: `D:/blog/content/post/45/can-ack-retry-deadline-budget.md`
