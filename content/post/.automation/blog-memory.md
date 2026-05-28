@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-05-28
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 编码器零电角标定、极对数识别与 d/q 轴错位误差
+  - 文章路径: `D:/blog/content/post/48/foc-encoder-electrical-zero-pole-pair-calibration.md`
+
 - 2026-05-27
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: MPU6050 姿态解算与零偏校准
@@ -177,6 +183,18 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-28 18:05:16 +08:00
+  - 输出文章: `D:/blog/content/post/48/foc-encoder-electrical-zero-pole-pair-calibration.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 编码器零电角标定、极对数识别与 d/q 轴错位误差
+  - 决策说明: 一级主题池已全覆盖，因此继续采用二级技术切面模式；最近四篇依次覆盖控制、视觉、工业总线与 MCU 通信，技术跨度已经拉开，而高阶电机维度自 2026-05-17 的 TB6612FNG 文章后未再出现，因此本轮优先回到运动控制主线。在已用一级主题中重访 FOC，但刻意避开旧文 `foc-clarke-park.md` 已经展开的三相到 d/q 坐标变换与电压矢量限幅，以及 `foc-single-shunt-reconstruction.md` 已经展开的单电阻采样窗口、死区补偿与低速电流重构，改把切口收束到编码器机械角到电角的映射、极对数误配、零电角偏差造成的 d/q 轴串扰、方向符号和圆周平均标定流程，确保标题、slug、公式链路和工程问题均与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从坐标契约回到闭环真实性”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 `theta_e = dir * p * theta_m - theta_e_offset`、`p ~= Delta_theta_e / Delta_theta_m`、`Delta_theta_e_lsb = 360° * p / CPR` 与 `i_d_actual = i_q_cmd * sin(delta)`、`i_q_actual = i_q_cmd * cos(delta)` 的误差映射展开，覆盖开环 d 轴吸附、正反向电角慢扫、编码器计数解包、圆周均值、极对数识别、方向判断与零电角落盘，并加入母线电压下限、极对数整数逼近与机械对称性判据。
+  - 提交动作: 已按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/48/foc-encoder-electrical-zero-pole-pair-calibration.md" "auto(blog): skill-foc-encoder-electrical-zero-and-pole-pair-calibration"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本返回 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；失败点仍在 `git add` 阶段，说明本轮问题依旧是 `.git` 目录写权限受限，而不是文章路径、slug、提交说明或脚本参数异常。
 
 - 2026-05-27 14:18:50 +08:00
   - 输出文章: `D:/blog/content/post/47/mpu6050-dlpf-sample-divider-phase-margin.md`
