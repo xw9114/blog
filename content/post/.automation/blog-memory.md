@@ -198,7 +198,10 @@
   - 决策说明: 一级主题池已经全部覆盖，因此本轮转入已用主题派生新二级切面的模式；最近五篇文章依次覆盖高阶电机、控制融合、视觉、工业总线与 MCU 通信，技术跨度已经拉开，而 MCU 架构维度自 2026-05-23 的 UART 文章后尚未再展开新的模拟采样切口，因此本轮回到 `STM32 DMA 与多通道 ADC` 主线，但刻意避开旧文 `stm32-adc-dma.md` 已经写过的通道排序、定时触发、环形 DMA 与半缓冲处理总览，把切口收束到采样保持电容充放电、源阻抗等效、通道切换残留、重复 Rank 预充电与物理 Rank 到逻辑通道的映射，确保标题、slug、公式链路和工程问题都与旧文明显分离。
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从模拟节点回到数字契约”的叙述风格。
   - 实现约束: 代码采用 STM32 HAL 场景，围绕 `V_err / V_step = exp(-t_sample / ((R_source + R_on) * C_sh))`、`t_sample >= -tau * ln(epsilon)`、`index = frame * physical_rank_count + rank` 与 `R_ntc = R_pullup * Vadc / (Vref - Vadc)` 的映射关系展开，覆盖采样时间估算、Sample Time 档位挑选、高阻 NTC 双 Rank 预充电、DMA 半缓冲帧解析、母线电压/相电流/NTC 温度物理量还原以及一致性发布。
-  - 提交动作: 已按约定准备调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/49/stm32-adc-source-impedance-crosstalk-budget.md" "auto(blog): skill-stm32-adc-sampling-time-source-impedance-and-channel-crosstalk-budget"`。
+  - 提交动作: 已按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/49/stm32-adc-source-impedance-crosstalk-budget.md" "auto(blog): skill-stm32-adc-sampling-time-source-impedance-and-channel-crosstalk-budget"`。
+  - 提交状态: 已自动提交并推送到 GitHub。
+  - 最近提交: `804f1dc711b162ae0f2748f611ab1853b2e068cc`
+  - 提交说明: `auto(blog): skill-stm32-adc-sampling-time-source-impedance-and-channel-crosstalk-budget`
 
 - 2026-05-28 18:05:16 +08:00
   - 输出文章: `D:/blog/content/post/48/foc-encoder-electrical-zero-pole-pair-calibration.md`
