@@ -200,7 +200,6 @@
   - 实现约束: 代码采用 STM32 HAL 场景，围绕 `V_err / V_step = exp(-t_sample / ((R_source + R_on) * C_sh))`、`t_sample >= -tau * ln(epsilon)`、`index = frame * physical_rank_count + rank` 与 `R_ntc = R_pullup * Vadc / (Vref - Vadc)` 的映射关系展开，覆盖采样时间估算、Sample Time 档位挑选、高阻 NTC 双 Rank 预充电、DMA 半缓冲帧解析、母线电压/相电流/NTC 温度物理量还原以及一致性发布。
   - 提交动作: 已按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/49/stm32-adc-source-impedance-crosstalk-budget.md" "auto(blog): skill-stm32-adc-sampling-time-source-impedance-and-channel-crosstalk-budget"`。
   - 提交状态: 已自动提交并推送到 GitHub。
-  - 最近提交: `815515139b8c8c2c4b74155e3fa3536d1135c4a9`
   - 提交说明: `auto(blog): skill-stm32-adc-sampling-time-source-impedance-and-channel-crosstalk-budget`
 
 - 2026-05-28 18:05:16 +08:00
