@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-05-29
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
+  - 二级技术切面: 采样时间、源阻抗与通道串扰误差预算
+  - 文章路径: `D:/blog/content/post/49/stm32-adc-source-impedance-crosstalk-budget.md`
+
 - 2026-05-28
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
@@ -183,6 +189,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-29 16:27:59 +08:00
+  - 输出文章: `D:/blog/content/post/49/stm32-adc-source-impedance-crosstalk-budget.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
+  - 二级技术切面: 采样时间、源阻抗与通道串扰误差预算
+  - 决策说明: 一级主题池已经全部覆盖，因此本轮转入已用主题派生新二级切面的模式；最近五篇文章依次覆盖高阶电机、控制融合、视觉、工业总线与 MCU 通信，技术跨度已经拉开，而 MCU 架构维度自 2026-05-23 的 UART 文章后尚未再展开新的模拟采样切口，因此本轮回到 `STM32 DMA 与多通道 ADC` 主线，但刻意避开旧文 `stm32-adc-dma.md` 已经写过的通道排序、定时触发、环形 DMA 与半缓冲处理总览，把切口收束到采样保持电容充放电、源阻抗等效、通道切换残留、重复 Rank 预充电与物理 Rank 到逻辑通道的映射，确保标题、slug、公式链路和工程问题都与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从模拟节点回到数字契约”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 `V_err / V_step = exp(-t_sample / ((R_source + R_on) * C_sh))`、`t_sample >= -tau * ln(epsilon)`、`index = frame * physical_rank_count + rank` 与 `R_ntc = R_pullup * Vadc / (Vref - Vadc)` 的映射关系展开，覆盖采样时间估算、Sample Time 档位挑选、高阻 NTC 双 Rank 预充电、DMA 半缓冲帧解析、母线电压/相电流/NTC 温度物理量还原以及一致性发布。
+  - 提交动作: 已按约定准备调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/49/stm32-adc-source-impedance-crosstalk-budget.md" "auto(blog): skill-stm32-adc-sampling-time-source-impedance-and-channel-crosstalk-budget"`。
 
 - 2026-05-28 18:05:16 +08:00
   - 输出文章: `D:/blog/content/post/48/foc-encoder-electrical-zero-pole-pair-calibration.md`
