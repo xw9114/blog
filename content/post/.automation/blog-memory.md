@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-05-30
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 多传感器融合：视觉坐标系与 MPU6050 姿态的对齐
+  - 二级技术切面: 曝光中点时间戳、滚动快门行延迟与姿态外推补偿
+  - 文章路径: `D:/blog/content/post/50/vision-imu-exposure-midpoint-rolling-shutter.md`
+
 - 2026-05-29
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
   - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
@@ -189,6 +195,18 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-30 12:37:46 +08:00
+  - 输出文章: `D:/blog/content/post/50/vision-imu-exposure-midpoint-rolling-shutter.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 多传感器融合：视觉坐标系与 MPU6050 姿态的对齐
+  - 二级技术切面: 曝光中点时间戳、滚动快门行延迟与姿态外推补偿
+  - 决策说明: 一级主题池已全部覆盖，因此继续沿用“已用一级主题下派生未写过二级技术切面”的策略；最近几篇文章依次覆盖 MCU 架构、高阶电机、控制传感、视觉、工业总线，技术跨度已经拉开，而“视觉-IMU 对齐”自 2026-04-27 后尚未展开新的时间域切口，因此本轮回到控制与融合维度，但刻意避开旧文 `vision-imu-alignment.md` 已经展开的外参标定、像素射线地平面求交与姿态补偿总览，把切口收束到曝光中点、滚动快门逐行时序、MPU6050 DLPF 群延迟、陀螺短时外推与行级姿态补偿，确保标题、slug、公式链路和工程问题都与旧文明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“先校平时间轴，再讨论空间融合”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 使用场景，围绕 `t_mid = t_sof + T_exp / 2`、`t_row(v) = t_sof + T_exp / 2 + (v + 0.5 - H / 2) * T_line`、`Δu ≈ f_x * ω_y * Δt` 与 `Δθ_b ≈ (ω_b - b_g) * Δt_row` 这条时间到角度、角度到像素的映射链展开，覆盖 IMU 物理采样时刻修正、姿态与角速度插值、滚动快门行偏移计算、小角度四元数外推、像素射线映射以及姿态补偿后的空间视线角恢复。
+  - 提交动作: 已按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/50/vision-imu-exposure-midpoint-rolling-shutter.md" "auto(blog): skill-vision-imu-exposure-midpoint-rolling-shutter-attitude-compensation"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本返回 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`，失败点仍在 `git add` 阶段，说明本轮问题依旧是 `.git` 目录写权限受限，而不是文章路径、slug、提交说明或脚本参数异常。
 
 - 2026-05-29 16:27:59 +08:00
   - 输出文章: `D:/blog/content/post/49/stm32-adc-source-impedance-crosstalk-budget.md`
