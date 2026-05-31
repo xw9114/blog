@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-05-31
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 相机标定与物理世界的三维重建
+  - 二级技术切面: 单目 PnP 的共面退化、条件数与姿态翻转判据
+  - 文章路径: `D:/blog/content/post/51/opencv-planar-pnp-degeneracy-condition-number-pose-flip.md`
+
 - 2026-05-30
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: 多传感器融合：视觉坐标系与 MPU6050 姿态的对齐
@@ -195,6 +201,18 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-05-31 16:48:30 +08:00
+  - 输出文章: `D:/blog/content/post/51/opencv-planar-pnp-degeneracy-condition-number-pose-flip.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 相机标定与物理世界的三维重建
+  - 二级技术切面: 单目 PnP 的共面退化、条件数与姿态翻转判据
+  - 决策说明: 一级主题池已全部覆盖，因此继续遵循“已用一级主题下派生未写过的二级技术切面”策略；最近几篇文章依次覆盖控制融合、MCU 架构、高阶电机、控制传感、视觉颜色与工业总线，视觉维度自 2026-05-26 后未再展开，而仓库中与该一级主题相关的旧文 `opencv-calibration.md` 主要聚焦针孔模型、畸变、通用标定流程、PnP 位姿求解和像素射线反投影，没有深入讨论平面靶标的共面退化、IPPE 双解、正视角可观测度、DLT 条件数与时间连续性筛解，因此本轮在同一一级主题下切到“单目 PnP 的共面退化、条件数与姿态翻转判据”，确保标题、slug、数学链路与工程问题均与旧文明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“先承认退化边界存在，再讨论如何建立姿态可信度预算”的叙述风格。
+  - 实现约束: 代码采用 OpenCV C++ 风格，围绕 `s p ~ H P_plane`、`cond(A) = sigma_max / sigma_min_nonzero`、`n_c = R * [0, 0, 1]^T`、`score = area_norm * sqrt(1 - n_z^2)` 与时间连续性判据展开，覆盖 IPPE 双解构造、平均重投影误差计算、平面法向可观测度估计、单应 DLT 条件数估算、双解筛选以及姿态跳变拒绝逻辑，显式体现“能拟合”与“可信”分离的工程思想。
+  - 提交动作: 已按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/51/opencv-planar-pnp-degeneracy-condition-number-pose-flip.md" "auto(blog): skill-opencv-planar-pnp-degeneracy-condition-number-and-pose-flip-criteria"`
+  - 提交状态: 自动提交失败
+  - 失败原因: 发布脚本返回 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`，失败点仍在 `git add` 阶段，说明本轮问题依旧是 `.git` 目录写权限受限，而不是文章路径、slug、提交说明或批处理参数异常。
 
 - 2026-05-30 12:37:46 +08:00
   - 输出文章: `D:/blog/content/post/50/vision-imu-exposure-midpoint-rolling-shutter.md`

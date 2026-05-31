@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rtk ls *)",
+      "Bash(nohup hugo server --bind 0.0.0.0 -p 1313)",
+      "Bash(echo \"Hugo server PID: $!\")",
+      "Bash(kill 518)",
+      "Bash(pkill -f \"hugo server\")",
+      "Bash(echo \"New PID: $!\")",
+      "mcp__Playwright__browser_navigate"
+    ]
+  }
+}

@@ -8,10 +8,19 @@
     icon = "home"
 
 [[main]]
+  identifier = "notes"
+  name       = "知识"
+  url        = "/notes/"
+  weight     = 2
+
+  [main.params]
+    icon = "book"
+
+[[main]]
   identifier = "archives"
   name       = "归档"
   url        = "/archives/"
-  weight     = 2
+  weight     = 3
 
   [main.params]
     icon = "archives"
@@ -20,7 +29,7 @@
   identifier = "search"
   name       = "搜索"
   url        = "/search/"
-  weight     = 3
+  weight     = 4
 
   [main.params]
     icon = "search"
