@@ -13,14 +13,18 @@
 
     <div class="ref-list-grid">
         {{ range .Pages }}
-        <a class="ref-list-card" href="{{ .RelPermalink }}">
-            <div class="ref-list-card-icon">
-                {{ with .Params.icon }}{{ . | safeHTML }}{{ else }}📄{{ end }}
+        {{ $color := .Params.color | default "#17c48a" }}
+        <a class="ref-list-card" href="{{ .RelPermalink }}" style="--card-accent: {{ $color }};">
+            <div class="ref-list-card-banner">
+                <div class="ref-list-card-icon">
+                    {{ with .Params.icon }}{{ . | safeHTML }}{{ else }}📄{{ end }}
+                </div>
             </div>
-            <h2>{{ .Title }}</h2>
-            {{ with .Description }}
-            <p>{{ . }}</p>
-            {{ end }}
+            <div class="ref-list-card-body">
+                <h2>{{ .Title }}</h2>
+                {{ with .Description }}<p>{{ . }}</p>{{ end }}
+                <span class="ref-list-card-arrow">→</span>
+            </div>
         </a>
         {{ end }}
     </div>

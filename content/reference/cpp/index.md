@@ -3,6 +3,7 @@ title: "C++ 备忘清单"
 description: "提供基本语法和方法的 C++ 快速参考备忘单"
 type: reference
 icon: "C++"
+color: "#00599C"
 toc: false
 date: 2026-06-06
 ---
