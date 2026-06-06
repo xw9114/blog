@@ -29,14 +29,30 @@
         var box = document.createElement('div');
         box.className = 'ref-modal-box';
 
+        // 关闭按钮——单独创建保住事件监听
         var closeBtn = document.createElement('button');
         closeBtn.className = 'ref-modal-close';
         closeBtn.setAttribute('aria-label', '关闭');
         closeBtn.textContent = '✕';
         closeBtn.addEventListener('click', function () { backdrop.remove(); });
-
         box.appendChild(closeBtn);
-        box.innerHTML += card.innerHTML;
+
+        // 复制卡片内容（不用 innerHTML+= 避免销毁事件）
+        var content = document.createElement('div');
+        content.innerHTML = card.innerHTML;
+
+        // 用内联样式强制覆盖主题 CSS，确保字体够大
+        content.querySelectorAll('pre, code').forEach(function (el) {
+            el.style.fontSize = '1rem';
+            el.style.lineHeight = '1.7';
+        });
+
+        // 行号列已不需要，在模态里也隐藏
+        content.querySelectorAll('.lntd:first-child').forEach(function (el) {
+            el.style.display = 'none';
+        });
+
+        box.appendChild(content);
         backdrop.appendChild(box);
         document.body.appendChild(backdrop);
 
@@ -44,7 +60,10 @@
             if (e.target === backdrop) backdrop.remove();
         });
         document.addEventListener('keydown', function onKey(e) {
-            if (e.key === 'Escape') { backdrop.remove(); document.removeEventListener('keydown', onKey); }
+            if (e.key === 'Escape') {
+                backdrop.remove();
+                document.removeEventListener('keydown', onKey);
+            }
         });
     }
 
