@@ -163,16 +163,16 @@ $ref-accent: #17c48a;
     }
 }
 
-// 三列网格（默认 3 列，较窄时自动折 2/1）
+// 两列网格（默认 2 列，超宽屏才显示 3 列）
 .ref-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.2rem;
     margin-bottom: 1.5rem;
     align-items: start;
 
-    @media (max-width: 1200px) {
-        grid-template-columns: repeat(2, 1fr);
+    @media (min-width: 1600px) {
+        grid-template-columns: repeat(3, 1fr);
     }
 
     @media (max-width: 640px) {
@@ -260,7 +260,7 @@ $ref-accent: #17c48a;
         }
 
         code {
-            font-size: 0.875rem;
+            font-size: 0.92rem;
         }
 
         // 代码块撑满卡片边缘
@@ -288,7 +288,21 @@ $ref-accent: #17c48a;
                 margin: 0;
                 padding: 1rem 1.25rem;
                 background: transparent;
-                font-size: 0.875rem;
+                font-size: 0.92rem;
+                line-height: 1.6;
+            }
+
+            // 卡片内隐藏行号列，省出宽度给代码
+            .lntable .lntd:first-child {
+                display: none;
+            }
+
+            .lntable {
+                width: 100%;
+
+                .lntd:last-child {
+                    width: 100%;
+                }
             }
         }
 
