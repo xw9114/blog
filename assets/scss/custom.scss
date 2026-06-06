@@ -7,3 +7,310 @@
         object-position: center;
     }
 }
+
+// ===== 知识参考速查列表页 =====
+
+.ref-list-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+}
+
+.ref-list-header {
+    text-align: center;
+    padding: 2rem 0 2.5rem;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    p {
+        margin-top: 0.6rem;
+        color: var(--card-text-color-secondary);
+    }
+}
+
+.ref-list-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+
+    @media (max-width: 800px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 500px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ref-list-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 1.4rem 1.4rem 1.2rem;
+    box-shadow: var(--shadow-l1);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, transform 0.2s;
+
+    &:hover {
+        box-shadow: var(--shadow-l2);
+        transform: translateY(-2px);
+    }
+
+    .ref-list-card-icon {
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        line-height: 1;
+    }
+
+    h2 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin: 0 0 0.3rem;
+    }
+
+    p {
+        font-size: 0.83rem;
+        color: var(--card-text-color-secondary);
+        margin: 0;
+        line-height: 1.5;
+    }
+}
+
+// ===== 知识参考页 (Reference / Cheatsheet) =====
+
+$ref-accent: #17c48a;
+
+.reference-page .main {
+    padding: 0;
+}
+
+.ref-article {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+}
+
+// 页面顶部标题区
+.ref-page-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 3.5rem 0 4rem;
+
+    .ref-page-icon {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-bottom: 0.4rem;
+        line-height: 1;
+    }
+
+    .ref-page-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin: 0;
+        line-height: 1.15;
+    }
+
+    .ref-page-desc {
+        margin-top: 0.9rem;
+        color: var(--card-text-color-secondary);
+        font-size: 0.95rem;
+        max-width: 560px;
+
+        a {
+            color: $ref-accent;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// 区块标题
+.ref-content {
+    h2 {
+        font-size: 1.75rem;
+        font-weight: 300;
+        margin: 2.5rem 0 1rem;
+        padding-bottom: 0.6rem;
+        border-bottom: 1px solid var(--card-separator-color);
+
+        &::before {
+            content: "# ";
+            color: $ref-accent;
+            font-family: var(--code-font-family);
+        }
+    }
+
+    h3 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin: 0.75rem 0 0.25rem;
+    }
+}
+
+// 三列网格
+.ref-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: start;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+// 单张卡片
+.ref-card {
+    position: relative;
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 1.25rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-l1);
+
+    &.col-span-2 {
+        grid-column: span 2;
+
+        @media (max-width: 600px) {
+            grid-column: span 1;
+        }
+    }
+
+    &.col-span-3 {
+        grid-column: span 3;
+
+        @media (max-width: 600px) {
+            grid-column: span 1;
+        }
+    }
+
+    > .card-filename {
+        position: absolute;
+        top: 0;
+        right: 12px;
+        background: $ref-accent;
+        color: #fff;
+        padding: 2px 12px;
+        border-radius: 0 0 6px 6px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        font-family: var(--code-font-family);
+        line-height: 1.7;
+        z-index: 1;
+    }
+
+    .card-body {
+        > *:first-child {
+            margin-top: 0;
+        }
+
+        > *:last-child {
+            margin-bottom: 0;
+        }
+
+        p {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            margin: 0.45rem 0;
+        }
+
+        code {
+            font-size: 0.82rem;
+        }
+
+        // 代码块撑满卡片边缘
+        .highlight {
+            margin: 0.5rem -1.25rem;
+            border-radius: 0;
+            overflow: hidden;
+
+            &:first-child {
+                margin-top: -1.25rem;
+                border-radius: 10px 10px 0 0;
+            }
+
+            &:last-child {
+                margin-bottom: -1.25rem;
+                border-radius: 0 0 10px 10px;
+            }
+
+            &:only-child {
+                margin: -1.25rem;
+                border-radius: 10px;
+            }
+
+            pre {
+                margin: 0;
+                padding: 1rem 1.25rem;
+                background: transparent;
+            }
+        }
+
+        // 表格
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            font-size: 0.84rem;
+            border-collapse: collapse;
+
+            thead th {
+                color: $ref-accent;
+                font-weight: 600;
+                border-bottom: 1px solid var(--card-separator-color);
+                padding: 0.35rem 0.6rem;
+                text-align: left;
+            }
+
+            tbody td {
+                padding: 0.35rem 0.6rem;
+                border-bottom: 1px solid var(--card-separator-color);
+
+                &:first-child {
+                    color: $ref-accent;
+                    font-family: var(--code-font-family);
+                    font-size: 0.8rem;
+                }
+            }
+
+            tbody tr:last-child td {
+                border-bottom: none;
+            }
+        }
+
+        ul,
+        ol {
+            padding-left: 1.3rem;
+            margin: 0.3rem 0;
+
+            li {
+                font-size: 0.88rem;
+                line-height: 1.7;
+            }
+        }
+    }
+}

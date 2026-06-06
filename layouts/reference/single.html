@@ -1,0 +1,22 @@
+{{ define "body-class" }}reference-page{{ end }}
+
+{{ define "right-sidebar" }}{{ end }}
+
+{{ define "main" }}
+<article class="ref-article">
+    <header class="ref-page-header">
+        {{ with .Params.icon }}
+        <div class="ref-page-icon">{{ . | safeHTML }}</div>
+        {{ end }}
+        <h1 class="ref-page-title">{{ .Title }}</h1>
+        {{ with .Description }}
+        <p class="ref-page-desc">{{ . }}</p>
+        {{ end }}
+    </header>
+
+    <div class="ref-content article-content">
+        {{ .Content }}
+    </div>
+</article>
+{{ partialCached "footer/footer" . }}
+{{ end }}

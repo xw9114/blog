@@ -1,0 +1,29 @@
+{{ define "body-class" }}reference-list-page{{ end }}
+
+{{ define "right-sidebar" }}{{ end }}
+
+{{ define "main" }}
+<div class="ref-list-container">
+    <header class="ref-list-header">
+        <h1>{{ .Title }}</h1>
+        {{ with .Description }}
+        <p>{{ . }}</p>
+        {{ end }}
+    </header>
+
+    <div class="ref-list-grid">
+        {{ range .Pages }}
+        <a class="ref-list-card" href="{{ .RelPermalink }}">
+            <div class="ref-list-card-icon">
+                {{ with .Params.icon }}{{ . | safeHTML }}{{ else }}📄{{ end }}
+            </div>
+            <h2>{{ .Title }}</h2>
+            {{ with .Description }}
+            <p>{{ . }}</p>
+            {{ end }}
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ partialCached "footer/footer" . }}
+{{ end }}

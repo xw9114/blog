@@ -1,0 +1,8 @@
+{{ $filename := .Get "filename" -}}
+{{ $span := .Get "span" -}}
+<div class="ref-card{{ with $span }} col-span-{{ . }}{{ end }}">
+    {{- with $filename }}<div class="card-filename">{{ . }}</div>{{ end -}}
+    <div class="card-body">
+        {{- .Inner | markdownify -}}
+    </div>
+</div>

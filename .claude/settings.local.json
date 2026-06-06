@@ -7,7 +7,11 @@
       "Bash(kill 518)",
       "Bash(pkill -f \"hugo server\")",
       "Bash(echo \"New PID: $!\")",
-      "mcp__Playwright__browser_navigate"
+      "mcp__Playwright__browser_navigate",
+      "Read(//Users/**)",
+      "Bash(xargs ls)",
+      "Bash(hugo --minify)",
+      "Read(//tmp/**)"
     ]
   }
 }

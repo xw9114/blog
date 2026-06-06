@@ -17,10 +17,19 @@
     icon = "book"
 
 [[main]]
+  identifier = "reference"
+  name       = "速查"
+  url        = "/reference/"
+  weight     = 3
+
+  [main.params]
+    icon = "categories"
+
+[[main]]
   identifier = "archives"
   name       = "归档"
   url        = "/archives/"
-  weight     = 3
+  weight     = 4
 
   [main.params]
     icon = "archives"
@@ -29,7 +38,7 @@
   identifier = "search"
   name       = "搜索"
   url        = "/search/"
-  weight     = 4
+  weight     = 5
 
   [main.params]
     icon = "search"
@@ -38,7 +47,7 @@
   identifier = "about"
   name       = "关于"
   url        = "/about/"
-  weight     = 4
+  weight     = 6
 
   [main.params]
     icon = "user"
@@ -47,7 +56,7 @@
   identifier = "links"
   name       = "链接"
   url        = "/links/"
-  weight     = 5
+  weight     = 7
 
   [main.params]
     icon = "link"
