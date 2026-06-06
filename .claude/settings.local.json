@@ -13,7 +13,10 @@
       "Bash(hugo --minify)",
       "Read(//tmp/**)",
       "Bash(rtk git *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git status *)",
+      "Bash(xargs -0 echo)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
