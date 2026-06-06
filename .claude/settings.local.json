@@ -11,7 +11,9 @@
       "Read(//Users/**)",
       "Bash(xargs ls)",
       "Bash(hugo --minify)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(rtk git *)",
+      "Bash(git add *)"
     ]
   }
 }

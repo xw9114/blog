@@ -163,19 +163,19 @@ $ref-accent: #17c48a;
     }
 }
 
-// 三列网格
+// 三列网格（默认 3 列，较窄时自动折 2/1）
 .ref-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 1.2rem;
     margin-bottom: 1.5rem;
     align-items: start;
 
-    @media (max-width: 1024px) {
+    @media (max-width: 1200px) {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
         grid-template-columns: 1fr;
     }
 }
@@ -188,6 +188,30 @@ $ref-accent: #17c48a;
     padding: 1.25rem;
     overflow: hidden;
     box-shadow: var(--shadow-l1);
+    cursor: pointer;
+    transition: box-shadow 0.18s, transform 0.18s;
+
+    &:hover {
+        box-shadow: var(--shadow-l2);
+        transform: translateY(-2px);
+    }
+
+    // 右下角展开提示
+    &::after {
+        content: "⤢";
+        position: absolute;
+        bottom: 6px;
+        right: 10px;
+        font-size: 0.75rem;
+        color: var(--card-text-color-tertiary);
+        opacity: 0;
+        transition: opacity 0.15s;
+        pointer-events: none;
+    }
+
+    &:hover::after {
+        opacity: 1;
+    }
 
     &.col-span-2 {
         grid-column: span 2;
@@ -236,7 +260,7 @@ $ref-accent: #17c48a;
         }
 
         code {
-            font-size: 0.82rem;
+            font-size: 0.875rem;
         }
 
         // 代码块撑满卡片边缘
@@ -264,6 +288,7 @@ $ref-accent: #17c48a;
                 margin: 0;
                 padding: 1rem 1.25rem;
                 background: transparent;
+                font-size: 0.875rem;
             }
         }
 
@@ -313,4 +338,131 @@ $ref-accent: #17c48a;
             }
         }
     }
+}
+
+// ===== 卡片展开模态窗口 =====
+
+.ref-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+    padding: 1.5rem;
+    animation: refModalIn 0.15s ease;
+}
+
+@keyframes refModalIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.ref-modal-box {
+    background: var(--body-background);
+    border-radius: 14px;
+    padding: 1.75rem;
+    max-width: 760px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: refModalSlideIn 0.18s ease;
+
+    // 关闭按钮
+    .ref-modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: var(--card-text-color-secondary);
+        line-height: 1;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: background 0.15s;
+
+        &:hover {
+            background: var(--card-background-selected);
+        }
+    }
+
+    // 模态内的文件名徽章改为静态位置
+    .card-filename {
+        position: static;
+        display: inline-block;
+        background: $ref-accent;
+        color: #fff;
+        padding: 2px 14px;
+        border-radius: 6px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        font-family: var(--code-font-family);
+        margin-bottom: 1rem;
+    }
+
+    .card-body {
+        > *:first-child { margin-top: 0; }
+        > *:last-child  { margin-bottom: 0; }
+
+        code { font-size: 0.9rem; }
+
+        pre {
+            font-size: 0.9rem;
+        }
+
+        .highlight {
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 0.75rem 0;
+
+            pre {
+                padding: 1rem 1.25rem;
+                margin: 0;
+            }
+        }
+
+        table {
+            width: 100%;
+            font-size: 0.9rem;
+            border-collapse: collapse;
+
+            thead th {
+                color: $ref-accent;
+                font-weight: 600;
+                border-bottom: 1px solid var(--card-separator-color);
+                padding: 0.4rem 0.7rem;
+                text-align: left;
+            }
+
+            tbody td {
+                padding: 0.4rem 0.7rem;
+                border-bottom: 1px solid var(--card-separator-color);
+
+                &:first-child {
+                    color: $ref-accent;
+                    font-family: var(--code-font-family);
+                }
+            }
+
+            tbody tr:last-child td { border-bottom: none; }
+        }
+
+        p { font-size: 0.9rem; line-height: 1.7; }
+
+        ul, ol {
+            padding-left: 1.4rem;
+            li { font-size: 0.9rem; line-height: 1.75; }
+        }
+    }
+}
+
+@keyframes refModalSlideIn {
+    from { transform: translateY(12px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
 }
