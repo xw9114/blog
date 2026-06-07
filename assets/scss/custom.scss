@@ -11,7 +11,7 @@
 // ===== 知识参考速查列表页 =====
 
 .ref-list-container {
-    max-width: 1000px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 2rem 1.5rem 3rem;
 }
@@ -35,12 +35,8 @@
 
 .ref-list-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.2rem;
-
-    @media (max-width: 900px) {
-        grid-template-columns: repeat(3, 1fr);
-    }
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 
     @media (max-width: 640px) {
         grid-template-columns: repeat(2, 1fr);
@@ -55,7 +51,7 @@
     display: flex;
     flex-direction: column;
     background: var(--card-background);
-    border-radius: 14px;
+    border-radius: 16px;
     overflow: hidden;
     box-shadow: var(--shadow-l1);
     text-decoration: none;
@@ -64,7 +60,7 @@
 
     &:hover {
         box-shadow: var(--shadow-l2);
-        transform: translateY(-3px);
+        transform: translateY(-4px);
     }
 
     // 顶部彩色横幅
@@ -73,15 +69,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 1.6rem 1rem;
-        min-height: 90px;
+        padding: 2.4rem 1rem;
+        min-height: 140px;
 
         .ref-list-card-icon {
-            font-size: 2.2rem;
+            font-size: 3.2rem;
             font-weight: 900;
             color: #fff;
             line-height: 1;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
             text-align: center;
             word-break: break-all;
         }
@@ -89,31 +85,31 @@
 
     // 卡片文字区
     .ref-list-card-body {
-        padding: 0.9rem 1rem 0.8rem;
+        padding: 1.2rem 1.25rem 1rem;
         flex: 1;
         display: flex;
         flex-direction: column;
         position: relative;
 
         h2 {
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin: 0 0 0.3rem;
+            margin: 0 0 0.4rem;
             line-height: 1.3;
         }
 
         p {
-            font-size: 0.78rem;
+            font-size: 0.88rem;
             color: var(--card-text-color-secondary);
             margin: 0;
-            line-height: 1.4;
+            line-height: 1.5;
             flex: 1;
         }
 
         .ref-list-card-arrow {
             display: block;
-            margin-top: 0.6rem;
-            font-size: 0.85rem;
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
             color: var(--card-accent, #17c48a);
             font-weight: 700;
             transition: transform 0.15s;
@@ -121,7 +117,7 @@
     }
 
     &:hover .ref-list-card-arrow {
-        transform: translateX(4px);
+        transform: translateX(5px);
     }
 }
 
