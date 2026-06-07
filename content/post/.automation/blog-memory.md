@@ -9,6 +9,12 @@
 ## 已用主题
 
 - 2026-06-07
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 多从设备共享 MISO、片选撤销延迟与帧间污染恢复
+  - 文章路径: `D:/blog/content/post/53/spi-shared-bus-miso-tristate-release-contamination-recovery.md`
+
+- 2026-06-07
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: 步进电机 S 型加减速算法：抑制机械谐振的微积分应用
   - 二级技术切面: 短行程段退化、定时器量化与末端残差消除
@@ -207,6 +213,18 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-07 14:05:00 +08:00
+  - 输出文章: `D:/blog/content/post/53/spi-shared-bus-miso-tristate-release-contamination-recovery.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 多从设备共享 MISO、片选撤销延迟与帧间污染恢复
+  - 决策说明: 一级主题池已全部覆盖，因此继续遵循“已用一级主题下派生未写过的二级技术切面”策略；最近几篇文章依次覆盖高阶电机、视觉、控制融合与 MCU 架构，工业总线自 2026-05-25 后未再展开，因此本轮优先回到工业总线维度。在 SPI 主线下，刻意避开旧文 `spi-cpol-cpha-timing.md` 已覆盖的基础采样边沿、空闲时钟与片选建立时间，也避开 `skill-spi-dma-chip-select-hold-and-readback-phase-recovery.md` 已展开的 DMA 连续事务、片选保持和回读错位恢复，把切口收束到多从设备共享 `MISO` 的三态释放尾延迟、片选撤销后的交接保护时间、偏置网络恢复与首字节污染恢复，确保标题、slug、公式链路与工程问题都与旧文明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从字节流表象回到总线所有权交接”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `T_guard >= max(tDIS_prev, tEN_next) + t_flight + t_margin`、`tau = R_bias * C_bus`、`valid_offset = 1 + N_dummy` 与 `t_frame ~= 8 * N_total / f_sck + t_css + t_csh + t_guard` 展开，覆盖共享总线锁、最近一次 `CS` 拉高时间记录、`BSY/RXNE/OVR` 收尾清理、首字节槽位校验、额外 Dummy 吸收帧间污染以及失败后的重新空闲化恢复。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/53/spi-shared-bus-miso-tristate-release-contamination-recovery.md" "auto(blog): skill-spi-shared-bus-miso-tristate-release-chip-select-deassertion-and-interframe-contamination-recovery"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本与直接 `git add` 均在 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied` 处失败；当前 `.git/index.lock` 并不存在，且对 `.git` 目录做探针写入同样被拒绝，说明问题仍是 `.git` 目录写权限或锁文件创建受限，而不是文章路径、slug、批处理参数或正文内容异常。
 
 - 2026-06-07 10:51:16 +08:00
   - 输出文章: `D:/blog/content/post/52/stepper-short-move-s-curve-quantization-residual.md`

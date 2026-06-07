@@ -267,8 +267,8 @@ $ref-accent: #17c48a;
         > *:last-child  { margin-bottom: 0; }
 
         p {
-            font-size: 0.88rem;
-            line-height: 1.65;
+            font-size: 1.1rem;
+            line-height: 1.7;
             margin: 0.45rem 0;
         }
 
@@ -340,20 +340,20 @@ $ref-accent: #17c48a;
         table {
             width: 100%;
             max-width: 100%;
-            font-size: 0.84rem;
+            font-size: 1.1rem;
             border-collapse: collapse;
-            white-space: nowrap; // 防止单元格内文字换行导致列宽失控
+            white-space: nowrap;
 
             thead th {
                 color: $ref-accent;
                 font-weight: 600;
                 border-bottom: 1px solid var(--card-separator-color);
-                padding: 0.35rem 0.8rem;
+                padding: 0.5rem 1rem;
                 text-align: left;
             }
 
             tbody td {
-                padding: 0.35rem 0.8rem;
+                padding: 0.5rem 1rem;
                 border-bottom: 1px solid var(--card-separator-color);
 
                 &:first-child {
@@ -374,7 +374,7 @@ $ref-accent: #17c48a;
             margin: 0.3rem 0;
 
             li {
-                font-size: 0.88rem;
+                font-size: 1.1rem;
                 line-height: 1.7;
                 word-break: break-word;
             }
