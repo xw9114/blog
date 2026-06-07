@@ -200,17 +200,13 @@ $ref-accent: #17c48a;
     }
 }
 
-// 两列网格（默认 2 列）
+// 单列网格
 .ref-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
     margin-bottom: 1.5rem;
     align-items: start;
-
-    @media (max-width: 640px) {
-        grid-template-columns: 1fr;
-    }
 }
 
 // 单张卡片
@@ -273,7 +269,7 @@ $ref-accent: #17c48a;
         }
 
         code {
-            font-size: 1.5rem;
+            font-size: 1.1rem; // 行内代码与正文同级
         }
 
         // 卡片内隐藏主题自动注入的 Copy 按钮
@@ -308,8 +304,8 @@ $ref-accent: #17c48a;
                 margin: 0;
                 padding: 1rem 1.1rem;
                 background: transparent;
-                font-size: 1.5rem;
-                line-height: 1.7;
+                font-size: 1.15rem; // 代码块比正文略大
+                line-height: 1.75;
                 white-space: pre;
                 word-break: normal;
                 overflow-wrap: normal;
