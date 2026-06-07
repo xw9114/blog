@@ -264,6 +264,8 @@ $ref-accent: #17c48a;
 
     .card-body {
         padding: 0.9rem 1.1rem;
+        overflow-x: auto;      // 表格等宽内容横向可滚动
+        word-break: break-word; // 长文本在卡片边界换行
 
         > *:first-child { margin-top: 0; }
         > *:last-child  { margin-bottom: 0; }
@@ -341,19 +343,21 @@ $ref-accent: #17c48a;
 
         table {
             width: 100%;
+            max-width: 100%;
             font-size: 0.84rem;
             border-collapse: collapse;
+            white-space: nowrap; // 防止单元格内文字换行导致列宽失控
 
             thead th {
                 color: $ref-accent;
                 font-weight: 600;
                 border-bottom: 1px solid var(--card-separator-color);
-                padding: 0.35rem 0.6rem;
+                padding: 0.35rem 0.8rem;
                 text-align: left;
             }
 
             tbody td {
-                padding: 0.35rem 0.6rem;
+                padding: 0.35rem 0.8rem;
                 border-bottom: 1px solid var(--card-separator-color);
 
                 &:first-child {
@@ -376,6 +380,7 @@ $ref-accent: #17c48a;
             li {
                 font-size: 0.88rem;
                 line-height: 1.7;
+                word-break: break-word;
             }
         }
     }
