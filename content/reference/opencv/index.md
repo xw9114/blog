@@ -23,3 +23,15 @@ date: 2026-06-07
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+{{< ref-cols >}}
+
+{{< ref-card filename="颜色空间转换" >}}
+```python
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 转为灰度图
+hsv  = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)   # 转为 HSV 色彩空间
+rgb  = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 转为 RGB 色彩空间
+```
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
