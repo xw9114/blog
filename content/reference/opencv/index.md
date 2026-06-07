@@ -35,3 +35,23 @@ rgb  = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)   # 转为 RGB 色彩空间
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+{{< ref-cols >}}
+
+{{< ref-card filename="BGR 转 HSV" >}}
+将图片从 BGR 色彩空间转换为 HSV 色彩空间。
+
+```python
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+```
+
+HSV 三个通道含义：
+
+- **H**：色调（Hue）
+- **S**：饱和度（Saturation）
+- **V**：亮度（Value）
+
+常用于颜色识别，比如识别红色、蓝色、绿色物体。
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
