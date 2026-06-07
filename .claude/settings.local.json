@@ -20,7 +20,10 @@
       "Bash(xargs grep -l \"ref-modal\")",
       "Bash(xargs grep -l \"card-filename\\\\|ref-card\")",
       "Bash(xargs ls -la)",
-      "Bash(python3 *)"
+      "Bash(python3 *)",
+      "Bash(pip3 show *)",
+      "Bash(pip show *)",
+      "Bash(pip list *)"
     ]
   }
 }

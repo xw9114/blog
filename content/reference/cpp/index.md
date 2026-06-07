@@ -331,3 +331,23 @@ p2.reset();             // 释放（计数 -1）
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+```markdown
+{{< ref-cols >}}
+
+{{< ref-card filename="OpenCV 读取方式对比" >}}
+| 方式 | 用来读什么 | 是否需要循环 |
+|------|-----------|-------------|
+| `cv2.imread("图片路径")` | 一张图片 | 不需要 |
+| `cv2.VideoCapture(0)` | 摄像头 | 需要循环 |
+| `cv2.VideoCapture("test.mp4")` | 视频 | 需要循环 |
+| `cv2.VideoCapture("img_%03d.jpg")` | 图片序列 | 通常需要循环 |
+{{< /ref-card >}}
+
+{{< ref-card filename="VideoCapture 与 imread 区别" >}}
+- `cv2.VideoCapture` 用来从摄像头、视频文件或图片序列中读取**连续画面**，需要循环逐帧获取
+- `cv2.imread()` 直接读取**单张图片**，一次调用即可
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
+```

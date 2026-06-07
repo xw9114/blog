@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-07
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: 步进电机 S 型加减速算法：抑制机械谐振的微积分应用
+  - 二级技术切面: 短行程段退化、定时器量化与末端残差消除
+  - 文章路径: `D:/blog/content/post/52/stepper-short-move-s-curve-quantization-residual.md`
+
 - 2026-05-31
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
   - 一级主题: OpenCV 相机标定与物理世界的三维重建
@@ -201,6 +207,18 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-07 10:51:16 +08:00
+  - 输出文章: `D:/blog/content/post/52/stepper-short-move-s-curve-quantization-residual.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: 步进电机 S 型加减速算法：抑制机械谐振的微积分应用
+  - 二级技术切面: 短行程段退化、定时器量化与末端残差消除
+  - 决策说明: 一级主题池已在此前轮次全部覆盖，本轮遵循“已用一级主题下派生未写过的二级技术切面”策略；最近三篇依次覆盖视觉、控制融合与 MCU 架构，因此优先回到近几篇未连续展开的高阶电机维度，并刻意避开旧文 `stepper-s-curve.md` 已经覆盖过的 jerk 受限轨迹总览、机械谐振抑制与通用定时器脉冲映射，把切口收束到短行程下七段曲线如何塌缩、连续毫米轨迹如何对齐整数步预算、ARR 非整数分频如何用分数累加均值守恒，以及总时间结束后最后几步如何安全清算，确保标题、slug、公式链路和工程问题都与旧文明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“先承认积分世界与计数世界存在缝隙，再讨论如何用步预算把它们签成同一份合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `released_steps = floor(x_cmd / l_step)`、`T_ticks* = f_tim / f_step = N + alpha`、`S_total < 2 * S_half(v_max)` 与 `Tj = cbrt(S_total / (2 * j))` 展开，覆盖短行程段退化判据、位移到步数的量化对齐、STEP/DIR 建立时间保护、ARR 分数累加补偿、规划层与脉冲层解耦，以及尾段按剩余步数清算的停止逻辑。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/52/stepper-short-move-s-curve-quantization-residual.md" "auto(blog): skill-stepper-short-move-s-curve-segment-collapse-timer-quantization-and-residual-cancellation"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 发布脚本在 `git add` 阶段返回 `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`；当前 `.git/index.lock` 并不存在，说明问题仍是 `.git` 目录写权限受限，而不是残留锁文件未清理。
 
 - 2026-05-31 16:48:30 +08:00
   - 输出文章: `D:/blog/content/post/51/opencv-planar-pnp-degeneracy-condition-number-pose-flip.md`
