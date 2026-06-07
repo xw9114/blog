@@ -55,3 +55,22 @@ HSV 三个通道含义：
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+{{< ref-cols >}}
+
+{{< ref-card filename="BGR 转灰度图" >}}
+作用：把彩色图变成黑白图。
+
+```python
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+```
+
+常用于：
+
+- 边缘检测
+- 二值化
+- 轮廓检测
+- 人脸检测
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
