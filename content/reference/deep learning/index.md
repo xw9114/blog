@@ -82,3 +82,23 @@ $$\text{输出尺寸} = \frac{H_{in} - kH + 2 \times \text{padding}}{\text{strid
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+{{< ref-cols >}}
+
+{{< ref-card filename="Tensor 基本概念" >}}
+PyTorch 里用 **Tensor** 存储数字，可以理解为"支持 GPU 加速的 numpy 数组"。
+{{< /ref-card >}}
+
+{{< ref-card filename="图片 Batch 的形状" >}}
+一个 batch（批次）的图片形状是：
+
+```python
+(B, C, H, W)
+B = batch size  # 一次送几张图
+C = 通道数      # RGB = 3
+H = 高度        # 1024
+W = 宽度        # 1024
+```
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
