@@ -20,7 +20,7 @@ SortBy         = "default"
 
 [article]
   headingAnchor = true
-  math          = false
+  math          = true
   toc           = true
   readingTime   = true
 
