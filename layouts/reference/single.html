@@ -20,6 +20,24 @@
 </article>
 {{ partialCached "footer/footer" . }}
 
+{{- partial "helper/external" (dict "Context" . "Namespace" "KaTeX") -}}
+<script>
+window.addEventListener("DOMContentLoaded", function () {
+    var el = document.querySelector(".ref-article");
+    if (el && typeof renderMathInElement === "function") {
+        renderMathInElement(el, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });
+    }
+});
+</script>
+
 <script>
 (function () {
     function openModal(card) {
