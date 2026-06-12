@@ -8,6 +8,30 @@
 
 ## 已用主题
 
+- 2026-06-12
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: 重同步、SJW 与长线时钟漂移容限
+  - 文章路径: `D:/blog/content/post/57/can-resynchronization-sjw-clock-drift-budget.md`
+
+- 2026-06-12
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: I2C/UART 通信协议底层逻辑
+  - 二级技术切面: RS-485 半双工方向切换、帧间静默与总线回声消除
+  - 文章路径: `D:/blog/content/post/56/rs485-half-duplex-de-turnaround-idle-gap-echo-suppression.md`
+
+- 2026-06-11
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
+  - 二级技术切面: 连续噪声离散化、Q/R 量纲统一与采样周期抖动
+  - 文章路径: `D:/blog/content/post/55/kalman-continuous-noise-discretization-qr-dt-jitter.md`
+
+- 2026-06-11
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 硬件定时器与中断机制
+  - 二级技术切面: 影子寄存器、更新事件、重复计数器与中心对齐 PWM 的无毛刺更新
+  - 文章路径: `D:/blog/content/post/54/stm32-timer-preload-update-center-aligned-pwm.md`
+
 - 2026-06-07
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
   - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
@@ -213,6 +237,52 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-12 11:26:13 +08:00
+  - 输出文章: `D:/blog/content/post/57/can-resynchronization-sjw-clock-drift-budget.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: 重同步、SJW 与长线时钟漂移容限
+  - 决策说明: 一级主题池已全部覆盖，因此继续采用二级技术切面策略；最近几篇已经轮转覆盖 MCU、控制、工业总线、高阶电机与视觉，其中最新一篇刚回到 MCU 的 RS-485 半双工方向切换，因此本轮避免连续停留在 MCU 维度，转而重访工业总线里的 CAN 主线，但刻意避开 `can-arbitration.md` 已写过的线与仲裁基础、`can-bit-timing-bus-off-recovery.md` 已展开的位时序容差与 Bus-Off 恢复，以及 `can-ack-retry-deadline-budget.md` 已分析过的 ACK 缺失和发送截止期，改把切口收束到长线传播、采样点、SJW 与晶振 ppm 漂移如何共同决定重同步是否还来得及这一条更底层的时域链路，确保标题、slug、公式与工程问题都和历史文章明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从本地时钟漂移回到共享总线时间合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 bxCAN HAL 风格，围绕 `t_bit = (1 + TSEG1 + TSEG2) * tq`、`sample_point = (1 + BS1) / NBT`、`t_loop ~= 2 * t_cable + t_txrx + t_margin` 与 `ppm_local + ppm_remote <= ppm_limit(SJW, PHASE_SEG1, PHASE_SEG2, NBT)` 展开，显式把传播段、相位段、SJW、比特率误差和振荡器容限放进同一套求解流程，并加入边界限幅与候选优选逻辑。
+  - 提交动作: 在写入 `content/post/57/can-resynchronization-sjw-clock-drift-budget.md` 与两份记忆后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/57/can-resynchronization-sjw-clock-drift-budget.md" "auto(blog): skill-can-resynchronization-sjw-sample-point-and-clock-drift-budget"`。
+
+- 2026-06-12 10:22:04 +08:00
+  - 输出文章: `D:/blog/content/post/56/rs485-half-duplex-de-turnaround-idle-gap-echo-suppression.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: I2C/UART 通信协议底层逻辑
+  - 二级技术切面: RS-485 半双工方向切换、帧间静默与总线回声消除
+  - 决策说明: 一级主题池已全部覆盖，因此继续采用二级技术切面模式；最近几篇文章已经轮转覆盖控制、MCU、工业总线、高阶电机与视觉，本轮回到 I2C/UART 主线，但刻意避开 `i2c-bus-recovery.md` 已展开的开漏上拉与总线恢复，以及 `uart-oversampling-baud-error-resync.md` 已展开的过采样、波特率误差和 IDLE 重同步，改把切口收束到 RS-485 半双工共享介质里的占线权切换、DE/RE 边界、`TC` 完帧释放、字符静默窗与本机回声消除，确保标题、slug、公式链路和工程问题都与历史文章明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从共享线对的占有权回到时域合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 使用场景，围绕差分物理层空闲偏置、`t_char = (1 + N_data + N_parity + N_stop) / baud`、`t_silent_min = 3.5 * t_char`、DMA 完成与 `TC` 完帧边界差异、DE 建立/释放保护时间、RX DMA 环形缓冲与回声保护窗展开，显式写出 `N_buf >= ceil((baud / bits_per_char) * T_block)` 的缓冲深度预算，并加入 `FE/NE/ORE` 错误后的残帧丢弃与重同步。
+  - 提交动作: 在写入 `content/post/56/rs485-half-duplex-de-turnaround-idle-gap-echo-suppression.md` 与两份记忆后，先尝试补齐上轮遗留的 `content/post/54`、`content/post/55`，再调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/56/rs485-half-duplex-de-turnaround-idle-gap-echo-suppression.md" "auto(blog): skill-rs485-half-duplex-de-turnaround-idle-gap-and-echo-suppression"`。
+  - 提交状态: 自动提交失败
+  - 失败原因: 手工 `git add` 与发布脚本都无法创建 `D:/blog/.git/index.lock`，并且直接向 `D:/blog/.git` 写入测试文件同样返回 `Access denied`，因此本轮文章与上轮遗留的 `content/post/54`、`content/post/55` 仍未能自动提交或推送。
+
+- 2026-06-11 13:17:12 +08:00
+  - 输出文章: `D:/blog/content/post/55/kalman-continuous-noise-discretization-qr-dt-jitter.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
+  - 二级技术切面: 连续噪声离散化、Q/R 量纲统一与采样周期抖动
+  - 决策说明: 一级主题池已全部覆盖，因此继续沿已用一级主题派生未写过的二级技术切面；最近几篇已依次轮转 MCU、工业总线、高阶电机、视觉与控制维度，其中控制方向自 2026-05-30 的视觉-IMU 时间对齐后尚未重访，因此回到卡尔曼主线，但刻意避开 `kalman-filter.md` 的基础推演与 `kalman-nis-gating.md` 的异常观测门控，改为聚焦“连续噪声如何穿过采样门进入 Q、加速度噪声如何映射成 R、dt 抖动如何同步改写状态推进与协方差传播”这一新的物理切口。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从协方差记账回到物理时基”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 使用场景，围绕 2 状态俯仰角/零偏模型展开，内部统一使用弧度制，显式写出 `F = [[1, -dt], [0, 1]]` 与 `Q_d = [[q_g * dt + q_b * dt^3 / 3, -q_b * dt^2 / 2], [-q_b * dt^2 / 2, q_b * dt]]`，覆盖基于 `atan2(-ax, az)` 的角度观测、`R_theta ~= sigma_a^2 / (a_x^2 + a_z^2)` 的误差传播、微秒时间戳 `dt` 重算、Joseph Form 协方差更新、交叉协方差对称化与边界限幅。
+  - 提交动作: 完成文章与仓库记忆写入后，先将上轮遗留的 `D:/blog/content/post/54/stm32-timer-preload-update-center-aligned-pwm.md` 纳入暂存，再按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/55/kalman-continuous-noise-discretization-qr-dt-jitter.md" "auto(blog): skill-kalman-continuous-noise-discretization-qr-unit-consistency-and-dt-jitter"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: 手工 `git add` 与发布脚本都在创建 `D:/blog/.git/index.lock` 时返回 `Permission denied`，因此本轮未能补提 `content/post/54`，也未能提交或推送 `content/post/55`。
+
+- 2026-06-11 12:34:00 +08:00
+  - 输出文章: `D:/blog/content/post/54/stm32-timer-preload-update-center-aligned-pwm.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 硬件定时器与中断机制
+  - 二级技术切面: 影子寄存器、更新事件、重复计数器与中心对齐 PWM 的无毛刺更新
+  - 决策说明: 一级主题池已全部覆盖，因此继续遵循“已用一级主题下派生未写过的二级技术切面”策略；最近几篇文章已轮转覆盖工业总线、高阶电机、视觉、控制与 MCU 架构，本轮避免回到刚写过的工业总线与电机维度，回到上次于 2026-05-29 展开的 MCU 架构方向，并刻意避开 `timer.md` 已覆盖的定时器基础节拍与 `stm32-input-capture-overflow-rpm.md` 已覆盖的输入捕获测速，把切口收束到影子寄存器、更新事件、重复计数器与中心对齐 PWM 的运行中无毛刺更新，重点分析“改值的时刻”如何决定功率级波形真实性，而不是停留在 `HAL_TIM_PWM_Start()` 这一层。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从离散时间边界回到功率波形契约”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `f_pwm = f_tim / (2 * (PSC + 1) * ARR)`、`duty ~= CCR / ARR` 与 `CCR = round(duty * ARR)` 展开，覆盖中心对齐载波参数计算、`ARPE/OCxPE` 预装载、`RCR` 合并更新边界、软件 pending 帧到硬件 preload 的原子提交、保护计数限幅以及只在更新事件之后写入下一帧比较值的无毛刺更新策略。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/54/stm32-timer-preload-update-center-aligned-pwm.md" "auto(blog): skill-stm32-timer-preload-update-event-center-aligned-pwm-glitch-free-update"`。
+  - 提交状态: 自动提交失败。
+  - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
 
 - 2026-06-07 14:05:00 +08:00
   - 输出文章: `D:/blog/content/post/53/spi-shared-bus-miso-tristate-release-contamination-recovery.md`
