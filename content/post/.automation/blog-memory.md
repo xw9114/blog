@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-13
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 电流环离散化、交叉耦合解耦与反电动势前馈
+  - 文章路径: `D:/blog/content/post/58/foc-current-loop-discretization-decoupling-back-emf-feedforward.md`
+
 - 2026-06-12
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
   - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
@@ -237,6 +243,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-13 10:42:47 +08:00
+  - 输出文章: `D:/blog/content/post/58/foc-current-loop-discretization-decoupling-back-emf-feedforward.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 电流环离散化、交叉耦合解耦与反电动势前馈
+  - 决策说明: 一级主题池已全部覆盖，因此继续沿已用一级主题派生未写过的二级技术切面；最近两篇连续落在工业总线与 MCU 方向，继续停留会拉窄博客跨度，而高阶电机维度自 2026-06-07 的步进电机短行程量化后尚未重访，因此本轮回到 FOC 主线，但刻意避开 `foc-clarke-park.md` 已展开的坐标变换与基本 dq 闭环、`foc-single-shunt-current-reconstruction.md` 已展开的单电阻采样窗口与死区补偿，以及 `foc-encoder-electrical-zero-pole-pair-calibration.md` 已展开的零电角与极对数标定，改把切口收束到“电流环面对的其实是一个随 `omega_e` 变化的离散旋转对象”这一更深层问题，重点展开 dq 方程离散化、交叉耦合解耦、`omega_e * psi_f` 反电动势前馈、电压矢量统一限幅与 back-calculation 抗积分饱和，确保标题、slug、公式链路与工程故障画像都与历史 FOC 文章明显分离。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从有限母线电压回到账本式电流环”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 快环场景，假设前级已提供三相电流、电角度与电角速度，围绕 `v_d = R_s * i_d + L_d * di_d/dt - omega_e * L_q * i_q` 与 `v_q = R_s * i_q + L_q * di_q/dt + omega_e * (L_d * i_d + psi_f)` 展开，显式写出前向 Euler 离散化、`v_d_ff / v_q_ff` 前馈构造、参考斜率限幅、dq 电压矢量统一饱和、back-calculation 抗积分饱和以及 alpha/beta 到中心对齐 PWM 的线性映射公式。
+  - 提交动作: 在写入 `content/post/58/foc-current-loop-discretization-decoupling-back-emf-feedforward.md` 与两份记忆后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/58/foc-current-loop-discretization-decoupling-back-emf-feedforward.md" "auto(blog): skill-foc-current-loop-discretization-decoupling-and-back-emf-feedforward"`。
 
 - 2026-06-12 11:26:13 +08:00
   - 输出文章: `D:/blog/content/post/57/can-resynchronization-sjw-clock-drift-budget.md`
