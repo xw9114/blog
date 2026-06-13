@@ -74,3 +74,37 @@ gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+## 常见插值方法
+
+{{< ref-cols >}}
+
+{{< ref-card filename="最近邻插值" >}}
+```python
+cv.INTER_NEAREST
+```
+最近邻插值，速度快，但图片容易有锯齿。
+{{< /ref-card >}}
+
+{{< ref-card filename="双线性插值" >}}
+```python
+cv.INTER_LINEAR
+```
+双线性插值，默认方法，效果和速度都比较均衡。
+{{< /ref-card >}}
+
+{{< ref-card filename="三次插值" >}}
+```python
+cv.INTER_CUBIC
+```
+三次插值，放大图片效果更好，但速度慢一点。
+{{< /ref-card >}}
+
+{{< ref-card filename="区域插值" >}}
+```python
+cv.INTER_AREA
+```
+区域插值，通常适合缩小图片。
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
