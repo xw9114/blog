@@ -711,3 +711,23 @@
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/19/stm32-adc-dma.md" "auto(blog): skill-stm32-dma-multi-channel-adc-memory-transport"`。
   - 提交状态: 自动提交失败。
   - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
+
+## 2026-06-13 补充主题索引
+
+- 日期: 2026-06-13
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 基础图像处理与颜色识别
+  - 二级技术切面: 色温漂移、3x3 颜色校正矩阵与 Lab ΔE 门控
+  - 文章路径: `D:/blog/content/post/58/color-temperature-ccm-lab-gating.md`
+
+## 2026-06-13 补充运行记录
+
+- 2026-06-13 10:43:52 +08:00
+  - 输出文章: `D:/blog/content/post/58/color-temperature-ccm-lab-gating.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 基础图像处理与颜色识别
+  - 二级技术切面: 色温漂移、3x3 颜色校正矩阵与 Lab ΔE 门控
+  - 决策说明: 一级主题池已全部覆盖，因此按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已连续覆盖工业总线、MCU 与控制方向，为避免技术维度过于集中，本轮切回近期较少出现的视觉方向，并刻意避开 `opencv-hsv-recalibration-ae-awb-gamma.md` 已写过的自动曝光、白平衡与 HSV 回标定老切口，把重心收敛到“光源色温变化如何穿过传感器线性化、白点增益、3x3 CCM 和 Lab 距离门控，最终决定颜色识别是否仍可比较”这条更底层的颜色测量链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从入射光谱到感知距离”的叙述风格。
+  - 实现约束: 代码采用 OpenCV C++ 风格，覆盖 sRGB 反伽马、白参考增益归一化、3x3 颜色校正矩阵最小二乘求解、线性 RGB 到 XYZ/Lab 的映射、DeltaE76 门控以及过曝/欠曝边界拒绝逻辑，并显式写出 `rgb_balanced = diag(g_r, g_g, g_b) * rgb_linear`、`M = arg min sum ||c_ref_i - M * c_cam_i||^2` 与 `DeltaE76 = sqrt((DeltaL)^2 + (Deltaa)^2 + (Deltab)^2)` 等关键公式。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/58/color-temperature-ccm-lab-gating.md" "auto(blog): skill-color-recognition-color-temperature-ccm-and-lab-deltae-gating"`。
