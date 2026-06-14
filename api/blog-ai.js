@@ -116,6 +116,7 @@ module.exports = async function handler(req, res) {
             },
             body: JSON.stringify({
                 model,
+                stream: false,
                 messages: [
                     {
                         role: "system",
@@ -142,7 +143,8 @@ module.exports = async function handler(req, res) {
             return sendJson(res, apiResponse.status, { error: errMsg });
         }
 
-        const msg = data.choices && data.choices[0] && data.choices[0].message;
+        const choice = data.choices && data.choices[0];
+        const msg = choice && (choice.message || choice.delta);
         const answer = (msg && (msg.content || msg.reasoning_content) || "").trim();
 
         if (!answer) {
