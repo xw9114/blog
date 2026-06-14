@@ -1,0 +1,46 @@
+{{- with site.Params.blogAi -}}
+{{- if .enabled -}}
+    {{- $config := dict
+        "title" (default "月栖问答" .title)
+        "subtitle" (default "基于博客文章回答" .subtitle)
+        "greeting" (default "你好，我会先检索博客文章，再整理答案。" .greeting)
+        "placeholder" (default "问问博客内容..." .placeholder)
+        "endpoint" (default "/api/blog-ai" .endpoint)
+        "searchIndex" (default "/search/index.json" .searchIndex)
+        "contextLimit" (default 6 .contextLimit)
+    -}}
+    <div
+        class="blog-ai"
+        data-blog-ai
+        data-title="{{ $config.title }}"
+        data-subtitle="{{ $config.subtitle }}"
+        data-greeting="{{ $config.greeting }}"
+        data-placeholder="{{ $config.placeholder }}"
+        data-endpoint="{{ $config.endpoint }}"
+        data-search-index="{{ $config.searchIndex }}"
+        data-context-limit="{{ $config.contextLimit }}"
+    >
+        <button class="blog-ai__trigger" type="button" aria-label="{{ $config.title }}">
+            <span class="blog-ai__trigger-mark">AI</span>
+        </button>
+        <section class="blog-ai__panel" aria-label="{{ $config.title }}" hidden>
+            <header class="blog-ai__header">
+                <div>
+                    <p class="blog-ai__eyebrow">Gemini</p>
+                    <h2>{{ $config.title }}</h2>
+                    <p>{{ $config.subtitle }}</p>
+                </div>
+                <button class="blog-ai__close" type="button" aria-label="关闭">×</button>
+            </header>
+            <div class="blog-ai__messages" role="log" aria-live="polite">
+                <div class="blog-ai__message blog-ai__message--assistant">{{ $config.greeting }}</div>
+            </div>
+            <form class="blog-ai__form">
+                <textarea class="blog-ai__input" rows="3" placeholder="{{ $config.placeholder }}"></textarea>
+                <button class="blog-ai__send" type="submit">发送</button>
+            </form>
+        </section>
+    </div>
+    <script src="{{ "js/blog-ai.js" | relURL }}" defer></script>
+{{- end -}}
+{{- end -}}

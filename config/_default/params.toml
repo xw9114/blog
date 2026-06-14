@@ -61,5 +61,15 @@ SortBy         = "default"
     "/about/"     = "/images/backgrounds/nav/about-sakura.jpg"
     "/links/"     = "/images/backgrounds/nav/links-misty-valley.jpg"
 
+[blogAi]
+  enabled      = true
+  title        = "月栖问答"
+  subtitle     = "基于博客文章回答"
+  greeting     = "你好，我会先检索月栖之地的文章，再用 Gemini 帮你整理答案。"
+  placeholder  = "问问文章、笔记或速查内容..."
+  endpoint     = "/api/blog-ai"
+  searchIndex  = "/search/index.json"
+  contextLimit = 6
+
 [comments]
   enabled = false
