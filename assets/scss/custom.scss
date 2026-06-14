@@ -675,6 +675,10 @@ $ref-accent: #17c48a;
     box-shadow: var(--blog-ai-shadow);
     backdrop-filter: blur(18px) saturate(1.1);
     -webkit-backdrop-filter: blur(18px) saturate(1.1);
+
+    &[hidden] {
+        display: none !important;
+    }
 }
 
 .blog-ai__header {
