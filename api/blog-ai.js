@@ -137,15 +137,12 @@ module.exports = async function handler(req, res) {
             return sendJson(res, apiResponse.status, { error: errMsg });
         }
 
-        const answer = data.choices &&
-            data.choices[0] &&
-            data.choices[0].message &&
-            data.choices[0].message.content
-            ? data.choices[0].message.content.trim()
-            : "";
+        const msg = data.choices && data.choices[0] && data.choices[0].message;
+        const answer = (msg && (msg.content || msg.reasoning_content) || "").trim();
 
         if (!answer) {
-            return sendJson(res, 502, { error: "AI 没有返回文本" });
+            const detail = JSON.stringify(data).slice(0, 300);
+            return sendJson(res, 502, { error: `AI 没有返回文本，原始响应：${detail}` });
         }
 
         return sendJson(res, 200, { answer });
