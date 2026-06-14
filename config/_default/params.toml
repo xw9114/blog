@@ -49,5 +49,17 @@ SortBy         = "default"
   [imageProcessing.thumbnail]
     enabled = true
 
+[backgrounds]
+  opacity = 0.30
+
+  [backgrounds.pages]
+    "/"           = "/images/backgrounds/nav/home-fuji.jpg"
+    "/notes/"     = "/images/backgrounds/nav/notes-forest.jpg"
+    "/reference/" = "/images/backgrounds/nav/reference-courtyard.jpg"
+    "/archives/"  = "/images/backgrounds/nav/archives-coast.jpg"
+    "/search/"    = "/images/backgrounds/nav/search-rain-city.jpg"
+    "/about/"     = "/images/backgrounds/nav/about-sakura.jpg"
+    "/links/"     = "/images/backgrounds/nav/links-misty-valley.jpg"
+
 [comments]
   enabled = false

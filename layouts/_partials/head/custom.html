@@ -1,0 +1,31 @@
+{{- $backgroundImage := .Params.backgroundImage -}}
+{{- if not $backgroundImage -}}
+    {{- with site.Params.backgrounds.pages -}}
+        {{- $backgroundImage = index . $.RelPermalink -}}
+    {{- end -}}
+{{- end -}}
+{{- if and (not $backgroundImage) (eq .Kind "term") -}}
+    {{- $backgroundImage = .Params.image -}}
+{{- end -}}
+{{- with $backgroundImage -}}
+    {{- $value := printf "%v" . -}}
+    {{- $url := "" -}}
+    {{- if or (hasPrefix $value "http://") (hasPrefix $value "https://") -}}
+        {{- $url = $value -}}
+    {{- else if hasPrefix $value "/" -}}
+        {{- $url = $value | relURL -}}
+    {{- else -}}
+        {{- with $.Resources.GetMatch $value -}}
+            {{- $url = .RelPermalink -}}
+        {{- else -}}
+            {{- $url = (printf "/%s" $value) | relURL -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $opacity := default (default 0.18 site.Params.backgrounds.opacity) $.Params.backgroundImageOpacity -}}
+<style>
+:root {
+    --site-background-image: url('{{ $url | safeURL }}');
+    --site-background-image-opacity: {{ $opacity }};
+}
+</style>
+{{- end -}}
