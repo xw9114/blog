@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-14
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
+  - 二级技术切面: 测量延迟、离序观测与固定滞后回放
+  - 文章路径: `D:/blog/content/post/59/kalman-delayed-measurement-fixed-lag-replay.md`
+
 - 2026-06-13
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
@@ -243,6 +249,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-14 12:00:50 +08:00
+  - 输出文章: `D:/blog/content/post/59/kalman-delayed-measurement-fixed-lag-replay.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
+  - 二级技术切面: 测量延迟、离序观测与固定滞后回放
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生新的二级技术切面；最近一次成功发布的 2026-06-13 文章落在视觉维度的“色温漂移、3x3 颜色校正矩阵与 Lab ΔE 门控”，继续停留在视觉方向会让技术跨度变窄，因此本轮切回控制理论维度，并刻意避开 `kalman-filter.md` 已展开的基础状态估计推演、`kalman-nis-gating.md` 已展开的异常观测门控，以及 `kalman-continuous-noise-discretization-qr-dt-jitter.md` 已展开的连续噪声离散化与 `dt` 抖动问题，改把切口收束到“延迟观测真正属于过去哪个状态、更新过去后如何把未来诚实回放到现在”这条时间轴链路，确保标题、slug、公式与工程问题都与历史卡尔曼文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从带时间戳的信念回到当前状态”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 `x = [theta, bias]^T` 的 2 状态姿态模型展开，显式写出 `theta[k+1] = theta[k] + dt * (omega_gyro[k] - b[k])`、`Q_d = [[q_theta * dt + q_bias * dt^3 / 3, -q_bias * dt^2 / 2], [-q_bias * dt^2 / 2, q_bias * dt]]`、`N_hist >= ceil((T_delay_max + T_jitter) / T_s) + 1` 与 `P = (I - KH) P (I - KH)^T + K R K^T`，覆盖 TIM2 微秒时间戳、固定滞后环形缓冲、延迟观测落点、Joseph Form 更新、NIS 门控以及质量分数到测量方差的线性映射。
+  - 提交动作: 在写入 `content/post/59/kalman-delayed-measurement-fixed-lag-replay.md` 与两份记忆后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/59/kalman-delayed-measurement-fixed-lag-replay.md" "auto(blog): skill-kalman-delayed-measurement-out-of-sequence-and-fixed-lag-replay"`。
 
 - 2026-06-13 10:42:47 +08:00
   - 输出文章: `D:/blog/content/post/58/foc-current-loop-discretization-decoupling-back-emf-feedforward.md`
