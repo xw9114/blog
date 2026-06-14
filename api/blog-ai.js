@@ -131,9 +131,14 @@ module.exports = async function handler(req, res) {
             }),
         });
 
-        const data = await apiResponse.json().catch(() => ({}));
+        const rawText = await apiResponse.text().catch(() => "");
+        let data = {};
+        try { data = JSON.parse(rawText); } catch (_) {}
+
         if (!apiResponse.ok) {
-            const errMsg = data.error && data.error.message ? data.error.message : "AI 请求失败";
+            const errMsg = data.error && data.error.message
+                ? data.error.message
+                : `HTTP ${apiResponse.status}：${rawText.slice(0, 200)}`;
             return sendJson(res, apiResponse.status, { error: errMsg });
         }
 
@@ -141,7 +146,7 @@ module.exports = async function handler(req, res) {
         const answer = (msg && (msg.content || msg.reasoning_content) || "").trim();
 
         if (!answer) {
-            const detail = JSON.stringify(data).slice(0, 300);
+            const detail = rawText.slice(0, 300) || "（空响应）";
             return sendJson(res, 502, { error: `AI 没有返回文本，原始响应：${detail}` });
         }
 
