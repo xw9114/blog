@@ -97,6 +97,18 @@ body > * {
     box-shadow: 0 16px 42px rgba(45, 55, 45, 0.14);
 }
 
+// 归档页背景图占比更高，文章列表进一步降低不透明度
+body.template-archives {
+    --article-card-background: transparent;
+    --article-card-border: transparent;
+    --article-card-shadow: none;
+
+    .archives-group .article-list--compact {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
+
 // 限制文章列表封面图高度，防止图片过大撑开卡片
 .article-image {
     img {
