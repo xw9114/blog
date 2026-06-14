@@ -8,9 +8,9 @@
     --site-background-line-soft: rgba(70, 96, 82, 0.035);
     --site-background-glow-primary: rgba(206, 174, 113, 0.30);
     --site-background-glow-secondary: rgba(91, 132, 106, 0.24);
-    --article-card-background: rgba(255, 255, 255, 0.40);
-    --article-card-border: rgba(255, 255, 255, 0.46);
-    --article-card-shadow: 0 12px 36px rgba(45, 55, 45, 0.10);
+    --article-card-background: transparent;
+    --article-card-border: transparent;
+    --article-card-shadow: none;
 
     &[data-scheme="dark"] {
         --body-background: #20241f;
@@ -18,9 +18,9 @@
         --site-background-line-soft: rgba(166, 205, 179, 0.04);
         --site-background-glow-primary: rgba(157, 123, 67, 0.18);
         --site-background-glow-secondary: rgba(96, 143, 116, 0.22);
-        --article-card-background: rgba(48, 48, 48, 0.72);
-        --article-card-border: rgba(255, 255, 255, 0.12);
-        --article-card-shadow: 0 12px 36px rgba(0, 0, 0, 0.24);
+        --article-card-background: transparent;
+        --article-card-border: transparent;
+        --article-card-shadow: none;
     }
 }
 
@@ -82,31 +82,21 @@ body > * {
     }
 }
 
-// 文章卡片使用半透明毛玻璃，保留背景图氛围但不牺牲阅读性
+// 文章卡片透明化，让页面背景成为主视觉
 .article-list article,
 .article-list--compact,
+.article-list--tile article,
 .article-page .main-article {
     background: var(--article-card-background);
     border: 1px solid var(--article-card-border);
     box-shadow: var(--article-card-shadow);
-    backdrop-filter: blur(14px) saturate(1.08);
-    -webkit-backdrop-filter: blur(14px) saturate(1.08);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
-.article-list article:hover {
-    box-shadow: 0 16px 42px rgba(45, 55, 45, 0.14);
-}
-
-// 归档页背景图占比更高，文章列表进一步降低不透明度
-body.template-archives {
-    --article-card-background: transparent;
-    --article-card-border: transparent;
-    --article-card-shadow: none;
-
-    .archives-group .article-list--compact {
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-    }
+.article-list article:hover,
+.article-list--tile article:hover {
+    box-shadow: none;
 }
 
 // 限制文章列表封面图高度，防止图片过大撑开卡片
