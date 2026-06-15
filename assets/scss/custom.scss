@@ -613,9 +613,9 @@ $ref-accent: #17c48a;
 
 .blog-ai {
     --blog-ai-accent: #334155;
-    --blog-ai-surface: transparent;
-    --blog-ai-panel-layer: transparent;
-    --blog-ai-border: transparent;
+    --blog-ai-surface: rgba(232, 241, 242, 0.62);
+    --blog-ai-panel-layer: rgba(255, 255, 255, 0.18);
+    --blog-ai-border: rgba(255, 255, 255, 0.36);
     --blog-ai-muted: rgba(51, 65, 85, 0.64);
     --blog-ai-shadow: 0 28px 72px rgba(15, 23, 42, 0.24);
 
@@ -675,7 +675,7 @@ $ref-accent: #17c48a;
     right: 0;
     bottom: 6rem;
     display: grid;
-    grid-template-rows: auto minmax(50rem, 1fr) auto;
+    grid-template-rows: auto minmax(38rem, 1fr) auto;
     width: calc(100vw - 3rem);
     max-width: 38rem;
     max-height: calc(100vh - 5rem);
@@ -684,8 +684,8 @@ $ref-accent: #17c48a;
     border-radius: 22px;
     background: var(--blog-ai-surface);
     box-shadow: var(--blog-ai-shadow);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 
     &[hidden] {
         display: none !important;
@@ -857,9 +857,9 @@ $ref-accent: #17c48a;
 
 [data-scheme="dark"] {
     .blog-ai {
-        --blog-ai-surface: transparent;
-        --blog-ai-panel-layer: transparent;
-        --blog-ai-border: transparent;
+        --blog-ai-surface: rgba(15, 23, 42, 0.54);
+        --blog-ai-panel-layer: rgba(15, 23, 42, 0.16);
+        --blog-ai-border: rgba(255, 255, 255, 0.14);
         --blog-ai-shadow: 0 28px 72px rgba(0, 0, 0, 0.36);
         --blog-ai-muted: rgba(229, 231, 235, 0.62);
         color: #f8fafc;
