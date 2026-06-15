@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-15
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 硬件定时器与中断机制
+  - 二级技术切面: 主从同步、TRGO 触发链与 ADC/PWM 相位锁定
+  - 文章路径: `D:/blog/content/post/60/stm32-timer-master-slave-trgo-adc-pwm-phase-lock.md`
+
 - 2026-06-14
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
@@ -249,6 +255,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-15 08:22:52 +08:00
+  - 输出文章: `D:/blog/content/post/60/stm32-timer-master-slave-trgo-adc-pwm-phase-lock.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 硬件定时器与中断机制
+  - 二级技术切面: 主从同步、TRGO 触发链与 ADC/PWM 相位锁定
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生未写过的二级技术切面；最近几篇成功发布分别落在控制理论、高阶电机与工业总线方向，若继续停留在这些维度会压缩技术跨度，因此本轮回到近期相对空档的 MCU 架构主线，并刻意避开 `timer.md` 已展开的基础计数与更新中断、`stm32-input-capture-overflow-rpm.md` 已展开的输入捕获与溢出扩展、`stm32-timer-preload-update-center-aligned-pwm.md` 已展开的影子寄存器与无毛刺更新，以及 `stm32-adc-dma.md`、`stm32-adc-source-impedance-crosstalk-budget.md` 已展开的 ADC 搬运与模拟前端误差预算，改把切口收束到“谁来定义 PWM 周期零点、谁来在硬件里延迟出采样静默窗、谁来保证 ADC 真正采在物理安静时刻”这条时间触发链路，确保标题、slug、公式与工程故障画像都与历史 STM32 定时器文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从片上时间总线回到模拟采样因果链”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕 TIM1 主定时器、TIM2 延迟从定时器与 ADC1 注入通道硬件触发链展开，显式写出 `f_pwm = f_tim / ((PSC + 1) * (ARR + 1))`、`t_quiet = t_dead + t_switch_recovery + t_shunt_amp_settle + t_adc_aperture + t_guard`、`CCR = ceil(t_quiet * f_delay)` 与 `t_quiet < T_pwm` 等公式，覆盖 TRGO/ITR 传播、Reset Slave Mode、比较事件延迟、影子寄存器预装载与在线采样相位更新边界。
+  - 提交动作: 在写入 `content/post/60/stm32-timer-master-slave-trgo-adc-pwm-phase-lock.md` 与两份记忆后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/60/stm32-timer-master-slave-trgo-adc-pwm-phase-lock.md" "auto(blog): skill-stm32-timer-master-slave-trgo-adc-pwm-phase-lock"`。
 
 - 2026-06-14 12:00:50 +08:00
   - 输出文章: `D:/blog/content/post/59/kalman-delayed-measurement-fixed-lag-replay.md`
