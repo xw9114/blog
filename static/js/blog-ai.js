@@ -48,8 +48,9 @@
 
         contexts.slice(0, 4).forEach((item) => {
             const link = document.createElement("a");
+            const label = item.section === "reference" ? "速查" : "文章";
             link.href = item.permalink;
-            link.textContent = item.title || item.permalink;
+            link.textContent = `${label}: ${item.title || item.permalink}`;
             link.target = "_blank";
             link.rel = "noopener";
             list.appendChild(link);
@@ -117,23 +118,29 @@
     function pickContexts(question, pages) {
         const tokens = tokenize(question);
         const limit = Number(config.contextLimit || 6);
+        const questionText = String(question || "").toLowerCase();
 
         return pages
             .map((page) => {
                 const title = String(page.title || "");
                 const content = String(page.content || "");
+                const section = String(page.section || "");
                 const haystack = `${title}\n${content}`.toLowerCase();
                 const titleText = title.toLowerCase();
 
-                const score = tokens.reduce((sum, token) => {
+                const baseScore = tokens.reduce((sum, token) => {
                     const titleScore = titleText.includes(token) ? 10 : 0;
                     return sum + titleScore + countMatches(haystack, token);
                 }, 0);
+                const exactTitleScore = titleText && questionText.includes(titleText) ? 24 : 0;
+                const referenceBoost = section === "reference" && baseScore > 0 ? 14 : 0;
+                const score = baseScore + exactTitleScore + referenceBoost;
 
                 return {
                     title,
                     permalink: page.permalink,
                     date: page.date,
+                    section,
                     snippet: makeSnippet(content, tokens),
                     score,
                 };

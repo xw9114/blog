@@ -49,6 +49,7 @@ function normalizeContexts(contexts) {
     return contexts.slice(0, MAX_CONTEXTS).map((item) => ({
         title: cleanText(item.title, 120),
         permalink: cleanText(item.permalink, 240),
+        section: cleanText(item.section, 40),
         snippet: cleanText(item.snippet, MAX_SNIPPET_LENGTH),
     })).filter((item) => item.snippet);
 }
@@ -56,6 +57,7 @@ function normalizeContexts(contexts) {
 function buildPrompt(question, contexts) {
     const contextBlock = contexts.length
         ? contexts.map((item, index) => [
+            `类型：${item.section === "reference" ? "参考速查" : "文章"}`,
             `资料 ${index + 1}`,
             `标题：${item.title || "未命名"}`,
             `链接：${item.permalink || "无"}`,
