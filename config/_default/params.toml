@@ -63,12 +63,15 @@ SortBy         = "default"
 
 [blogAi]
   enabled      = true
+  provider     = "Claude"
+  icon         = "/images/ai/claude.png"
   title        = "月栖问答"
-  subtitle     = "基于博客文章回答"
-  greeting     = "你好，我会先检索月栖之地的文章，再用 Gemini 帮你整理答案。"
+  subtitle     = "基于文章与速查回答"
+  greeting     = "你好，我会先检索月栖之地的文章和参考速查，再用 Claude 帮你整理答案。"
   placeholder  = "问问文章、笔记或速查内容..."
   endpoint     = "/api/blog-ai"
   searchIndex  = "/search/index.json"
+  indexSections = ["post", "reference"]
   contextLimit = 6
 
 [comments]

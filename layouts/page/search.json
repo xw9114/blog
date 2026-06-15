@@ -1,0 +1,21 @@
+{{- $sections := site.Params.mainSections -}}
+{{- with site.Params.blogAi.indexSections -}}
+    {{- $sections = . -}}
+{{- end -}}
+
+{{- $pages := where site.RegularPages "Type" "in" $sections -}}
+{{- $pages = partial "helper/pages-sort.html" (dict "Pages" $pages "Context" .) -}}
+{{- $result := slice -}}
+
+{{- range $pages -}}
+    {{- $data := dict "title" .Title "date" .Date "permalink" .RelPermalink "content" (.Plain) "section" .Type -}}
+
+    {{- $image := partial "helper/image" (dict "Image" .Params.image "Resources" .Resources "Context" .) -}}
+    {{- if $image -}}
+        {{- $data = merge $data (dict "image" $image.Permalink) -}}
+    {{- end -}}
+
+    {{- $result = $result | append $data -}}
+{{- end -}}
+
+{{ jsonify $result }}

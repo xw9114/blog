@@ -5,7 +5,9 @@
     {{- end -}}
 {{- end -}}
 {{- if and (not $backgroundImage) (eq .Kind "term") -}}
-    {{- $backgroundImage = .Params.image -}}
+    {{- with site.Params.backgrounds.pages -}}
+        {{- $backgroundImage = index . "/archives/" -}}
+    {{- end -}}
 {{- end -}}
 {{- with $backgroundImage -}}
     {{- $value := printf "%v" . -}}

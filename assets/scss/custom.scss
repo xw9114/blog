@@ -613,11 +613,11 @@ $ref-accent: #17c48a;
 
 .blog-ai {
     --blog-ai-accent: #334155;
-    --blog-ai-surface: rgba(248, 251, 252, 0.36);
-    --blog-ai-panel-layer: rgba(255, 255, 255, 0.22);
-    --blog-ai-border: rgba(255, 255, 255, 0.46);
+    --blog-ai-surface: transparent;
+    --blog-ai-panel-layer: transparent;
+    --blog-ai-border: transparent;
     --blog-ai-muted: rgba(51, 65, 85, 0.64);
-    --blog-ai-shadow: 0 24px 80px rgba(15, 23, 42, 0.18);
+    --blog-ai-shadow: none;
 
     position: fixed;
     right: 1.6rem;
@@ -627,19 +627,21 @@ $ref-accent: #17c48a;
 }
 
 .blog-ai__trigger {
-    width: 3.25rem;
-    height: 3.25rem;
+    width: 4.2rem;
+    height: 4.2rem;
     border: 1px solid rgba(255, 255, 255, 0.58);
     border-radius: 18px;
-    background: rgba(51, 65, 85, 0.92);
+    background: rgba(255, 255, 255, 0.28);
     color: #fff;
     box-shadow: 0 14px 36px rgba(15, 23, 42, 0.26);
     cursor: pointer;
+    overflow: hidden;
+    padding: 0;
     transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.28s ease;
 
     &:hover {
         transform: translateY(-2px);
-        background: #1f2937;
+        background: rgba(255, 255, 255, 0.42);
         box-shadow: 0 18px 42px rgba(15, 23, 42, 0.32);
     }
 
@@ -647,6 +649,14 @@ $ref-accent: #17c48a;
         outline: 3px solid rgba(51, 65, 85, 0.22);
         outline-offset: 3px;
     }
+}
+
+.blog-ai__trigger-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 52% 42%;
 }
 
 .blog-ai__trigger-mark {
@@ -663,7 +673,7 @@ $ref-accent: #17c48a;
 .blog-ai__panel {
     position: absolute;
     right: 0;
-    bottom: 4.1rem;
+    bottom: 5rem;
     display: grid;
     grid-template-rows: auto minmax(42rem, 1fr) auto;
     width: calc(100vw - 3rem);
@@ -674,8 +684,8 @@ $ref-accent: #17c48a;
     border-radius: 22px;
     background: var(--blog-ai-surface);
     box-shadow: var(--blog-ai-shadow);
-    backdrop-filter: blur(22px) saturate(1.16);
-    -webkit-backdrop-filter: blur(22px) saturate(1.16);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 
     &[hidden] {
         display: none !important;
@@ -687,7 +697,7 @@ $ref-accent: #17c48a;
     justify-content: space-between;
     gap: 1rem;
     padding: 1.05rem 1.15rem 0.9rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+    border-bottom: 1px solid transparent;
     background: var(--blog-ai-panel-layer);
 
     h2 {
@@ -718,14 +728,14 @@ $ref-accent: #17c48a;
     height: 2rem;
     border: 0;
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.22);
+    background: transparent;
     color: rgba(15, 23, 42, 0.72);
     cursor: pointer;
     font-size: 1.25rem;
     line-height: 1;
 
     &:hover {
-        background: rgba(255, 255, 255, 0.34);
+        background: rgba(255, 255, 255, 0.18);
     }
 }
 
@@ -748,18 +758,18 @@ $ref-accent: #17c48a;
 
 .blog-ai__message--assistant {
     align-self: flex-start;
-    background: rgba(255, 255, 255, 0.24);
-    border: 1px solid rgba(255, 255, 255, 0.38);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: transparent;
+    border: 1px solid transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 .blog-ai__message--user {
     align-self: flex-end;
-    background: rgba(51, 65, 85, 0.76);
-    color: #fff;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: transparent;
+    color: #111827;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 .blog-ai__sources {
@@ -795,7 +805,7 @@ $ref-accent: #17c48a;
     grid-template-columns: 1fr auto;
     gap: 0.65rem;
     padding: 0.95rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.34);
+    border-top: 1px solid transparent;
     background: var(--blog-ai-panel-layer);
 }
 
@@ -847,19 +857,25 @@ $ref-accent: #17c48a;
 
 [data-scheme="dark"] {
     .blog-ai {
-        --blog-ai-surface: rgba(18, 24, 22, 0.44);
-        --blog-ai-panel-layer: rgba(15, 23, 42, 0.22);
-        --blog-ai-border: rgba(255, 255, 255, 0.16);
+        --blog-ai-surface: transparent;
+        --blog-ai-panel-layer: transparent;
+        --blog-ai-border: transparent;
         --blog-ai-muted: rgba(229, 231, 235, 0.62);
         color: #f8fafc;
     }
 
     .blog-ai__header,
     .blog-ai__form {
-        border-color: rgba(255, 255, 255, 0.10);
+        border-color: transparent;
     }
 
     .blog-ai__message--assistant,
+    .blog-ai__message--user {
+        background: transparent;
+        border-color: transparent;
+        color: #f8fafc;
+    }
+
     .blog-ai__input {
         background: rgba(15, 23, 42, 0.34);
         color: #f8fafc;
@@ -875,7 +891,7 @@ $ref-accent: #17c48a;
 
     .blog-ai__panel {
         right: -0.25rem;
-        bottom: 4rem;
+        bottom: 5rem;
         width: calc(100vw - 1.5rem);
         max-height: calc(100vh - 5.5rem);
         border-radius: 16px;
