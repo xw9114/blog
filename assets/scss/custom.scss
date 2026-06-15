@@ -702,21 +702,21 @@ $ref-accent: #17c48a;
 
     h2 {
         margin: 0.05rem 0 0.18rem;
-        font-size: 1.08rem;
+        font-size: 1.48rem;
         line-height: 1.25;
     }
 
     p {
         margin: 0;
         color: var(--blog-ai-muted);
-        font-size: 0.82rem;
+        font-size: 1.12rem;
         line-height: 1.45;
     }
 }
 
 .blog-ai__eyebrow {
     color: var(--blog-ai-accent) !important;
-    font-size: 0.72rem !important;
+    font-size: 0.98rem !important;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -751,8 +751,8 @@ $ref-accent: #17c48a;
     max-width: 96%;
     border-radius: 14px;
     padding: 0.78rem 0.92rem;
-    font-size: 0.9rem;
-    line-height: 1.62;
+    font-size: 1.42rem;
+    line-height: 1.68;
     white-space: pre-wrap;
 }
 
@@ -777,7 +777,7 @@ $ref-accent: #17c48a;
     flex-wrap: wrap;
     gap: 0.4rem;
     align-items: center;
-    font-size: 0.78rem;
+    font-size: 1.08rem;
 
     span {
         color: var(--blog-ai-muted);
@@ -819,6 +819,7 @@ $ref-accent: #17c48a;
     background: rgba(255, 255, 255, 0.24);
     color: #111827;
     font: inherit;
+    font-size: 1.48rem;
     line-height: 1.45;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -838,6 +839,7 @@ $ref-accent: #17c48a;
     background: var(--blog-ai-accent);
     color: #fff;
     cursor: pointer;
+    font-size: 1.4rem;
     font-weight: 700;
     transition: transform 0.16s ease, background 0.16s ease;
 
