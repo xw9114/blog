@@ -15,6 +15,9 @@
         {{- with .Params.sidebarTitle -}}
             {{- $sidebarTitle = . -}}
         {{- end -}}
+        {{- with .Description -}}
+            {{- $sidebarSubtitle = . -}}
+        {{- end -}}
         {{- with .Params.sidebarSubtitle -}}
             {{- $sidebarSubtitle = . -}}
         {{- end -}}
