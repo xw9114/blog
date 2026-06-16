@@ -8,27 +8,45 @@
 {{- $result := slice -}}
 
 {{- range $pages -}}
-    {{- $plain := .Plain | plainify | replaceRE "\\s+" " " -}}
-    {{- $summary := "" -}}
-    {{- with .Description -}}
-        {{- $summary = . | plainify | replaceRE "\\s+" " " -}}
+    {{- $filePath := "" -}}
+    {{- with .File -}}
+        {{- $filePath = .Path -}}
     {{- end -}}
-    {{- if not $summary -}}
-        {{- $summary = .Summary | plainify | replaceRE "\\s+" " " | truncate 360 "..." -}}
-    {{- end -}}
-    {{- if not $summary -}}
-        {{- $summary = $plain | truncate 360 "..." -}}
-    {{- end -}}
+    {{- $exclude := or .Params.searchExclude .Params.aiExclude -}}
+    {{- $exclude = or $exclude .Params.indexExclude -}}
 
-    {{- $content := printf "%s %s" $summary $plain | replaceRE "\\s+" " " | truncate 2400 "..." -}}
-    {{- $data := dict "title" .Title "date" .Date "permalink" .RelPermalink "summary" $summary "content" $content "section" .Type -}}
+    {{- if and (not $exclude) (not (strings.Contains $filePath ".automation")) -}}
+        {{- $plain := .Plain | plainify | replaceRE "\\s+" " " -}}
+        {{- $summary := "" -}}
+        {{- with .Description -}}
+            {{- $summary = . | plainify | replaceRE "\\s+" " " -}}
+        {{- end -}}
+        {{- if not $summary -}}
+            {{- $summary = .Summary | plainify | replaceRE "\\s+" " " | truncate 360 "..." -}}
+        {{- end -}}
+        {{- if not $summary -}}
+            {{- $summary = $plain | truncate 360 "..." -}}
+        {{- end -}}
 
-    {{- $image := partial "helper/image" (dict "Image" .Params.image "Resources" .Resources "Context" .) -}}
-    {{- if $image -}}
-        {{- $data = merge $data (dict "image" $image.Permalink) -}}
+        {{- $keywords := "" -}}
+        {{- with .Params.tags -}}
+            {{- $keywords = printf "%s %s" $keywords (delimit . " ") -}}
+        {{- end -}}
+        {{- with .Params.categories -}}
+            {{- $keywords = printf "%s %s" $keywords (delimit . " ") -}}
+        {{- end -}}
+        {{- $keywords = $keywords | plainify | replaceRE "\\s+" " " | replaceRE "^\\s+|\\s+$" "" -}}
+
+        {{- $content := printf "%s %s %s" $summary $keywords $plain | replaceRE "\\s+" " " | truncate 2400 "..." -}}
+        {{- $data := dict "title" .Title "date" .Date "permalink" .RelPermalink "summary" $summary "content" $content "keywords" $keywords "section" .Type -}}
+
+        {{- $image := partial "helper/image" (dict "Image" .Params.image "Resources" .Resources "Context" .) -}}
+        {{- if $image -}}
+            {{- $data = merge $data (dict "image" $image.Permalink) -}}
+        {{- end -}}
+
+        {{- $result = $result | append $data -}}
     {{- end -}}
-
-    {{- $result = $result | append $data -}}
 {{- end -}}
 
 {{ jsonify $result }}

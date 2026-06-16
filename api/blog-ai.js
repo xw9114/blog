@@ -2,7 +2,9 @@ const API_ENDPOINT = "https://www.micuapi.ai/v1/chat/completions";
 const DEFAULT_MODEL = "grok-3";
 const MAX_QUESTION_LENGTH = 500;
 const MAX_CONTEXTS = 6;
+const MAX_SUMMARY_LENGTH = 420;
 const MAX_SNIPPET_LENGTH = 1200;
+const MAX_KEYWORDS_LENGTH = 240;
 
 function sendJson(res, status, payload) {
     res.statusCode = status;
@@ -50,19 +52,28 @@ function normalizeContexts(contexts) {
         title: cleanText(item.title, 120),
         permalink: cleanText(item.permalink, 240),
         section: cleanText(item.section, 40),
+        summary: cleanText(item.summary, MAX_SUMMARY_LENGTH),
+        keywords: cleanText(item.keywords, MAX_KEYWORDS_LENGTH),
         snippet: cleanText(item.snippet, MAX_SNIPPET_LENGTH),
     })).filter((item) => item.snippet);
 }
 
 function buildPrompt(question, contexts) {
     const contextBlock = contexts.length
-        ? contexts.map((item, index) => [
-            `类型：${item.section === "reference" ? "参考速查" : "文章"}`,
-            `资料 ${index + 1}`,
-            `标题：${item.title || "未命名"}`,
-            `链接：${item.permalink || "无"}`,
-            `内容：${item.snippet}`,
-        ].join("\n")).join("\n\n")
+        ? contexts.map((item, index) => {
+            const lines = [
+                `类型：${item.section === "reference" ? "参考速查" : "文章"}`,
+                `资料 ${index + 1}`,
+                `标题：${item.title || "未命名"}`,
+                `链接：${item.permalink || "无"}`,
+            ];
+
+            if (item.summary) lines.push(`摘要：${item.summary}`);
+            if (item.keywords) lines.push(`关键词：${item.keywords}`);
+            lines.push(`命中片段：${item.snippet}`);
+
+            return lines.join("\n");
+        }).join("\n\n")
         : "没有检索到相关博客片段。";
 
     return [

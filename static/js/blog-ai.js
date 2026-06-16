@@ -104,6 +104,11 @@
         return String(text || "").replace(/\s+/g, " ").trim();
     }
 
+    function joinText(value) {
+        if (Array.isArray(value)) return cleanText(value.join(" "));
+        return cleanText(value);
+    }
+
     function makeSnippet(content, summary, tokens) {
         const text = cleanText(content || summary);
         const summaryText = cleanText(summary);
@@ -187,15 +192,21 @@
             .map((page) => {
                 const title = cleanText(page.title);
                 const summary = cleanText(page.summary || page.description);
-                const content = cleanText(page.content || page.snippet || summary);
+                const keywords = cleanText([
+                    joinText(page.keywords),
+                    joinText(page.tags),
+                    joinText(page.categories),
+                ].join(" "));
+                const content = cleanText(page.content || page.snippet || `${summary} ${keywords}`);
                 const section = cleanText(page.section);
                 const titleText = title.toLowerCase();
                 const time = parseDateTime(page.date);
 
                 const titleScore = scoreTitle(titleText, questionText, tokens);
+                const keywordScore = scoreField(keywords, tokens, 8, 4);
                 const summaryScore = scoreField(summary, tokens, 6, 4);
                 const contentScore = scoreField(content, tokens, 2, 8);
-                const baseScore = titleScore + summaryScore + contentScore;
+                const baseScore = titleScore + keywordScore + summaryScore + contentScore;
                 const referenceBoost = section === "reference" && baseScore > 0 ? 10 : 0;
                 const recentBoost = section !== "reference" && baseScore > 0 ? getRecentBoost(time, newestTime) : 0;
                 const score = baseScore + referenceBoost + recentBoost;
@@ -206,6 +217,7 @@
                     date: page.date,
                     section,
                     summary,
+                    keywords,
                     snippet: makeSnippet(content, summary, tokens),
                     score,
                     time,
