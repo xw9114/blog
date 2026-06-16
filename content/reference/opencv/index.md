@@ -158,3 +158,38 @@ ret 返回 127
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+{{< ref-cols >}}
+
+{{< ref-card filename="Otsu 自动阈值" >}}
+```python
+ret, result = cv.threshold(
+    img,
+    0,        # 阈值填0作为占位符
+    255,
+    cv.THRESH_BINARY + cv.THRESH_OTSU  # 启用 Otsu 自动计算
+)
+```
+{{< /ref-card >}}
+
+{{< ref-card filename="Otsu 执行流程" >}}
+代码填写 `0` 作为占位
+
+↓
+
+OpenCV 分析整张图像的灰度分布
+
+↓
+
+自动计算合适的阈值，例如 `132`
+
+↓
+
+使用 `132` 进行二值化
+
+↓
+
+`ret` 返回 `132`
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
