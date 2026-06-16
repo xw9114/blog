@@ -8,7 +8,20 @@
 {{- $result := slice -}}
 
 {{- range $pages -}}
-    {{- $data := dict "title" .Title "date" .Date "permalink" .RelPermalink "content" (.Plain) "section" .Type -}}
+    {{- $plain := .Plain | plainify | replaceRE "\\s+" " " -}}
+    {{- $summary := "" -}}
+    {{- with .Description -}}
+        {{- $summary = . | plainify | replaceRE "\\s+" " " -}}
+    {{- end -}}
+    {{- if not $summary -}}
+        {{- $summary = .Summary | plainify | replaceRE "\\s+" " " | truncate 360 "..." -}}
+    {{- end -}}
+    {{- if not $summary -}}
+        {{- $summary = $plain | truncate 360 "..." -}}
+    {{- end -}}
+
+    {{- $content := printf "%s %s" $summary $plain | replaceRE "\\s+" " " | truncate 2400 "..." -}}
+    {{- $data := dict "title" .Title "date" .Date "permalink" .RelPermalink "summary" $summary "content" $content "section" .Type -}}
 
     {{- $image := partial "helper/image" (dict "Image" .Params.image "Resources" .Resources "Context" .) -}}
     {{- if $image -}}

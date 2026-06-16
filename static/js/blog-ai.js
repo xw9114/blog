@@ -100,54 +100,125 @@
         return count;
     }
 
-    function makeSnippet(content, tokens) {
-        const text = String(content || "").replace(/\s+/g, " ").trim();
+    function cleanText(text) {
+        return String(text || "").replace(/\s+/g, " ").trim();
+    }
+
+    function makeSnippet(content, summary, tokens) {
+        const text = cleanText(content || summary);
+        const summaryText = cleanText(summary);
         if (!text) return "";
 
         const lower = text.toLowerCase();
         const token = tokens.find((item) => lower.includes(item));
         const center = token ? lower.indexOf(token) : 0;
         const start = Math.max(0, center - 260);
-        const end = Math.min(text.length, start + 920);
+        const end = Math.min(text.length, start + 760);
         const prefix = start > 0 ? "..." : "";
         const suffix = end < text.length ? "..." : "";
+        const excerpt = `${prefix}${text.slice(start, end)}${suffix}`;
+        const summaryKey = summaryText.toLowerCase().slice(0, 80);
 
-        return `${prefix}${text.slice(start, end)}${suffix}`;
+        if (!summaryText || (summaryKey && excerpt.toLowerCase().includes(summaryKey))) {
+            return excerpt;
+        }
+
+        return `${summaryText}\n${excerpt}`.slice(0, 1100);
+    }
+
+    function parseDateTime(date) {
+        const time = Date.parse(date);
+        return Number.isFinite(time) ? time : 0;
+    }
+
+    function getRecentBoost(time, newestTime) {
+        if (!time || !newestTime) return 0;
+
+        const ageDays = Math.max(0, (newestTime - time) / 86400000);
+        if (ageDays <= 7) return 12;
+        if (ageDays <= 30) return 8;
+        if (ageDays <= 90) return 5;
+        if (ageDays <= 180) return 2;
+        return 0;
+    }
+
+    function scoreField(text, tokens, weight, matchLimit) {
+        const lower = cleanText(text).toLowerCase();
+        if (!lower) return 0;
+
+        return tokens.reduce((sum, token) => {
+            return sum + Math.min(countMatches(lower, token), matchLimit) * weight;
+        }, 0);
+    }
+
+    function scoreTitle(titleText, questionText, tokens) {
+        if (!titleText) return 0;
+
+        const compactTitle = titleText.replace(/\s+/g, "");
+        const compactQuestion = questionText.replace(/\s+/g, "");
+        let score = 0;
+
+        if (compactQuestion.length >= 2 && compactTitle.includes(compactQuestion)) {
+            score += 36;
+        }
+
+        if (compactTitle.length >= 4 && compactQuestion.includes(compactTitle)) {
+            score += 56;
+        }
+
+        tokens.forEach((token) => {
+            const matches = countMatches(titleText, token);
+            if (!matches) return;
+
+            score += Math.min(matches, 2) * (token.length >= 4 ? 20 : 14);
+            if (titleText.startsWith(token)) score += 8;
+        });
+
+        return score;
     }
 
     function pickContexts(question, pages) {
         const tokens = tokenize(question);
         const limit = Number(config.contextLimit || 6);
-        const questionText = String(question || "").toLowerCase();
+        const questionText = cleanText(question).toLowerCase();
+        const newestTime = Math.max(0, ...pages.map((page) => parseDateTime(page.date)));
 
         return pages
             .map((page) => {
-                const title = String(page.title || "");
-                const content = String(page.content || "");
-                const section = String(page.section || "");
-                const haystack = `${title}\n${content}`.toLowerCase();
+                const title = cleanText(page.title);
+                const summary = cleanText(page.summary || page.description);
+                const content = cleanText(page.content || page.snippet || summary);
+                const section = cleanText(page.section);
                 const titleText = title.toLowerCase();
+                const time = parseDateTime(page.date);
 
-                const baseScore = tokens.reduce((sum, token) => {
-                    const titleScore = titleText.includes(token) ? 10 : 0;
-                    return sum + titleScore + countMatches(haystack, token);
-                }, 0);
-                const exactTitleScore = titleText && questionText.includes(titleText) ? 24 : 0;
-                const referenceBoost = section === "reference" && baseScore > 0 ? 14 : 0;
-                const score = baseScore + exactTitleScore + referenceBoost;
+                const titleScore = scoreTitle(titleText, questionText, tokens);
+                const summaryScore = scoreField(summary, tokens, 6, 4);
+                const contentScore = scoreField(content, tokens, 2, 8);
+                const baseScore = titleScore + summaryScore + contentScore;
+                const referenceBoost = section === "reference" && baseScore > 0 ? 10 : 0;
+                const recentBoost = section !== "reference" && baseScore > 0 ? getRecentBoost(time, newestTime) : 0;
+                const score = baseScore + referenceBoost + recentBoost;
 
                 return {
                     title,
                     permalink: page.permalink,
                     date: page.date,
                     section,
-                    snippet: makeSnippet(content, tokens),
+                    summary,
+                    snippet: makeSnippet(content, summary, tokens),
                     score,
+                    time,
                 };
             })
             .filter((page) => page.score > 0 && page.snippet)
-            .sort((a, b) => b.score - a.score)
-            .slice(0, limit);
+            .sort((a, b) => {
+                return b.score - a.score
+                    || b.time - a.time
+                    || a.title.localeCompare(b.title, "zh-Hans-CN");
+            })
+            .slice(0, limit)
+            .map(({ time, ...page }) => page);
     }
 
     async function ask(question) {
