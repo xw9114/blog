@@ -286,3 +286,19 @@ ret, thresh5 = cv.threshold(
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+## 五种阈值方法对比
+
+{{< ref-cols >}}
+
+{{< ref-card filename="五种阈值方法对比" >}}
+| 阈值类型 | x > 127 时 | x ≤ 127 时 |
+|---|---|---|
+| `THRESH_BINARY` | 255 | 0 |
+| `THRESH_BINARY_INV` | 0 | 255 |
+| `THRESH_TRUNC` | 127 | 保留原值 |
+| `THRESH_TOZERO` | 保留原值 | 0 |
+| `THRESH_TOZERO_INV` | 0 | 保留原值 |
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
