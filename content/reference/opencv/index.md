@@ -108,3 +108,24 @@ cv.INTER_AREA
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+{{< ref-cols >}}
+
+{{< ref-card filename="cv.threshold 函数签名" >}}
+```python
+ret, dst = cv.threshold(src, thresh, maxval, type)
+```
+{{< /ref-card >}}
+
+{{< ref-card filename="cv.threshold 参数说明" >}}
+| 参数 | 说明 |
+|------|------|
+| `src` | 输入图像 |
+| `thresh` | 设置的阈值 |
+| `maxval` | 最大像素值 |
+| `type` | 阈值处理类型 |
+| `ret` | 实际使用的阈值 |
+| `dst` | 阈值处理后的图像 |
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
