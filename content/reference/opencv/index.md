@@ -129,3 +129,32 @@ ret, dst = cv.threshold(src, thresh, maxval, type)
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+## 固定阈值与自动阈值的区别
+
+{{< ref-cols >}}
+
+{{< ref-card filename="固定阈值用法" >}}
+固定阈值：手动指定阈值，OpenCV 直接使用该值。
+
+```python
+ret, result = cv.threshold(
+    img,
+    127,       # 手动设定的阈值
+    255,       # 超过阈值时赋的最大值
+    cv.THRESH_BINARY
+)
+```
+{{< /ref-card >}}
+
+{{< ref-card filename="固定阈值流程" >}}
+固定阈值处理流程：
+
+你设置 127
+↓
+OpenCV 直接使用 127
+↓
+ret 返回 127
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
