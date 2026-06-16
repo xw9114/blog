@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-16
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 高速 SPI 采样窗、板级传播延迟与 Dummy Cycle 预算
+  - 文章路径: `D:/blog/content/post/61/spi-sampling-window-board-delay-dummy-cycle-budget.md`
+
 - 2026-06-15
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
   - 一级主题: STM32 硬件定时器与中断机制
@@ -255,6 +261,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-16 08:31:15 +08:00
+  - 输出文章: `D:/blog/content/post/61/spi-sampling-window-board-delay-dummy-cycle-budget.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 高速 SPI 采样窗、板级传播延迟与 Dummy Cycle 预算
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生未写过的二级技术切面；最近一次成功发布落在 MCU 定时器触发链，往前则覆盖了控制、高阶电机与视觉方向，本轮回到近几天未继续展开的工业总线维度，并刻意避开 `spi-cpol-cpha-timing.md` 已展开的基础模式与边沿契约、`skill-spi-dma-chip-select-hold-and-readback-phase-recovery.md` 已展开的 DMA 连续事务与片选保持，以及 `spi-shared-bus-miso-tristate-release-contamination-recovery.md` 已展开的共享总线交接问题，改把切口收束到“高速读事务里半周期采样窗还能剩多少、首字节为什么需要 Dummy Cycle、板级传播延迟如何直接吃掉稳定窗口”这条时域预算链路，确保标题、slug、公式与工程故障画像都与历史 SPI 文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从边沿预算回到读事务合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 场景，围绕外部 Flash Fast Read 事务展开，显式写出 `T_sck / 2 >= t_co_slave + t_flight + t_su_master + t_jitter + t_margin`、`T_sck / 2 + N_dummy * T_sck >= t_first_valid + t_flight + t_su_master + t_jitter + t_margin`、`f_sck <= 1 / (2 * path_ns)` 与 `dummy_bytes = ceil(dummy_bits / 8)` 等映射关系，覆盖 prescaler 选择、首字节 Dummy 预算、DWT 级 CS 建立/保持和事务超时估算。
+  - 提交动作: 在写入 `content/post/61/spi-sampling-window-board-delay-dummy-cycle-budget.md` 与两份记忆后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/61/spi-sampling-window-board-delay-dummy-cycle-budget.md" "auto(blog): skill-high-speed-spi-sampling-window-board-delay-and-dummy-cycle-budget"`。
 
 - 2026-06-15 08:22:52 +08:00
   - 输出文章: `D:/blog/content/post/60/stm32-timer-master-slave-trgo-adc-pwm-phase-lock.md`
