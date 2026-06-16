@@ -28,3 +28,18 @@ assert [条件], [错误提示信息]
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+{{< ref-cols >}}
+
+{{< ref-card filename="plt 工具箱常用函数" >}}
+| 函数 | 说明 |
+|------|------|
+| `plt.subplot()` | 划分图片显示区域 |
+| `plt.imshow()` | 显示图片 |
+| `plt.title()` | 添加标题 |
+| `plt.xticks()` | 设置横坐标刻度 |
+| `plt.yticks()` | 设置纵坐标刻度 |
+| `plt.show()` | 显示整个绘图窗口 |
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
