@@ -365,3 +365,47 @@ cv.adaptiveThreshold(
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+## 七、自适应高斯阈值
+
+{{< ref-cols >}}
+
+{{< ref-card filename="自适应高斯阈值调用" >}}
+```python
+th3 = cv.adaptiveThreshold(
+    img,
+    255,
+    cv.ADAPTIVE_THRESH_GAUSSIAN_C,  # 使用高斯加权平均
+    cv.THRESH_BINARY,
+    11,  # 邻域大小（11×11）
+    2    # 常数 C，从加权均值中减去
+)
+```
+{{< /ref-card >}}
+
+{{< ref-card filename="两种自适应方法对比" >}}
+**平均法（MEAN_C）**
+
+`cv.ADAPTIVE_THRESH_MEAN_C`
+
+直接对周围 11×11 区域中的像素求平均。
+
+---
+
+**高斯法（GAUSSIAN_C）**
+
+`cv.ADAPTIVE_THRESH_GAUSSIAN_C`
+
+对周围像素进行**高斯加权平均**：
+
+- 离当前像素越近的像素，权重越大
+- 离当前像素越远的像素，权重越小
+
+局部阈值计算公式：
+
+> 局部阈值 = 高斯加权平均值 - 2
+
+它通常比简单平均更加重视当前像素附近的信息。
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
