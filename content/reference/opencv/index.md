@@ -302,3 +302,66 @@ ret, thresh5 = cv.threshold(
 {{< /ref-card >}}
 
 {{< /ref-cols >}}
+
+## 六、自适应平均阈值
+
+{{< ref-cols >}}
+
+{{< ref-card filename="自适应阈值调用示例" >}}
+```python
+th2 = cv.adaptiveThreshold(
+    img,
+    255,
+    cv.ADAPTIVE_THRESH_MEAN_C,
+    cv.THRESH_BINARY,
+    11,
+    2
+)
+```
+{{< /ref-card >}}
+
+{{< ref-card filename="函数参数格式" >}}
+```python
+cv.adaptiveThreshold(
+    src,        # 输入灰度图
+    maxValue,   # 最大输出值
+    adaptiveMethod,   # 自适应方法
+    thresholdType,    # 阈值类型
+    blockSize,  # 邻域大小
+    C           # 从计算结果中减去的常数
+)
+```
+
+| 参数 | 说明 |
+|------|------|
+| `img` | 输入灰度图 |
+| `255` | 最大输出值 |
+| `ADAPTIVE_THRESH_MEAN_C` | 使用邻域平均值计算阈值 |
+| `THRESH_BINARY` | 使用普通二值化 |
+| `11` | 使用 11×11 的邻域 |
+| `2` | 计算后的阈值再减去 2 |
+{{< /ref-card >}}
+
+{{< ref-card filename="自适应阈值计算原理" >}}
+对每个像素，取周围 **11×11** 区域计算平均灰度值：
+
+```
+局部阈值 = 11×11区域的平均值 - 2
+```
+
+**亮区示例**（附近平均值为 140）：
+
+```
+阈值 = 140 - 2 = 138
+```
+
+**暗区示例**（附近平均值为 90）：
+
+```
+阈值 = 90 - 2 = 88
+```
+
+> 针对每个像素，根据它周围的小区域，单独计算阈值，而非对整张图使用同一固定阈值。
+{{< /ref-card >}}
+
+{{< /ref-cols >}}
