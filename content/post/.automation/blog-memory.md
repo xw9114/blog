@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-17
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: YOLO 边缘端部署：AI 模型的轻量化与量化裁剪
+  - 二级技术切面: Letterbox 坐标逆映射、Stride 栅格量化与小目标框漂移补偿
+  - 文章路径: `D:/blog/content/post/62/yolo-letterbox-stride-quantization-small-object-drift.md`
+
 - 2026-06-16
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
   - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
@@ -261,6 +267,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-17 09:04:56 +08:00
+  - 输出文章: `D:/blog/content/post/62/yolo-letterbox-stride-quantization-small-object-drift.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: YOLO 边缘端部署：AI 模型的轻量化与量化裁剪
+  - 二级技术切面: Letterbox 坐标逆映射、Stride 栅格量化与小目标框漂移补偿
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生新的二级技术切面；最近三次成功发布依次落在工业总线、MCU 架构与控制理论方向，而视觉维度虽在 2026-06-13 补充篇中短暂出现，但近几篇主线文章并未继续展开，为保持技术跨度，本轮切回视觉方向，并刻意避开 `skill-yolo-edge-int8-pruning-and-nms-budget` 已展开的结构化剪枝、INT8 映射与 NMS 尾延迟预算主线，改把切口收束到“同一个目标为什么不是没检出，而是框在 letterbox、像素中心约定、stride 栅格与 INT8 回归步距之间持续漂移”这条几何误差链路，确保标题、slug、公式与工程故障画像都与历史 YOLO 文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从坐标合同回到几何可信度”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 工程中的边缘后处理场景，显式写出 `s = min(W_in / W_f, H_in / H_f)`、`u_f = (u_in + 0.5 - pad_x) / s - 0.5`、`c_x = (i + sigma(t_x)) * stride`、`|Delta c_x| <= stride * scale_tx / 8` 与 `Delta w ~= w * Delta t_w` 等映射关系，覆盖 letterbox 逆仿射、half-pixel center 反算、INT8 中心/尺寸误差上界、`degraded` 小目标守卫与跨检测头稳定性选择。
+  - 提交动作: 在写入 `content/post/62/yolo-letterbox-stride-quantization-small-object-drift.md` 与两份记忆后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/62/yolo-letterbox-stride-quantization-small-object-drift.md" "auto(blog): skill-yolo-edge-letterbox-inverse-mapping-stride-quantization-and-small-object-box-drift-compensation"`。
 
 - 2026-06-16 08:31:15 +08:00
   - 输出文章: `D:/blog/content/post/61/spi-sampling-window-board-delay-dummy-cycle-budget.md`
