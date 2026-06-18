@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-18
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: ESP32 双核调度与 RTOS 任务间的通信机制
+  - 二级技术切面: portMUX 自旋锁、双 bank 共享快照与 ISR 唤醒尾延迟预算
+  - 文章路径: `D:/blog/content/post/64/esp32-portmux-shared-snapshot-isr-wake-tail-latency.md`
+
 - 2026-06-17
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
   - 一级主题: YOLO 边缘端部署：AI 模型的轻量化与量化裁剪
@@ -267,6 +273,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-18 09:21:39 +08:00
+  - 输出文章: `D:/blog/content/post/64/esp32-portmux-shared-snapshot-isr-wake-tail-latency.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: ESP32 双核调度与 RTOS 任务间的通信机制
+  - 二级技术切面: portMUX 自旋锁、双 bank 共享快照与 ISR 唤醒尾延迟预算
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生新的二级技术切面；最近四篇主线文章依次覆盖视觉、工业总线、STM32 定时器与控制理论，维度跨度尚可，但 ESP32 双核主题自 2026-05-11 的 `esp32-cross-core-notify-backpressure.md` 之后尚未重访。为避免与那篇“跨核通知与队列背压”路线重复，本轮不再讨论队列长度与通知链路本身，而是把切口收束到“为什么双核实时系统真正脆弱点在共享内存发布、跨核自旋锁等待和 ISR 到控制任务的尾延迟预算”这条更底层的资源与时序链路上，确保标题、slug、公式与工程故障画像都与历史 ESP32 文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从共享内存合同回到最坏时延治理”的叙述风格。
+  - 实现约束: 代码采用 ESP-IDF FreeRTOS 场景，围绕 `portMUX_TYPE` 自旋锁、环形描述符邮箱、双 bank 共享快照与核心亲和性展开，显式写出 `T_cs_hold ≈ T_lock + N / BW_mem + T_index_update`、`T_irq_to_run = T_entry + T_isr + T_ready + T_ipi + T_sched + T_spin_wait`、`theta = 2 * pi * count / N_cpr`、`omega = alpha * omega_gyro + (1 - alpha) * omega_enc` 与 `T_irq_to_ctrl < T_deadline - T_ctrl - T_margin` 等映射关系，并加入超预算降级、覆盖最旧描述符和边界限幅处理。
+  - 提交动作: 在写入 `content/post/64/esp32-portmux-shared-snapshot-isr-wake-tail-latency.md` 与两份记忆后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/64/esp32-portmux-shared-snapshot-isr-wake-tail-latency.md" "auto(blog): skill-esp32-portmux-shared-snapshot-and-isr-wake-tail-latency-budget"`。
 
 - 2026-06-17 09:04:56 +08:00
   - 输出文章: `D:/blog/content/post/62/yolo-letterbox-stride-quantization-small-object-drift.md`
