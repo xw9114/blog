@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-19
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: 步进电机 S 型加减速算法：抑制机械谐振的微积分应用
+  - 二级技术切面: 共振带避让、jerk 限幅与失步保护窗口
+  - 文章路径: `D:/blog/content/post/65/stepper-s-curve-jerk-limit-resonance-band-crossing-and-stall-guard-window.md`
+
 - 2026-06-18
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
   - 一级主题: ESP32 双核调度与 RTOS 任务间的通信机制
@@ -791,6 +797,17 @@
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/19/stm32-adc-dma.md" "auto(blog): skill-stm32-dma-multi-channel-adc-memory-transport"`。
   - 提交状态: 自动提交失败。
   - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
+
+## 2026-06-19 运行记录
+
+- 2026-06-19 09:58:13 +08:00
+  - 输出文章: `D:/blog/content/post/65/stepper-s-curve-jerk-limit-resonance-band-crossing-and-stall-guard-window.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: 步进电机 S 型加减速算法：抑制机械谐振的微积分应用
+  - 二级技术切面: 共振带避让、jerk 限幅与失步保护窗口
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已覆盖 MCU、视觉与工业总线，而高阶电机方向自 `2026-06-13` 以来未再展开，本轮优先切回运动控制维度，并刻意避开 `stepper-short-move-s-curve-segment-collapse-timer-quantization-and-residual-cancellation.md` 已写过的“短行程量化残差”老切口，把重心收敛到“结构固有频率、禁速带最小穿越加速度、S 曲线 jerk 约束与编码器相位误差连续窗口保护”这条更底层的时域合同上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从离散脉冲回到弹性机械系统”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，覆盖禁速带穿越最小加速度 `|a_cross| >= Delta f / T_cross_max`、离散 jerk 更新 `a[k+1] = a[k] + clamp(a_target - a[k], -j_max * dt, j_max * dt)`、负载角判据 `delta = wrap(theta_cmd - theta_meas)`、连续窗口失步保护以及 `ARR = round(f_tim / f_step) - 1` 的步频映射，并显式做频率、加速度、相位误差与定时器范围的边界限幅。
 
 ## 2026-06-13 补充主题索引
 
