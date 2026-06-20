@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-20
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: MPU6050 姿态解算与零偏校准
+  - 二级技术切面: Allan 方差、零偏随机游走与静止冻结校准
+  - 文章路径: `D:/blog/content/post/66/mpu6050-allan-variance-bias-random-walk-and-stationary-bias-freeze.md`
+
 - 2026-06-19
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: 步进电机 S 型加减速算法：抑制机械谐振的微积分应用
@@ -797,6 +803,18 @@
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/19/stm32-adc-dma.md" "auto(blog): skill-stm32-dma-multi-channel-adc-memory-transport"`。
   - 提交状态: 自动提交失败。
   - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
+
+## 2026-06-20 运行记录
+
+- 2026-06-20 10:51:14 +08:00
+  - 输出文章: `D:/blog/content/post/66/mpu6050-allan-variance-bias-random-walk-and-stationary-bias-freeze.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: MPU6050 姿态解算与零偏校准
+  - 二级技术切面: Allan 方差、零偏随机游走与静止冻结校准
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已连续覆盖高阶电机、MCU、视觉与工业总线，而控制维度自 `2026-06-14` 以来未再展开，本轮优先切回控制与传感方向，并刻意避开 `mpu6050-temp-bias-zero-rate.md` 已写过的“温漂零偏、静止窗口与零角速度约束”老切口，把重心收敛到“MEMS 陀螺噪声按时间尺度如何分层、Allan 方差如何决定在线偏置更新时间常数，以及静止窗口外为何必须冻结偏置估计”这条更底层的误差建模链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从 MEMS 振动结构回到数字偏置估计”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，覆盖 `14 bytes` 同帧突发读取、`accel_raw / 4096` 与 `gyro_raw / 65.5` 的物理量映射、温度分段线性偏置表、静止门控 `||omega|| < omega_th` 与 `| ||a|| - g | < a_th`、动态偏置更新 `b_dyn[k+1] = b_dyn[k] + alpha * (omega_res[k] - b_dyn[k])` 以及 `alpha = 1 - exp(-dt / tau)` 的离散时间映射，并显式做温度区间、dt、偏置幅值与连续静止样本数的边界限幅。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/66/mpu6050-allan-variance-bias-random-walk-and-stationary-bias-freeze.md" "auto(blog): skill-mpu6050-allan-variance-bias-random-walk-and-stationary-bias-freeze"`。
 
 ## 2026-06-19 运行记录
 
