@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-21
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: 位填充帧长抖动、优先级阻塞与最坏响应时间
+  - 文章路径: `D:/blog/content/post/67/can-bit-stuffing-frame-jitter-priority-blocking-and-worst-case-response-time.md`
+
 - 2026-06-20
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: MPU6050 姿态解算与零偏校准
@@ -803,6 +809,18 @@
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/19/stm32-adc-dma.md" "auto(blog): skill-stm32-dma-multi-channel-adc-memory-transport"`。
   - 提交状态: 自动提交失败。
   - 失败原因: `fatal: Unable to create 'D:/blog/.git/index.lock': Permission denied`
+
+## 2026-06-21 运行记录
+
+- 2026-06-21 09:08:11 +08:00
+  - 输出文章: `D:/blog/content/post/67/can-bit-stuffing-frame-jitter-priority-blocking-and-worst-case-response-time.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: 位填充帧长抖动、优先级阻塞与最坏响应时间
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已轮转覆盖控制、高阶电机、MCU、视觉与工业总线，为避免连续回到同一底层误差模型，本轮仍留在工业总线维度，但刻意避开 `can-arbitration.md` 已讲过的线与仲裁基础、`can-bit-timing-bus-off-recovery.md` 已展开的位时序容差与 Bus-Off、`can-ack-retry-deadline-budget.md` 已分析过的 ACK 缺失重发，以及 `can-resynchronization-sjw-clock-drift-budget.md` 已覆盖的重同步与晶振漂移，把重心收敛到“位填充如何把同样 DLC 的业务帧拉成不同总线时长、低优先级整帧阻塞如何吞掉高优先级 deadline，以及固定点响应时间方程如何把这两件事合并成可验证预算”这条更底层的实时链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从编码边沿回到实时占线预算”的叙述风格。
+  - 实现约束: 代码采用 STM32 bxCAN HAL 风格，围绕标准 11 位数据帧的 `N_base = 47 + 8 * DLC`、可填充区 `N_sr = 34 + 8 * DLC`、保守填充上界 `N_stuff,max <= floor((N_sr - 1) / 4)`、低优先级阻塞 `B_i = max C_k` 与固定点响应时间 `R_i^(n+1) = J_i + C_i + B_i + Σ ceil((R_i^n + J_j + tau_bit) / T_j) * C_j` 展开，并显式加入 DLC、迭代轮数、总和溢出和邮箱资源的边界限幅。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/67/can-bit-stuffing-frame-jitter-priority-blocking-and-worst-case-response-time.md" "auto(blog): skill-can-bit-stuffing-frame-jitter-priority-blocking-and-worst-case-response-time"`。
 
 ## 2026-06-20 运行记录
 
