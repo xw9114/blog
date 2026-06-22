@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-22
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 电压圆限幅、SVPWM 零序注入与母线利用率边界
+  - 文章路径: `D:/blog/content/post/68/foc-voltage-circle-limiting-svpwm-zero-sequence-and-dc-bus-utilization.md`
+
 - 2026-06-21
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
   - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
@@ -291,6 +297,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-22 10:12:21 +08:00
+  - 输出文章: `D:/blog/content/post/68/foc-voltage-circle-limiting-svpwm-zero-sequence-and-dc-bus-utilization.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 电压圆限幅、SVPWM 零序注入与母线利用率边界
+  - 决策说明: 一级主题池已全部覆盖，因此按兜底策略从已用一级主题中派生未写过的二级技术切面；考虑最近几篇已轮转覆盖工业总线、控制、步进运动控制、MCU 与视觉方向，本轮切回高阶电机维度，但刻意避开 `foc-clarke-park.md` 已讲过的坐标降维基础、`foc-single-shunt-reconstruction.md` 已展开的单电阻采样与死区补偿、`foc-encoder-electrical-zero-pole-pair-calibration.md` 已覆盖的坐标标定，以及 `foc-current-loop-discretization-decoupling-back-emf-feedforward.md` 已讨论的电流环离散化与解耦前馈，把重心收敛到“逆变器六边形线性区如何约束 dq 电压命令、零序注入如何在不改变线电压的前提下提升母线利用率，以及抗饱和回写如何把未兑现的电压预算重新记回积分器”这条更靠近功率级物理边界的链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从理想电压矢量回到可兑现开关资源”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `|V_ref| <= k_util * Vdc / sqrt(3)` 的 dq 电压圆限幅、`v_0 = -0.5 * (max + min)` 的零序注入、`duty = 0.5 + v_leg / Vdc` 的桥臂平均电压映射，以及 `integrator[k+1] = integrator[k] + ki * e * dt + kaw * (v_applied - v_unsat)` 的 back-calculation 抗饱和回写展开，并显式加入 `Vdc`、`dt`、电流参考与占空比护栏的边界限幅。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/68/foc-voltage-circle-limiting-svpwm-zero-sequence-and-dc-bus-utilization.md" "auto(blog): skill-foc-voltage-circle-limiting-svpwm-zero-sequence-and-dc-bus-utilization"`。
 
 - 2026-06-18 09:21:39 +08:00
   - 输出文章: `D:/blog/content/post/64/esp32-portmux-shared-snapshot-isr-wake-tail-latency.md`
