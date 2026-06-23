@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-23
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 基础图像处理与颜色识别
+  - 二级技术切面: LED 频闪、滚动快门条纹与时域颜色稳定化
+  - 文章路径: `D:/blog/content/post/69/opencv-color-led-flicker-rolling-shutter-temporal-stabilization.md`
+
 - 2026-06-22
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
@@ -297,6 +303,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-23 09:04:20 +08:00
+  - 输出文章: `D:/blog/content/post/69/opencv-color-led-flicker-rolling-shutter-temporal-stabilization.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 基础图像处理与颜色识别
+  - 二级技术切面: LED 频闪、滚动快门条纹与时域颜色稳定化
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已轮转覆盖高阶电机、工业总线、控制与 MCU，而视觉维度自 `2026-06-17` 的 `yolo-letterbox-stride-quantization-small-object-drift.md` 之后尚未再展开，本轮优先切回视觉方向，并刻意避开 `opencv-hsv-recalibration-ae-awb-gamma.md` 已写过的自动曝光/白平衡与 HSV 回标定、`color-temperature-ccm-lab-gating.md` 已展开的色温漂移与 CCM/Lab 距离建模，以及 `opencv-planar-pnp-degeneracy-condition-number-pose-flip.md` 已覆盖的几何退化，把重心收敛到“LED 驱动纹波如何经滚动快门逐行曝光折叠成空间条纹、同排白参考为何能在相同相位上抵消照明幅值，以及条纹强度如何驱动时域融合权重”这条更底层的照明时序链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从照明时序回到颜色测量合同”的叙述风格。
+  - 实现约束: 代码采用 OpenCV C++ 风格，围绕逐行曝光时刻 `t_row(y) = t_frame_start + y * T_line + T_exp / 2`、频闪曝光平均 `A_eff = A * sinc(pi * f_f * T_exp)`、同排白参考归一化 `c_norm(y) = c_target(y) / (c_white(y) + eps)`、条纹强度 `stripe_ratio = mean(|g[y] - g[y - 1]|) / mean(g[y])` 与自适应时域融合 `c_fused[k] = alpha * c_meas[k] + (1 - alpha) * c_fused[k - 1]` 展开，并显式加入 ROI、码值、增益、行带窗口与 `alpha` 的边界限幅。
+  - 提交动作: 完成文章与仓库记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/69/opencv-color-led-flicker-rolling-shutter-temporal-stabilization.md" "auto(blog): skill-opencv-color-recognition-led-flicker-rolling-shutter-and-temporal-stabilization"`。
 
 - 2026-06-22 10:12:21 +08:00
   - 输出文章: `D:/blog/content/post/68/foc-voltage-circle-limiting-svpwm-zero-sequence-and-dc-bus-utilization.md`
