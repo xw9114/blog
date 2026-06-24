@@ -896,3 +896,15 @@
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从入射光谱到感知距离”的叙述风格。
   - 实现约束: 代码采用 OpenCV C++ 风格，覆盖 sRGB 反伽马、白参考增益归一化、3x3 颜色校正矩阵最小二乘求解、线性 RGB 到 XYZ/Lab 的映射、DeltaE76 门控以及过曝/欠曝边界拒绝逻辑，并显式写出 `rgb_balanced = diag(g_r, g_g, g_b) * rgb_linear`、`M = arg min sum ||c_ref_i - M * c_cam_i||^2` 与 `DeltaE76 = sqrt((DeltaL)^2 + (Deltaa)^2 + (Deltab)^2)` 等关键公式。
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/58/color-temperature-ccm-lab-gating.md" "auto(blog): skill-color-recognition-color-temperature-ccm-and-lab-deltae-gating"`。
+
+## 2026-06-24 运行记录
+
+- 2026-06-24 09:18:00 +08:00
+  - 输出文章: `D:/blog/content/post/70/stm32-adc-dma-double-buffer-snapshot-consistency-and-overrun-degradation.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
+  - 二级技术切面: 双缓冲 DMA 快照一致性、控制回路读写撕裂与过载退化
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题中派生新的二级技术切面；考虑最近几篇已依次覆盖控制、高阶电机、工业总线与视觉方向，今天切回 MCU 维度，同时刻意避开 `stm32-adc-dma.md` 与 `stm32-adc-source-impedance-crosstalk-budget.md` 已经写过的“基础搬运”与“源阻抗串扰”切口，把重点压到“DMA half/full transfer 如何定义可消费快照、控制环如何避免读到一半新一半旧的数据、以及消费跟不上时系统如何显式降级”这条更贴近实时闭环一致性的链路上，确保标题、slug、代码与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从采样保持到快照提交语义”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，覆盖交织扫描布局、bank 边界提交、快照获取临界区、ADC 码值到电流/母线电压的线性映射、过载计数与丢帧策略，并显式写出 `idx = k * ADC_CHANNEL_COUNT + c`、`i_phase = ((adc_code - offset_code) * vref_v) / (4095 * gain * shunt_ohm)` 与 `v_bus = v_adc * (r_upper + r_lower) / r_lower` 等关键公式。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/70/stm32-adc-dma-double-buffer-snapshot-consistency-and-overrun-degradation.md" "auto(blog): skill-stm32-adc-dma-double-buffer-snapshot-consistency-and-overrun-degradation"`。
