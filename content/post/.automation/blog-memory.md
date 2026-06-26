@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-26
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: MPU6050 姿态解算与零偏校准
+  - 二级技术切面: 六面体静态标定、交叉轴失准与 3x3 补偿矩阵
+  - 文章路径: `D:/blog/content/post/71/mpu6050-six-position-calibration-cross-axis-misalignment-and-3x3-compensation.md`
+
 - 2026-06-23
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
   - 一级主题: OpenCV 基础图像处理与颜色识别
@@ -303,6 +309,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-26 09:40:00 +08:00
+  - 输出文章: `D:/blog/content/post/71/mpu6050-six-position-calibration-cross-axis-misalignment-and-3x3-compensation.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: MPU6050 姿态解算与零偏校准
+  - 二级技术切面: 六面体静态标定、交叉轴失准与 3x3 补偿矩阵
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已轮转覆盖高阶电机、视觉与 MCU，而控制维度自 `2026-06-20` 的 `mpu6050-allan-variance-bias-random-walk-and-stationary-bias-freeze.md` 之后尚未再展开，本轮优先切回控制与传感方向，并刻意避开 `mpu6050-temp-bias-zero-rate.md` 已写过的温漂零偏、`mpu6050-dlpf-sample-divider-phase-margin.md` 已写过的 DLPF 与采样分频、`mpu6050-allan-variance-bias-random-walk-and-stationary-bias-freeze.md` 已写过的 Allan 方差与冻结偏置，把重心收敛到“静态六面体如何先分离零偏与比例因子、交叉轴失准为何必须进入 3x3 补偿矩阵、以及姿态解算前为何要先把观测坐标系校直”这条更底层的几何误差链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从重力参考回到传感器坐标契约”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，覆盖六面静置窗口均值与标准差门控、正反朝向零偏求解 `b_axis = (m_axis^+ + m_axis^-) / 2`、参考向量最小二乘拟合 `M = arg min Σ ||a_ref_i - M * (r_i - b)||^2`、运行时补偿 `a_corr = M * (a_raw - b)` 以及基于补偿向量的横滚/俯仰求解，并显式加入模长、标准差与病态矩阵的边界拒绝。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/71/mpu6050-six-position-calibration-cross-axis-misalignment-and-3x3-compensation.md" "auto(blog): skill-mpu6050-six-position-calibration-cross-axis-misalignment-and-3x3-compensation"`。
 
 - 2026-06-23 09:04:20 +08:00
   - 输出文章: `D:/blog/content/post/69/opencv-color-led-flicker-rolling-shutter-temporal-stabilization.md`
