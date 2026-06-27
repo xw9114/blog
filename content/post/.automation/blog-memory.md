@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-27
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: I2C/UART 通信协议底层逻辑
+  - 二级技术切面: UART DMA 环形接收、IDLE 判帧与粘包错帧恢复
+  - 文章路径: `D:/blog/content/post/72/uart-dma-circular-idle-frame-resync-and-error-recovery.md`
+
 - 2026-06-26
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: MPU6050 姿态解算与零偏校准
@@ -309,6 +315,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-27 14:59:56 +08:00
+  - 输出文章: `D:/blog/content/post/72/uart-dma-circular-idle-frame-resync-and-error-recovery.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: I2C/UART 通信协议底层逻辑
+  - 二级技术切面: UART DMA 环形接收、IDLE 判帧与粘包错帧恢复
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已轮转覆盖控制、视觉、高阶电机与 MCU，而通信维度自 `2026-06-16` 的 `rs485-half-duplex-de-turnaround-idle-gap-echo-suppression.md` 之后尚未再展开，本轮优先切回 MCU/通信方向，并刻意避开 `i2c-bus-recovery.md` 已写过的 I2C 开漏仲裁与总线恢复、`uart-oversampling-baud-error-resync.md` 已写过的过采样与波特率误差主线，以及 `rs485-half-duplex-de-turnaround-idle-gap-echo-suppression.md` 已展开的半双工方向切换，把重心收敛到“UART 在无独立帧时钟前提下如何借助 DMA 环形缓冲写指针、IDLE 物理静默边界与解析器重同步机制维持帧边界和一致性”这条更底层的异步时域链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从异步采样契约回到消息边界重建”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，覆盖 `write_pos = (N - NDTR) mod N` 的 DMA 写指针映射、`len = (w - r + N) mod N` 的环形缓冲增量提取、IDLE 事件快照、跨批次半包累积、同步头搜索与异或校验重同步，以及 `ORE/FE/NE` 错误计数和恢复流程，并显式加入待解析缓冲容量、长度字段与校验失败时的边界拒绝。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/72/uart-dma-circular-idle-frame-resync-and-error-recovery.md" "auto(blog): skill-uart-dma-circular-idle-frame-resync-and-error-recovery"`。
 
 - 2026-06-26 09:40:00 +08:00
   - 输出文章: `D:/blog/content/post/71/mpu6050-six-position-calibration-cross-axis-misalignment-and-3x3-compensation.md`
