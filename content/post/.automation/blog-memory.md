@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-28
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 多从设备混挂时的 CPOL/CPHA 动态切换、SCK 空闲回归与首位错采恢复
+  - 文章路径: `D:/blog/content/post/73/spi-mixed-mode-cpol-cpha-hot-switch-idle-window-and-first-bit-recovery.md`
+
 - 2026-06-27
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
   - 一级主题: I2C/UART 通信协议底层逻辑
@@ -315,6 +321,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-28 09:40:13 +08:00
+  - 输出文章: `D:/blog/content/post/73/spi-mixed-mode-cpol-cpha-hot-switch-idle-window-and-first-bit-recovery.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 多从设备混挂时的 CPOL/CPHA 动态切换、SCK 空闲回归与首位错采恢复
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已轮转覆盖 MCU、控制、视觉、高阶电机与工业总线，而工业总线方向自 `2026-06-21` 的 CAN 实时占线预算之后尚未再展开，本轮切回 SPI 维度，但刻意避开 `spi-cpol-cpha-timing.md` 已展开的基础边沿契约、`skill-spi-dma-chip-select-hold-and-readback-phase-recovery.md` 已覆盖的 DMA 连续事务与回读相位恢复、`spi-shared-bus-miso-tristate-release-contamination-recovery.md` 已写过的 MISO 三态释放与所有权交接，以及 `spi-sampling-window-board-delay-dummy-cycle-budget.md` 已拆解的高速稳态采样窗与 Dummy 预算，把重心收敛到“同一条 SPI 总线混挂 Mode 0 与 Mode 3 设备时，CPOL/CPHA 热切换如何改写首位时间预算、SCK 空闲电平回归为何会变成伪边沿风险，以及为什么首字节错误本质上是帧间时域合同破裂”这条更底层的切换链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从边沿合同回到帧间静默窗”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，覆盖总线锁、`BSY/RXNE/OVR` 残留清理、`CPOL/CPHA/BR` 动态重配置、`T_first_budget = t_css + (CPHA == 0 ? 0 : T_sck / 2)` 的首位预算、`T_quiet >= t_bsy_clear + t_csh_prev + t_recfg + t_idle_settle + t_margin` 的静默窗约束、事务前后纳秒级片选建立保持，以及首位错采后追加 Dummy Byte 的有界重同步恢复。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/73/spi-mixed-mode-cpol-cpha-hot-switch-idle-window-and-first-bit-recovery.md" "auto(blog): skill-spi-mixed-mode-cpol-cpha-hot-switch-idle-window-and-first-bit-recovery"`。
 
 - 2026-06-27 14:59:56 +08:00
   - 输出文章: `D:/blog/content/post/72/uart-dma-circular-idle-frame-resync-and-error-recovery.md`
