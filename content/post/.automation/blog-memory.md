@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-06-29
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: PID 算法在平衡车中的应用
+  - 二级技术切面: 位置式 PID 与增量式 PID 的离散实现差异、执行器饱和记忆与采样抖动
+  - 文章路径: `D:/blog/content/post/74/balance-car-position-vs-incremental-pid-saturation-memory-and-dt-jitter.md`
+
 - 2026-06-28
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
   - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
@@ -321,6 +327,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-06-29 11:53:58 +08:00
+  - 输出文章: `D:/blog/content/post/74/balance-car-position-vs-incremental-pid-saturation-memory-and-dt-jitter.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: PID 算法在平衡车中的应用
+  - 二级技术切面: 位置式 PID 与增量式 PID 的离散实现差异、执行器饱和记忆与采样抖动
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已依次覆盖控制、MCU 与工业总线，而 `PID` 方向自 `2026-05-05` 的 `balance-car-pid-discrete-cascade.md` 之后尚未再展开，本轮切回平衡车控制维度，但刻意避开“姿态环位置式 PD + 速度环增量式 PI 的串级总览”旧切口，把重心收敛到“同一倒立摆、同一组离散参数下，位置式 PID 与增量式 PID 为什么会因状态记忆位置、执行器饱和和采样抖动投影不同而表现出不同闭环手感”这条更底层的数字控制链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从倒立摆时域合同回到数字状态记账”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕同一 `P + I - D_meas` 物理控制律同时展开位置式与增量式两种离散实现，显式写出 `I[k] = I[k-1] + Ki * dt * e[k]`、`Delta_u[k] = Kp * (e[k] - e[k-1]) + Ki * dt * e[k] - Kd * (gyro[k] - gyro[k-1])`、`u[k] = u[k-1] + Delta_u[k]` 以及 `pwm = pwm_dead + duty * (ARR - pwm_dead)` 等关键公式，并加入 dt 限幅、back-calculation 抗饱和、增量冻结和 PWM 死区映射的边界处理。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/74/balance-car-position-vs-incremental-pid-saturation-memory-and-dt-jitter.md" "auto(blog): skill-balance-car-position-vs-incremental-pid-saturation-memory-and-dt-jitter"`。
 
 - 2026-06-28 09:40:13 +08:00
   - 输出文章: `D:/blog/content/post/73/spi-mixed-mode-cpol-cpha-hot-switch-idle-window-and-first-bit-recovery.md`
