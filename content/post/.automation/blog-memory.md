@@ -15,6 +15,12 @@
   - 文章路径: `D:/blog/content/post/76/camera-calibration-lens-thermal-drift-focus-breathing-and-online-reprojection-guard.md`
 
 - 2026-06-30
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 硬件定时器与中断机制
+  - 二级技术切面: 编码器模式四倍频计数、环形差分溢出扩展与低速速度观测
+  - 文章路径: `D:/blog/content/post/77/stm32-timer-encoder-mode-quadrature-overflow-low-speed-observer.md`
+
+- 2026-06-30
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: 电机驱动 (TB6612FNG) 与死区控制
   - 二级技术切面: 续流路径、快慢衰减与换向回灌保护
@@ -349,6 +355,16 @@
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从一次性标定结果回到持续可信度审计”的叙述风格。
   - 实现约束: 代码采用 OpenCV C++ 风格，围绕 `u = f_x * X / Z + c_x`、`v = f_y * Y / Z + c_y`、`f_x(T) = f_x0 * (1 + alpha_x * Delta T)`、`Z = f * L / l_px` 与 `Delta Z / Z ~= Delta f / f - Delta l_px / l_px` 展开，并实现一阶温漂补偿、对焦呼吸尺度最小二乘估计、分区重投影残差统计、边缘/中心误差比监测与在线标定退化守卫。
   - 提交动作: 待执行 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/76/camera-calibration-lens-thermal-drift-focus-breathing-and-online-reprojection-guard.md" "auto(blog): skill-camera-calibration-thermal-drift-focus-breathing-online-reprojection-guard"`
+
+- 2026-06-30 23:42:00 +08:00
+  - 输出文章: `D:/blog/content/post/77/stm32-timer-encoder-mode-quadrature-overflow-low-speed-observer.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 硬件定时器与中断机制
+  - 二级技术切面: 编码器模式四倍频计数、环形差分溢出扩展与低速速度观测
+  - 决策说明: 仓库中已存在一篇 `2026-06-30` 的高阶电机文章，本次按用户指定日期补写新的编号文章，因此只复用日期、不复用主题；一级主题池已全部覆盖，继续按兜底策略从已用一级主题派生新的二级技术切面。考虑最新几篇依次覆盖 MCU、工业总线、控制、高阶电机与视觉，且 `STM32 硬件定时器` 最近已写过输入捕获溢出、中心对齐 PWM、TRGO 相位锁定等切面，本轮回到 MCU 维度但避开这些旧切口，把重点收敛到“定时器编码器模式如何把正交 A/B 相四倍频边沿、有限位宽 CNT 回绕、固定周期差分和低速速度台阶组织成一份可信运动观测”这条更底层的测量链路上，确保标题、slug、公式和代码结构都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从能读 CNT 回到连续机械状态观测契约”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `counts_per_rev = 4 * N_line * gear_ratio`、`position[k] = position[k-1] + wrap_delta(CNT[k], CNT[k-1])`、`rpm = 60 * delta_counts / (counts_per_rev * dt)` 与 `|delta| < 32768` 展开，并实现 16 位环形差分、连续位置累加、速度一阶滤波、异常跳变拒绝、低速抖动死区与零速确认状态。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/77/stm32-timer-encoder-mode-quadrature-overflow-low-speed-observer.md" "auto(blog): skill-stm32-timer-encoder-mode-quadrature-overflow-low-speed-observer"`。
 
 - 2026-06-30 10:59:32 +08:00
   - 输出文章: `D:/blog/content/post/75/tb6612-current-decay-recirculation-and-regenerative-clamp.md`
