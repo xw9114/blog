@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-07-01
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 相机标定与物理世界的三维重建
+  - 二级技术切面: 镜头温漂、对焦呼吸与在线重投影守卫
+  - 文章路径: `D:/blog/content/post/76/camera-calibration-lens-thermal-drift-focus-breathing-and-online-reprojection-guard.md`
+
 - 2026-06-30
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: 电机驱动 (TB6612FNG) 与死区控制
@@ -333,6 +339,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-07-01 09:06:03 +08:00
+  - 输出文章: `D:/blog/content/post/76/camera-calibration-lens-thermal-drift-focus-breathing-and-online-reprojection-guard.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenCV 相机标定与物理世界的三维重建
+  - 二级技术切面: 镜头温漂、对焦呼吸与在线重投影守卫
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题中派生新的二级技术切面；考虑最近几篇文章依次覆盖了高阶电机、控制、工业总线与 MCU，而视觉维度自 `2026-06-23` 以来未再展开，本轮优先回补视觉跨度；在视觉主题中，`OpenCV 相机标定` 自 `2026-05-31` 的平面 PnP 退化文章后未再深挖，因此刻意避开已写过的“平面双解退化”和“双目标定深度误差”旧切口，把重心收敛到“标定并不会随着 YAML 文件落盘而冻结，镜头温漂、对焦呼吸和装配漂移如何通过焦距缩放、主点挪动与边缘重投影残差重新改写像素到毫米映射”这条更底层的光学几何链路上，确保标题、slug、公式、代码结构与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从一次性标定结果回到持续可信度审计”的叙述风格。
+  - 实现约束: 代码采用 OpenCV C++ 风格，围绕 `u = f_x * X / Z + c_x`、`v = f_y * Y / Z + c_y`、`f_x(T) = f_x0 * (1 + alpha_x * Delta T)`、`Z = f * L / l_px` 与 `Delta Z / Z ~= Delta f / f - Delta l_px / l_px` 展开，并实现一阶温漂补偿、对焦呼吸尺度最小二乘估计、分区重投影残差统计、边缘/中心误差比监测与在线标定退化守卫。
+  - 提交动作: 待执行 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/76/camera-calibration-lens-thermal-drift-focus-breathing-and-online-reprojection-guard.md" "auto(blog): skill-camera-calibration-thermal-drift-focus-breathing-online-reprojection-guard"`
 
 - 2026-06-30 10:59:32 +08:00
   - 输出文章: `D:/blog/content/post/75/tb6612-current-decay-recirculation-and-regenerative-clamp.md`
