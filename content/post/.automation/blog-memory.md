@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-07-02
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 时钟占空比塌缩、建立保持时间与亚稳态容限
+  - 文章路径: `D:/blog/content/post/78/spi-duty-cycle-distortion-setup-hold-and-metastability-margin.md`
+
 - 2026-07-01
   - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
   - 一级主题: OpenCV 相机标定与物理世界的三维重建
@@ -345,6 +351,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-07-02 14:27:51 +08:00
+  - 输出文章: `D:/blog/content/post/78/spi-duty-cycle-distortion-setup-hold-and-metastability-margin.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
+  - 二级技术切面: 时钟占空比塌缩、建立保持时间与亚稳态容限
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题中派生新的二级技术切面；考虑最近几篇文章依次覆盖了控制、高阶电机、MCU 与视觉，而工业总线维度自 `2026-06-28` 以来未再展开，本轮优先回补技术跨度；在工业总线主题中，`SPI` 已经写过“首边沿/次边沿与片选建立”“DMA 连续事务与回读错位恢复”“共享 MISO 污染”“板级传播延迟与 Dummy Cycle 预算”“多从混挂动态切换”等切口，因此刻意避开这些已用题材，把重心收敛到“CPOL/CPHA 之外，真正决定链路上限的是哪一个半周期在承担建立时间、保持时间、板级飞行时间和同步器亚稳态收敛成本”这条更底层的时域合同上，确保标题、slug、公式和代码结构都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从模式编号回到采样窗口预算”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `Tclk = 1 / f_sck`、`Thigh = D * Tclk`、`Tlow = (1 - D) * Tclk`、`Msetup = Tpre - (tpath + tjitter + tmeta) - tSU` 与 `Mhold = Tpost - tjitter - tH` 展开，同时实现模式到前后窗映射、MOSI/MISO 双向裕量评估、最快安全预分频选择与 CS 保护窗延迟。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/78/spi-duty-cycle-distortion-setup-hold-and-metastability-margin.md" "auto(blog): skill-spi-duty-cycle-distortion-setup-hold-and-metastability-margin"`
 
 - 2026-07-01 09:06:03 +08:00
   - 输出文章: `D:/blog/content/post/76/camera-calibration-lens-thermal-drift-focus-breathing-and-online-reprojection-guard.md`
