@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-07-03
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
+  - 二级技术切面: 注入组抢占、DMA 常规组背压与过流保护时延预算
+  - 文章路径: `D:/blog/content/post/79/stm32-adc-injected-preemption-regular-dma-backpressure-and-overcurrent-latency-budget.md`
+
 - 2026-07-02
   - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
   - 一级主题: SPI 协议 CPOL/CPHA 深度解析：数字采样的时域契约
@@ -351,6 +357,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-07-03 09:45:54 +08:00
+  - 输出文章: `D:/blog/content/post/79/stm32-adc-injected-preemption-regular-dma-backpressure-and-overcurrent-latency-budget.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
+  - 二级技术切面: 注入组抢占、DMA 常规组背压与过流保护时延预算
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题中派生新的二级技术切面；考虑最近几篇文章已依次覆盖工业总线、视觉、MCU、高阶电机与控制，而上一轮刚完成工业总线切面，本轮刻意不连续重复该维度，回到 `MCU` 体系中的 `STM32 DMA 与多通道 ADC` 主线；在这一主线下，仓库中已经写过“采样时间、源阻抗与通道串扰误差预算”以及“双缓冲 DMA、控制快照一致性与过载退化”两个旧切口，因此本轮明确避开模拟误差预算与 DMA 页面一致性老题，转而把重心收敛到“一颗 ADC 如何在常规组后台扫描、PWM 同步注入采样与过流保护之间分配优先级、转换时间和关断时延”这条更底层的实时调度链路上，确保标题、slug、公式、代码结构和工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从 ADC 外设回到实时调度器”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `t_conv = (t_sample + 12.5) / f_adc`、`rho_reg = f_reg_frame * N_reg * t_conv_reg`、`rho_inj = f_inj * N_inj * t_conv_inj`、`margin = 1 - rho_reg - rho_inj - rho_cpu`、`Iphase = (Vadc - Vbias) / (Rshunt * Gamp)` 与 `t_trip = t_conv + t_irq + t_gate_off` 展开，同时实现常规组半缓冲快照、注入组 JDR 快路径、模拟看门狗闩锁、软件过流兜底与启动期 `service_margin` 边界检查。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/79/stm32-adc-injected-preemption-regular-dma-backpressure-and-overcurrent-latency-budget.md" "auto(blog): skill-stm32-adc-injected-preemption-regular-dma-backpressure-and-overcurrent-latency-budget"`
 
 - 2026-07-02 14:27:51 +08:00
   - 输出文章: `D:/blog/content/post/78/spi-duty-cycle-distortion-setup-hold-and-metastability-margin.md`
