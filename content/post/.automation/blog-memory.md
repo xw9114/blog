@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-07-04
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 电角度时间戳对齐、采样执行延迟与 Park 相位前馈补偿
+  - 文章路径: `D:/blog/content/post/80/foc-electrical-angle-timestamp-alignment-sampling-execution-delay-and-park-phase-lead.md`
+
 - 2026-07-03
   - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
   - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
@@ -357,6 +363,16 @@
   - 文章路径: `D:/blog/content/post/19/stm32-adc-dma.md`
 
 ## 运行记录
+
+- 2026-07-04 09:15:22 +08:00
+  - 输出文章: `D:/blog/content/post/80/foc-electrical-angle-timestamp-alignment-sampling-execution-delay-and-park-phase-lead.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 电角度时间戳对齐、采样执行延迟与 Park 相位前馈补偿
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题中派生新的二级技术切面；最近几篇文章依次覆盖了 `Vision`、`Industrial Bus` 与 `MCU`，而高阶电机维度自 `2026-06-30` 以来未再展开，具备较好的技术跨度；在高阶电机主线中，`FOC` 已写过坐标变换、电流环解耦、编码器零电角和电压圆限幅，但尚未单独拆解“同一拍采样的电流、角度与 PWM 何时真正属于同一个电角时刻”这一时域问题，因此本轮刻意避开旧文已经覆盖的几何和调制边界，转而聚焦 `ADC` 采样时刻、编码器共时快照、PWM 预装载生效窗口、错过更新事件时的一整拍延迟惩罚，以及 `Delta_theta_e = omega_e * Tdelay + 0.5 * alpha_e * Tdelay^2` 如何把时间误差直接映射成 d/q 轴串扰，确保标题、slug、核心公式、代码结构和工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从旋转坐标系公式回到定时器与 ADC 时间合同”的叙述方式。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `Tdelay = Tsample_to_latch + Tzoh + Nmiss * Tcarrier`、`Delta_theta_e = omega_e * Tdelay + 0.5 * alpha_e * Tdelay^2`、`id_meas ~= iq * sin(Delta_theta_e)`、`vq_real ~= vq_ref * cos(Delta_theta_e)` 与 `sqrt(vd^2 + vq^2) <= k_util * Vdc / sqrt(3)` 展开，同时实现采样时刻角度下的 Park、电压执行时刻角度下的 inverse Park、编码器扩展计数差分测速、加速度限幅、错过 PWM 更新事件检测与三相 CCR 写回。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/80/foc-electrical-angle-timestamp-alignment-sampling-execution-delay-and-park-phase-lead.md" "auto(blog): skill-foc-electrical-angle-timestamp-alignment-sampling-execution-delay-and-park-phase-lead"`
 
 - 2026-07-03 09:45:54 +08:00
   - 输出文章: `D:/blog/content/post/79/stm32-adc-injected-preemption-regular-dma-backpressure-and-overcurrent-latency-budget.md`
