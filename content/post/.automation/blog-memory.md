@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-07-05
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: PCB 高频布局与混合信号干扰抑制
+  - 二级技术切面: 共阻抗耦合、VREF 回注与电流采样运放恢复时间
+  - 文章路径: `D:/blog/content/post/81/pcb-common-impedance-vref-injection-current-sense-recovery.md`
+
 - 2026-07-04
   - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
   - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
@@ -432,3 +438,13 @@
   - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题里派生新的二级技术切面；考虑最近几篇已依次覆盖控制、MCU 与工业总线，而 `PID` 方向自 `2026-05-05` 的 `balance-car-pid-discrete-cascade.md` 之后尚未再展开，本轮切回平衡车控制维度，但刻意避开“姿态环位置式 PD + 速度环增量式 PI 的串级总览”旧切口，把重心收敛到“同一倒立摆、同一组离散参数下，位置式 PID 与增量式 PID 为什么会因状态记忆位置、执行器饱和和采样抖动投影不同而表现出不同闭环手感”这条更底层的数字控制链路上，确保标题、slug、公式与工程问题都与历史文章明显区分。
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从离散状态记账回到倒立摆相位裕量”的叙述风格。
   - 实现约束: 代码采用 STM32 HAL 风格，覆盖 `P + I - D_meas` 的两种离散状态表示、`dt` 限幅、back-calculation 抗饱和、增量限幅、H 桥电压映射与同时间戳快照输入约束。
+
+- 2026-07-05 11:42:18 +08:00
+  - 输出文章: `D:/blog/content/post/81/pcb-common-impedance-vref-injection-current-sense-recovery.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: PCB 高频布局与混合信号干扰抑制
+  - 二级技术切面: 共阻抗耦合、VREF 回注与电流采样运放恢复时间
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题中派生新的二级技术切面；考虑最近几篇文章依次覆盖了高阶电机、MCU、工业总线与视觉，而控制维度自 `2026-06-29` 以来未再展开，本轮优先回补技术跨度；在控制维度中，`PCB 高频布局与混合信号干扰抑制` 曾于 `2026-05-07` 写过“回流路径、开关节点 dV/dt 与 ADC 采样静默窗预算”这一基础切口，因此本轮刻意避开旧文已覆盖的宏观铺陈，转而收敛到“同一块板上为什么会因为共阻抗地弹、VREF 回注和电流采样运放恢复期而把真实相电流读成伪瞬态”这条更具体的误差链，确保标题、slug、公式主线、代码结构和工程问题都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从 ADC 码值回到可信物理映射契约”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `V_err_shared = I_return * R_shared + L_shared * di/dt`、`Code = Vin / Vdda * (2^N - 1)`、`VDDA_now ~= Vcal * Code_cal / Code_now`、`Iphase = (Code / 4095 * VDDA - bias * VDDA) / (Rshunt * Gain)`、`|Delta I|max <= (Vbus / L) * Delta t` 与 `T_blank = T_dead + T_rr + T_opamp_recover + T_settle + T_aperture / 2` 展开，并实现占空比相关的注入触发重定位、VREFINT 参考补偿、物理斜率门控、静默窗失效冻结与可信样本保持。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/81/pcb-common-impedance-vref-injection-current-sense-recovery.md" "auto(blog): skill-pcb-common-impedance-vref-injection-current-sense-recovery"`
