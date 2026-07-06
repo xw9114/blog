@@ -8,6 +8,12 @@
 
 ## 已用主题
 
+- 2026-07-06
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: 硬件中断的边界：触发沿逻辑与信号消抖的博弈
+  - 二级技术切面: EXTI 双沿触发、静默窗消抖与边沿可信度预算
+  - 文章路径: `D:/blog/content/post/82/exti-dual-edge-quiet-window-debounce-and-edge-confidence-budget.md`
+
 - 2026-07-05
   - 技术维度: 控制理论与多维传感 (Control & Fusion)
   - 一级主题: PCB 高频布局与混合信号干扰抑制
@@ -448,3 +454,13 @@
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从 ADC 码值回到可信物理映射契约”的叙述风格。
   - 实现约束: 代码采用 STM32 HAL 风格，围绕 `V_err_shared = I_return * R_shared + L_shared * di/dt`、`Code = Vin / Vdda * (2^N - 1)`、`VDDA_now ~= Vcal * Code_cal / Code_now`、`Iphase = (Code / 4095 * VDDA - bias * VDDA) / (Rshunt * Gain)`、`|Delta I|max <= (Vbus / L) * Delta t` 与 `T_blank = T_dead + T_rr + T_opamp_recover + T_settle + T_aperture / 2` 展开，并实现占空比相关的注入触发重定位、VREFINT 参考补偿、物理斜率门控、静默窗失效冻结与可信样本保持。
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/81/pcb-common-impedance-vref-injection-current-sense-recovery.md" "auto(blog): skill-pcb-common-impedance-vref-injection-current-sense-recovery"`
+
+- 2026-07-06 09:05:11 +08:00
+  - 输出文章: `D:/blog/content/post/82/exti-dual-edge-quiet-window-debounce-and-edge-confidence-budget.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: 硬件中断的边界：触发沿逻辑与信号消抖的博弈
+  - 二级技术切面: EXTI 双沿触发、静默窗消抖与边沿可信度预算
+  - 决策说明: 读取仓库记忆后确认增强主题池尚未完全耗尽，其中 `硬件中断的边界：触发沿逻辑与信号消抖的博弈` 仍是从未写过的一级主题；虽然 `OpenMV 动态目标追踪与空域滤波算法` 也未使用，但本轮任务明确要求优先下探物理约束、时序边界和 STM32 HAL 风格代码展示，因此优先选择更适合把“阈值穿越抖动、EXTI 挂起位折叠、定时器静默窗确认与 CPU 负载预算”串成同一条实时链路的中断主题，确保与 `2026-07-03` 的 ADC/DMA 调度文章在问题域、公式、代码结构和工程失效模式上明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从模拟边沿回到数字事件契约”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `Delta t_jitter ~= DeltaV_noise / |dV/dt|`、`Tquiet >= Tbounce_max + Tsync + Tmargin`、`rho_raw = f_raw * t_exti_isr`、`Tpulse_min_trust > Tquiet + Tirq_block + Tsample_quantization` 展开，同时实现 EXTI 双沿原始记账、TIM6 一次性静默窗重装、稳定边沿队列化与 raw/stable 双时间戳分层。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/82/exti-dual-edge-quiet-window-debounce-and-edge-confidence-budget.md" "auto(blog): skill-exti-dual-edge-quiet-window-debounce-and-edge-confidence-budget"`
