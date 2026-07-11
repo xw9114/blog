@@ -519,3 +519,16 @@
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从可解矩阵回到可审计旋转合同”的叙述风格。
   - 实现约束: 代码采用 STM32 HAL 风格，围绕 `R_wc ~= R_wi * R_ic`、`R_ic_raw = R_wi^T * R_wc`、`δθ_yaw = (δθ · g_i) g_i`、`δθ_tilt = δθ - δθ_yaw`、`R_next = R_prev * exp([δθ]_x)` 与 `det(R) ~= 1` 展开，同时实现准静态门控、Gram-Schmidt 正交化、tilt/yaw 分解、yaw 可观测性评分门槛、单步修正限幅与在线诊断计数。
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/86/vision-imu-gravity-alignment-orthonormality-yaw-guard.md" "auto(blog): skill-vision-imu-gravity-alignment-orthonormality-and-yaw-observability-guard"`
+
+
+## 运行记录（UTF-8 追加）
+
+- 2026-07-11 09:09:50 +08:00
+  - 输出文章: `D:/blog/content/post/87/i2c-eeprom-page-boundary-ack-polling-and-repeated-start-atomicity.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: I2C/UART 通信协议底层逻辑
+  - 二级技术切面: I2C EEPROM 页写边界、ACK 轮询与重复起始的事务原子性
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生新的二级技术切面；考虑最近几篇文章依次覆盖了视觉、工业总线、高阶电机与控制维度，而 MCU 维度自 `2026-07-06` 以来未再展开，本轮优先回补技术跨度；在 `I2C/UART` 主题内，历史文章已经覆盖过协议总览、I2C 总线恢复、UART 过采样误码、RS-485 半双工切换与 UART DMA + IDLE 判帧，因此本轮刻意避开旧文已写过的“波形恢复”和“串口重同步”切口，转而聚焦“为什么 EEPROM 在线上看似写完、芯片内部却还没真正落盘”，把重心收敛到页边界回卷、ACK 轮询、repeated-start 原子读和地址字段映射这条更底层的隐藏从机状态机链路上，确保标题、slug、公式主线与代码结构都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从可见总线事务回到不可见页编程状态机合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `page_off = address mod page_size`、`chunk = min(length_remaining, page_size - page_off, block_remaining)`、`N_cycle = 1 + floor((o + L - 1) / P)`、`throughput_eff ≈ N_data / (bits_bus / fSCL + tWR)` 与 `dev7 = base7 | ((A >> word_addr_bits) & block_mask)` 展开，同时实现逻辑地址到设备地址/word address 的拆分、页写分块、ACK 轮询、跨 block 限幅与 repeated-start 随机读。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/87/i2c-eeprom-page-boundary-ack-polling-and-repeated-start-atomicity.md" "auto(blog): skill-i2c-eeprom-page-boundary-ack-polling-and-repeated-start-atomicity"`
