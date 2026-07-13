@@ -551,3 +551,14 @@
   - ????: ?? Hugo YAML Front Matter???????????????????????????????????????????????????
   - ????: ???? STM32 HAL ????? `W_ti = (W_to - 1) * Sx + Kx`?`H_ti = (H_to - 1) * Sy + Ky`?`B_total ? 2 * B_in_tile + 2 * B_out_tile + B_scratch + B_guard`?`T_steady ? max(T_in, T_compute, T_out)` ? `T_layer ? T_fill + N_tile * T_steady + T_drain` ????????? tile ???? halo?zero-point ??????? DMA ??/???ping-pong bank ??????????????
   - ????: ???????????????? `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/88/yolo-feature-map-tiling-double-buffer-dma-pipeline-closure.md" "auto(blog): skill-yolo-edge-feature-map-tiling-double-buffer-dma-and-operator-pipeline-closure"`
+
+
+- 2026-07-13 09:07:01 +08:00
+  - 输出文章: `D:/blog/content/post/89/foc-voltage-ellipse-field-weakening-and-negative-d-axis-current-scheduling.md`
+  - 技术维度: 高阶电机与运动控制算法 (Advanced Motion Control)
+  - 一级主题: FOC 磁场定向控制的核心：Clark 与 Park 变换的降维打击
+  - 二级技术切面: 基速以上的电压椭圆、弱磁控制与负 d 轴电流调度
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生新的二级技术切面；考虑最近五篇文章已经刚好轮转覆盖了工业总线、高阶电机、控制、MCU 与视觉，本轮在完成一轮全维度轮转后回到距离上次展开已 9 天的高阶电机维度，同时刻意避开历史文章已写过的电压圆限幅、单电阻采样、电流环离散化与时间戳对齐切口，转而聚焦“为什么电机一过基速，限制你的不再是电流 PI，而是电流平面里的电压椭圆与负 d 轴去磁调度”这条更底层的能量—磁链合同，确保标题、slug、公式主线与代码结构都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从 dq 电压方程回到高速区可兑现扭矩预算”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `v_d = R_s i_d - ω_e L_q i_q`、`v_q = R_s i_q + ω_e (ψ_f + L_d i_d)`、`v_d^2 + v_q^2 <= V_lim^2`、`i_q,max = sqrt(I_max^2 - i_d^2)`、`i_d,mtpa ≈ (ψ_f - sqrt(ψ_f^2 + 4ΔL^2 i_q^2)) / (2ΔL)` 与 `|Δi_d|max ≈ (V_lim / L_d) * T_s` 展开，同时实现 MTPA 迭代、弱磁电压余量 PI、负 d 轴限幅、电流圆约束、基于 `v = L di/dt` 的参考斜率限制与 HAL 定时回调集成。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/89/foc-voltage-ellipse-field-weakening-and-negative-d-axis-current-scheduling.md" "auto(blog): skill-foc-voltage-ellipse-field-weakening-and-negative-d-axis-current-scheduling"`
