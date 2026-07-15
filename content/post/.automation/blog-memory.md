@@ -562,3 +562,14 @@
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从 dq 电压方程回到高速区可兑现扭矩预算”的叙述风格。
   - 实现约束: 代码采用 STM32 HAL 风格，围绕 `v_d = R_s i_d - ω_e L_q i_q`、`v_q = R_s i_q + ω_e (ψ_f + L_d i_d)`、`v_d^2 + v_q^2 <= V_lim^2`、`i_q,max = sqrt(I_max^2 - i_d^2)`、`i_d,mtpa ≈ (ψ_f - sqrt(ψ_f^2 + 4ΔL^2 i_q^2)) / (2ΔL)` 与 `|Δi_d|max ≈ (V_lim / L_d) * T_s` 展开，同时实现 MTPA 迭代、弱磁电压余量 PI、负 d 轴限幅、电流圆约束、基于 `v = L di/dt` 的参考斜率限制与 HAL 定时回调集成。
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/89/foc-voltage-ellipse-field-weakening-and-negative-d-axis-current-scheduling.md" "auto(blog): skill-foc-voltage-ellipse-field-weakening-and-negative-d-axis-current-scheduling"`
+
+
+- 2026-07-15 09:07:24 +08:00
+  - 输出文章: `D:/blog/content/post/91/can-lec-fingerprint-timestamp-histogram-and-root-cause-traceback.md`
+  - 技术维度: 工业级总线与时序的物理契约 (Industrial Bus & Timing)
+  - 一级主题: CAN 总线仲裁的底层逻辑：从“线与”电路到非破坏性竞争
+  - 二级技术切面: LEC 最后错误码、时间戳错误直方图与物理层根因回推
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生新的二级技术切面；考虑最近几篇文章依次覆盖了高阶电机、视觉、MCU 与控制，而工业总线维度自 `2026-07-08` 以来未再展开，本轮优先回补技术跨度；在 CAN 主题内，历史文章已经覆盖了 ACK 重发截止期、SJW/采样点容差、位填充最坏响应时间、过滤器分桶与 FIFO 背压，以及更早期的位时序与 Bus-Off 恢复，因此本轮刻意避开旧文已写过的恢复与调度切口，转而聚焦“为什么同样是 CAN Error，中断里那一个 LEC 枚举能不能被还原成 dominant 注入、驱动不足、可达性缺失或周期性 EMI 的物理指纹”，确保标题、slug、公式主线与代码结构都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从错误枚举回到物理故障域”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL bxCAN 风格，围绕 `ρ_i = N_i / N_sum`、`r_trouble ≈ ΔTEC / (ΔREC + 1)`、`Δt_err[n] = t_err[n] - t_err[n-1]`、`f_suspect ≈ 10^6 / median(Δt_us)` 与 `score = clamp(1 - σ / (μ + ε), 0, 1)` 展开，同时实现 ESR 锁存、1 MHz 时间戳、发送上下文标记、错误直方图、周期性评分与根因域启发式分类。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/91/can-lec-fingerprint-timestamp-histogram-and-root-cause-traceback.md" "auto(blog): skill-can-lec-fingerprint-timestamp-histogram-and-root-cause-traceback"`
