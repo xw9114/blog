@@ -5,7 +5,7 @@ date: 2026-04-21T20:45:00+08:00
 draft: false
 description: "深度解析大模型从聊天机器人向智能体（Agent）进化的核心技术：AI Skill（工具/插件）的分类、底层调用逻辑及工程实践。"
 tags: ["AI", "Agent", "Function Calling", "大语言模型"]
-categories: ["技能档案"]
+categories: ["技能档案", "算法与人工智能"]
 image: ""
 ---
 

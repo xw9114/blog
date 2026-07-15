@@ -5,7 +5,7 @@ date: 2026-06-28T09:40:13+08:00
 draft: false
 description: "从 CPOL/CPHA 动态切换、SCK 空闲电平回归、片选前后静默窗到首位错采重读恢复，系统拆解一条 SPI 总线混挂不同模式从设备时为何最容易死在第一位。"
 tags: ["SPI", "STM32", "CPOL", "CPHA", "模式切换", "时序", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

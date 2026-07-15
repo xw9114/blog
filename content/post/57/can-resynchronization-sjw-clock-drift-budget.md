@@ -5,7 +5,7 @@ date: 2026-06-12T11:19:12+08:00
 draft: false
 description: "从传播延迟、采样点、重同步跳宽 SJW 到振荡器 ppm 预算，系统拆解 CAN 为什么常在长线、温漂与相位误差里失稳，而不是仲裁逻辑本身。"
 tags: ["CAN", "STM32", "bxCAN", "SJW", "位时序", "采样点", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

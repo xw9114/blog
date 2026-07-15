@@ -5,7 +5,7 @@ date: 2026-06-13T10:43:52+08:00
 draft: false
 description: "从传感器线性 RGB、白点增益、3x3 颜色校正矩阵到 CIE Lab ΔE 判别，系统拆解颜色识别为什么常死在光源迁移和颜色空间假设失配，而不是 HSV API。"
 tags: ["OpenCV", "颜色识别", "颜色校正", "Lab", "DeltaE", "机器视觉", "边缘计算"]
-categories: ["技能档案"]
+categories: ["技能档案", "机器视觉"]
 image: ""
 ---
 

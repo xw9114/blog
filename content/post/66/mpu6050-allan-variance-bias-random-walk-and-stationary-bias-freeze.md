@@ -5,7 +5,7 @@ date: 2026-06-20T10:51:14+08:00
 draft: false
 description: "从 MEMS 陀螺的角随机游走、零偏不稳定性与温漂，到 Allan 方差识别、静止门控与温度分段补偿，系统拆解 MPU6050 的零偏为什么是时间函数而不是常数。"
 tags: ["STM32", "MPU6050", "MEMS陀螺仪", "姿态解算", "Allan方差", "零偏校准"]
-categories: ["技能档案"]
+categories: ["技能档案", "控制与融合"]
 image: ""
 ---
 

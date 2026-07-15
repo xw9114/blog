@@ -26,10 +26,19 @@
     icon = "categories"
 
 [[main]]
+  identifier = "categories"
+  name       = "分类"
+  url        = "/categories/"
+  weight     = 4
+
+  [main.params]
+    icon = "tag"
+
+[[main]]
   identifier = "archives"
   name       = "归档"
   url        = "/archives/"
-  weight     = 4
+  weight     = 5
 
   [main.params]
     icon = "archives"
@@ -38,7 +47,7 @@
   identifier = "search"
   name       = "搜索"
   url        = "/search/"
-  weight     = 5
+  weight     = 6
 
   [main.params]
     icon = "search"
@@ -47,7 +56,7 @@
   identifier = "about"
   name       = "关于"
   url        = "/about/"
-  weight     = 6
+  weight     = 7
 
   [main.params]
     icon = "user"
@@ -56,7 +65,7 @@
   identifier = "links"
   name       = "链接"
   url        = "/links/"
-  weight     = 7
+  weight     = 8
 
   [main.params]
     icon = "link"

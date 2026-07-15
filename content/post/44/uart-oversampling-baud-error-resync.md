@@ -5,7 +5,7 @@ date: 2026-05-23T10:18:00+08:00
 draft: false
 description: "从起始位边沿、16 倍过采样、累计相位漂移到 IDLE 重同步，系统拆解 UART 为什么常死在时钟误差与帧边界恢复，而不是串口 API。"
 tags: ["UART", "STM32", "过采样", "波特率", "重同步", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

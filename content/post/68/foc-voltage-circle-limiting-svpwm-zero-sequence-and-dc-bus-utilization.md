@@ -5,7 +5,7 @@ date: 2026-06-22T10:12:21+08:00
 draft: false
 description: "从 dq 电压指令、两电平逆变器的六边形线性区到零序注入与抗饱和回写，系统拆解 FOC 为什么常死在可用母线电压而不是 Clarke/Park 公式。"
 tags: ["FOC", "STM32", "SVPWM", "PMSM", "零序注入", "母线利用率", "电压限幅"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制"]
 image: ""
 ---
 

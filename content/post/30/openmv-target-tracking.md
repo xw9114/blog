@@ -5,7 +5,7 @@ date: 2026-04-30T10:08:29+08:00
 draft: false
 description: "从曝光拖影、3x3 空域滤波、连通域矩到 alpha-beta 预测与 ROI 门控，系统拆解 OpenMV 动态目标追踪为何本质上是时空噪声管理。"
 tags: ["OpenMV", "STM32", "机器视觉", "目标追踪", "边缘计算"]
-categories: ["技能档案"]
+categories: ["技能档案", "机器视觉", "控制与融合"]
 image: ""
 ---
 

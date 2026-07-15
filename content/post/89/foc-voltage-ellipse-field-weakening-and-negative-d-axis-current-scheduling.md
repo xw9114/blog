@@ -5,7 +5,7 @@ date: 2026-07-13T09:07:01+08:00
 draft: false
 description: "从 PMSM 的 dq 电压方程、电压椭圆与基速边界，到负 d 轴去磁、MTPA 让位与弱磁 PI 余量闭环，系统拆解 FOC 为什么在高速区常败给母线电压而不是扭矩命令。"
 tags: ["FOC", "STM32", "PMSM", "弱磁控制", "电压椭圆", "负d轴", "电机控制"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制", "控制与融合"]
 image: ""
 ---
 

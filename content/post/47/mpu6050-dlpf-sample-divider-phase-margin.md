@@ -5,7 +5,7 @@ date: 2026-05-27T14:18:50+08:00
 draft: false
 description: "从陀螺 DLPF 群时延、SMPLRT_DIV 采样离散化到互补滤波交越频率，系统拆解姿态链路为什么常死在相位裕量，而不是精度标定。"
 tags: ["MPU6050", "STM32", "DLPF", "互补滤波", "相位裕量", "采样率", "姿态解算"]
-categories: ["技能档案"]
+categories: ["技能档案", "控制与融合"]
 image: ""
 ---
 

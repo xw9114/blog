@@ -5,7 +5,7 @@ date: 2026-07-03T09:45:54+08:00
 draft: false
 description: "从 PWM 中点采样、注入组抢占、JDR 与 DMA 双路径到模拟看门狗和软件关断时延，系统拆解一颗 STM32 ADC 如何在控制采样、后台监测与保护动作之间安排优先级。"
 tags: ["STM32", "ADC", "DMA", "注入组", "过流保护", "实时系统", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "嵌入式系统"]
 image: ""
 ---
 

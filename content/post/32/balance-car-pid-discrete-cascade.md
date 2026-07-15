@@ -5,7 +5,7 @@ date: 2026-05-05T15:38:34+08:00
 draft: false
 description: "从倒立摆线性化、姿态环位置式 PD、速度环增量式 PI 到 PWM 限幅与抗积分饱和，系统拆解平衡车 PID 为什么本质上是一场带宽分配。"
 tags: ["STM32", "PID", "平衡车", "离散控制", "运动控制"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制", "控制与融合"]
 image: ""
 ---
 

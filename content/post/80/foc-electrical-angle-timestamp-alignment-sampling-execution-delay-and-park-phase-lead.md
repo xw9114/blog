@@ -5,7 +5,7 @@ date: 2026-07-04T09:15:22+08:00
 draft: false
 description: "从 ADC 电流采样时刻、编码器角度快照、控制计算尾延迟到电角速度前馈预测，系统拆解 FOC 为什么常死在时间对齐而不是 PI 参数。"
 tags: ["FOC", "STM32", "PMSM", "Park 变换", "时间对齐", "相位前馈", "电机控制"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制", "控制与融合"]
 image: ""
 ---
 

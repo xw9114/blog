@@ -5,7 +5,7 @@ date: 2026-07-14T09:00:00+08:00
 draft: false
 description: "从镜像、容器、网络和数据卷出发，理解 Docker 的工作方式，并用一个实际示例完成构建、运行、调试和编排。"
 tags: ["Docker", "容器", "DevOps", "Linux", "Docker Compose"]
-categories: ["技能档案"]
+categories: ["技能档案", "工程实践"]
 image: ""
 ---
 

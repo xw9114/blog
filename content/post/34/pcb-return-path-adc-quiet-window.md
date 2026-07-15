@@ -5,7 +5,7 @@ date: 2026-05-07T09:59:38+08:00
 draft: false
 description: "从回流路径、开关节点 dV/dt、地弹噪声到 ADC 采样静默窗，系统拆解混合信号 PCB 为什么首先是一场寄生参数与时间窗预算。"
 tags: ["STM32", "PCB", "ADC", "EMI", "混合信号"]
-categories: ["技能档案"]
+categories: ["技能档案", "嵌入式系统"]
 image: ""
 ---
 

@@ -5,7 +5,7 @@ date: 2026-05-11T10:13:19+08:00
 draft: false
 description: "从采样点、SJW、振荡器漂移到 TEC/REC 与 Bus-Off 最小恢复时间，系统拆解 CAN 通信为什么首先是一份时钟误差与故障隔离合同。"
 tags: ["CAN", "STM32", "总线时序", "Bus-Off", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

@@ -5,7 +5,7 @@ date: 2026-04-23T09:03:50+08:00
 draft: false
 description: "从采样保持电容、通道排序、定时触发到环形 DMA 半缓冲处理，系统拆解 STM32 多通道 ADC 的模拟量搬运链路。"
 tags: ["STM32", "ADC", "DMA", "嵌入式", "数据采集"]
-categories: ["技能档案"]
+categories: ["技能档案", "嵌入式系统"]
 image: ""
 ---
 

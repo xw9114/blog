@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="55%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="600" fill="url(#bg)"/>
+  <g opacity="0.18" stroke="#ffffff" stroke-width="2" fill="none">
+    <circle cx="170" cy="120" r="54"/>
+    <circle cx="300" cy="150" r="22"/>
+    <circle cx="380" cy="104" r="14"/>
+    <path d="M170 120 L300 150 L380 104"/>
+    <rect x="710" y="110" width="150" height="92" rx="14"/>
+    <path d="M735 135h100M735 160h100M735 185h70"/>
+    <rect x="130" y="340" width="220" height="120" rx="18"/>
+    <path d="M160 370h140M160 398h160M160 426h100"/>
+    <rect x="610" y="330" width="250" height="140" rx="18"/>
+    <path d="M650 370c40-60 120-60 160 0"/>
+    <path d="M650 430l34-34 38 28 54-68"/>
+  </g>
+  <text x="72" y="470" fill="#ffffff" font-size="84" font-weight="700" font-family="Segoe UI, Microsoft YaHei, sans-serif">技能档案</text>
+  <text x="76" y="525" fill="#dbeafe" font-size="30" font-family="Segoe UI, Microsoft YaHei, sans-serif">嵌入式 · 控制 · 总线 · 系统实现</text>
+</svg>

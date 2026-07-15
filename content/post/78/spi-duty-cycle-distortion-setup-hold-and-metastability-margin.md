@@ -5,7 +5,7 @@ date: 2026-07-02T14:27:51+08:00
 draft: false
 description: "从 CPOL/CPHA 之外的半周期预算、板级飞行时间、主从建立保持边界到 STM32 上的安全分频选择，系统拆解 SPI 为什么会在示波器上看着正常、板上却偶发错位。"
 tags: ["STM32", "SPI", "CPOL/CPHA", "建立保持时间", "亚稳态", "时序分析", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

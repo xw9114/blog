@@ -5,7 +5,7 @@ date: 2026-04-22T10:21:42+08:00
 draft: false
 description: "从 H 桥导通路径、反电动势到 PWM 占空比补偿与换向死区，系统拆解 TB6612FNG 电机驱动的控制底层。"
 tags: ["嵌入式", "电机驱动", "TB6612FNG", "PWM", "控制系统"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制", "控制与融合"]
 image: ""
 ---
 

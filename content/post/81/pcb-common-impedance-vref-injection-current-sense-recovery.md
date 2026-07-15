@@ -5,7 +5,7 @@ date: 2026-07-05T11:42:18+08:00
 draft: false
 description: "从共阻抗地弹、开关节点对参考网络的回注，到电流采样运放过驱恢复和物理可达电流斜率门控，系统拆解混合信号 PCB 为何会把真实相电流读成伪瞬态。"
 tags: ["STM32", "PCB", "ADC", "VREFINT", "电流采样", "混合信号", "EMI"]
-categories: ["技能档案"]
+categories: ["技能档案", "嵌入式系统"]
 image: ""
 ---
 

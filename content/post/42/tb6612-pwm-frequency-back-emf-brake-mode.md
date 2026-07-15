@@ -5,7 +5,7 @@ date: 2026-05-17T09:32:00+08:00
 draft: false
 description: "从电枢电感、反电动势与续流路径出发，系统拆解 TB6612FNG 在 PWM 频率选择、动态刹车与反向切换中的物理约束。"
 tags: ["TB6612FNG", "STM32", "PWM", "电机驱动", "反电动势", "刹车模式", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制"]
 image: ""
 ---
 

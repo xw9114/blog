@@ -5,7 +5,7 @@ date: 2026-04-26T10:05:36+08:00
 draft: false
 description: "从 RC 上升沿、线与仲裁、时钟拉伸到 9 脉冲总线恢复，系统拆解 I2C 为何常败给物理边界而非寄存器配置。"
 tags: ["I2C", "STM32", "总线恢复", "时序", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

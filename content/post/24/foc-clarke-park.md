@@ -5,7 +5,7 @@ date: 2026-04-25T09:38:36+08:00
 draft: false
 description: "从三相电流约束、Clarke / Park 坐标变换到 d/q 电流 PI 闭环与母线电压限幅，系统拆解 FOC 如何把旋转磁场变成可调度的数字控制量。"
 tags: ["FOC", "STM32", "电机控制", "Clarke变换", "Park变换"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制", "控制与融合"]
 image: ""
 ---
 

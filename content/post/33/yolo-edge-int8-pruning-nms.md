@@ -5,7 +5,7 @@ date: 2026-05-06T10:11:17+08:00
 draft: false
 description: "从特征图带宽、结构化通道剪枝、INT8 量化映射到候选框解码与 NMS 尾延迟预算，系统拆解 YOLO 为什么在边缘端首先受制于内存与时序，而不是模型名气。"
 tags: ["STM32", "YOLO", "Edge AI", "INT8量化", "NMS"]
-categories: ["技能档案"]
+categories: ["技能档案", "算法与人工智能", "机器视觉"]
 image: ""
 ---
 

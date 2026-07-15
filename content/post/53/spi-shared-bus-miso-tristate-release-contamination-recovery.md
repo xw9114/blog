@@ -5,7 +5,7 @@ date: 2026-06-07T13:58:23+08:00
 draft: false
 description: "从 MISO 三态释放、片选撤销延迟、帧间保护时间到首字节污染恢复，系统拆解多从设备共享 SPI 为何本质上是一份总线所有权与时域交接合同。"
 tags: ["SPI", "STM32", "MISO", "总线共享", "时序", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

@@ -5,7 +5,7 @@ date: 2026-06-30T10:59:32+08:00
 draft: false
 description: "从 H 桥续流路径、快慢衰减、电感电流斜率到母线回灌与换向死区保护，系统拆解 TB6612FNG 的真正难点为什么从来不在 PWM 能不能转。"
 tags: ["STM32", "TB6612FNG", "直流电机", "H桥", "续流", "回灌保护"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制"]
 image: ""
 ---
 

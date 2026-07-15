@@ -5,7 +5,7 @@ date: 2026-05-13T09:04:13+08:00
 draft: false
 description: "从双目基线、极线校正、视差搜索到 Z = fB / d 的误差传播，系统拆解 OpenCV 双目标定为何本质上是在给深度估计做几何预算。"
 tags: ["OpenCV", "双目标定", "立体视觉", "深度重建", "误差传播"]
-categories: ["技能档案"]
+categories: ["技能档案", "机器视觉"]
 image: ""
 ---
 

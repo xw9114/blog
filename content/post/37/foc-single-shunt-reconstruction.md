@@ -5,7 +5,7 @@ date: 2026-05-12T09:58:08+08:00
 draft: false
 description: "从母线单电阻采样、PWM 有效窗口、死区电压误差到三相电流重构，系统拆解 FOC 为什么首先是一份时域预算与误差闭环合同。"
 tags: ["FOC", "STM32", "电机控制", "ADC", "PWM", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制", "控制与融合"]
 image: ""
 ---
 

@@ -5,7 +5,7 @@ date: 2026-07-11T09:03:29+08:00
 draft: false
 description: "从 EEPROM 页缓冲回卷、内部 tWR 忙周期、ACK 轮询到 repeated-start 读事务，系统拆解 I2C 为什么常败给“看不见的从机状态机”而不是 HAL 调用本身。"
 tags: ["I2C", "STM32", "EEPROM", "AT24Cxx", "重复起始", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

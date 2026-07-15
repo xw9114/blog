@@ -5,7 +5,7 @@ date: 2026-07-08T09:05:32+08:00
 draft: false
 description: "从标识符掩码、bxCAN 过滤器分桶、双 FIFO 背压到软队列过期丢弃，系统拆解 CAN 接收为什么常死在仲裁之后的资源隔离而非物理连线。"
 tags: ["CAN", "STM32", "bxCAN", "过滤器", "FIFO", "实时系统"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

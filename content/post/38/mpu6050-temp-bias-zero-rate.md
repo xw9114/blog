@@ -5,7 +5,7 @@ date: 2026-05-13T08:23:51+08:00
 draft: false
 description: "从 MEMS 温漂、静止窗口判定、零角速度约束到四元数离散积分，系统拆解 MPU6050 如何在长时运行中压住姿态漂移。"
 tags: ["MPU6050", "STM32", "IMU", "姿态解算", "零偏校准", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "控制与融合"]
 image: ""
 ---
 

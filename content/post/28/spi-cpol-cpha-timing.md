@@ -5,7 +5,7 @@ date: 2026-04-28T09:53:35+08:00
 draft: false
 description: "从空闲时钟、首边沿与次边沿、片选建立保持时间到 MISO/MOSI 有效窗口，系统拆解 SPI 四种模式如何把数字采样变成可验证的时域契约。"
 tags: ["SPI", "STM32", "时序", "数字通信", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

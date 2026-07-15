@@ -5,7 +5,7 @@ date: 2026-04-10T10:00:00+08:00
 draft: false
 description: "深度解析 SPI 高速全双工同步串行总线，从通俗的“专属内线”模型到四大工作模式（CPOL/CPHA）、时序控制及底层驱动代码实现。"
 tags: ["SPI", "嵌入式开发", "通信协议", "底层逻辑"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

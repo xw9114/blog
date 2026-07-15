@@ -5,7 +5,7 @@ date: 2026-04-22T10:00:31+08:00
 draft: false
 description: "从 CMOS 成像、颜色空间映射到形态学与轮廓矩，系统拆解 OpenCV 基础图像处理与颜色识别的工程链路。"
 tags: ["OpenCV", "计算机视觉", "图像处理", "颜色识别", "机器人"]
-categories: ["技能档案"]
+categories: ["技能档案", "机器视觉"]
 image: ""
 ---
 

@@ -5,7 +5,7 @@ date: 2026-04-06T10:00:00+08:00
 draft: false
 description: "博客搭建完成，记录一下搭建过程"
 tags: ["Hugo", "博客", "静态站点"]
-categories: ["教程"]
+categories: ["教程", "工程实践"]
 image: "cover.png"
 ---
 

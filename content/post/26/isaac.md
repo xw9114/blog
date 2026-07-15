@@ -5,7 +5,7 @@ date: 2026-04-26T19:07:00+08:00
 draft: false
 description: "掌握基于 NVIDIA PhysX 引擎的 GPU 加速仿真技术，实现数千个机器人实例在显存内的端到端并行训练。"
 tags: ["强化学习", "Isaac Gym", "机器人仿真"]
-categories: ["技能档案"]
+categories: ["技能档案", "算法与人工智能"]
 image: ""
 ---
 

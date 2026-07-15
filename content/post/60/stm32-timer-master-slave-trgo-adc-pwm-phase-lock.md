@@ -5,7 +5,7 @@ date: 2026-06-15T08:22:52+08:00
 draft: false
 description: "从更新事件、TRGO、从模式复位到采样静默窗预算，系统拆解 STM32 如何把 PWM 边沿、ADC 采样与控制周期锁进同一条硬件时间轴。"
 tags: ["STM32", "定时器", "TRGO", "ADC", "PWM", "主从同步", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "嵌入式系统"]
 image: ""
 ---
 

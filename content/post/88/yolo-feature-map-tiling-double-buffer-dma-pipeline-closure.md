@@ -5,7 +5,7 @@ date: 2026-07-12T09:03:11+08:00
 draft: false
 description: "从卷积 halo、SRAM 瓦片预算、双缓冲 DMA 重叠到 steady-state 吞吐公式，系统拆解边缘端 YOLO 为什么常败给特征图搬运而不是 MAC 数量本身。"
 tags: ["YOLO", "STM32", "Edge AI", "DMA", "双缓冲", "SRAM"]
-categories: ["技能档案"]
+categories: ["技能档案", "算法与人工智能", "机器视觉"]
 image: ""
 ---
 

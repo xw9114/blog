@@ -5,7 +5,7 @@ date: 2026-06-12T10:22:04+08:00
 draft: false
 description: "从差分线对占用权、DE/RE 翻转边界、TC 完帧时刻到 3.5 字符静默窗，系统拆解 RS-485 为什么常死在方向切换与回声污染，而不是 UART API。"
 tags: ["RS-485", "UART", "STM32", "半双工", "Modbus", "DMA", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

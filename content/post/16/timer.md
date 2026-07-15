@@ -5,7 +5,7 @@ date: 2026-04-21T21:24:46+08:00
 draft: false
 description: "从时钟树、预分频、更新事件到 NVIC 响应链路，系统拆解 STM32 硬件定时器与中断机制的实时控制本质。"
 tags: ["嵌入式", "STM32", "定时器", "中断", "实时系统"]
-categories: ["技能档案"]
+categories: ["技能档案", "嵌入式系统"]
 image: ""
 ---
 

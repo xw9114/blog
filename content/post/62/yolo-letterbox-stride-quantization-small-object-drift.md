@@ -5,7 +5,7 @@ date: 2026-06-17T09:04:56+08:00
 draft: false
 description: "从像素中心坐标、letterbox 逆仿射、stride 栅格分辨率到 INT8 回归误差上界，系统拆解边缘端 YOLO 为什么常不是没检出，而是框在小目标上持续漂移。"
 tags: ["YOLO", "Edge AI", "Letterbox", "量化", "坐标映射", "机器视觉", "边缘计算"]
-categories: ["技能档案"]
+categories: ["技能档案", "算法与人工智能", "机器视觉"]
 image: ""
 ---
 

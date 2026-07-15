@@ -5,7 +5,7 @@ date: 2026-06-13T10:42:47+08:00
 draft: false
 description: "从 PMSM dq 轴电压方程、采样周期离散化到 ωL 交叉耦合与 ψf 反电动势前馈，系统拆解 FOC 电流环为什么常死在高速区电压预算而不是 PI 参数表。"
 tags: ["FOC", "STM32", "PMSM", "电流环", "前馈", "离散控制", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制", "控制与融合"]
 image: ""
 ---
 

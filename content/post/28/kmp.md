@@ -5,7 +5,7 @@ date: 2026-04-27T21:05:00+08:00
 draft: false
 description: "深入剖析 KMP 算法的“对称美”，通过前缀表构建与破环成链技巧，解决高效字符串匹配与循环同构判定问题。"
 tags: ["算法", "KMP", "字符串"]
-categories: ["技能档案"]
+categories: ["技能档案", "算法与人工智能"]
 image: ""
 ---
 

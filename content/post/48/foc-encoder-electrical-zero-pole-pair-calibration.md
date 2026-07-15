@@ -5,7 +5,7 @@ date: 2026-05-28T18:05:16+08:00
 draft: false
 description: "从机械角到电角的映射、极对数误配到零电角偏差引发的 d/q 轴串扰，系统拆解 FOC 标定为什么首先是一份坐标合同。"
 tags: ["FOC", "STM32", "编码器", "零电角", "极对数", "Park变换", "PMSM"]
-categories: ["技能档案"]
+categories: ["技能档案", "电机控制", "控制与融合"]
 image: ""
 ---
 

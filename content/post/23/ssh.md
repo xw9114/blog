@@ -5,7 +5,7 @@ date: 2026-04-24T17:08:00+08:00
 draft: false
 description: "深入掌握 SSH 加密协议，实现对 Linux 嵌入式设备（如 MaixCAM、树莓派）的高效远程控、文件传输与自动化运维。"
 tags: ["SSH", "Linux", "嵌入式开发", "远程运维"]
-categories: ["技能档案"]
+categories: ["技能档案", "工程实践"]
 image: ""
 ---
 

@@ -5,7 +5,7 @@ date: 2026-07-15T09:07:24+08:00
 draft: false
 description: "从 bxCAN ESR 的 LEC 最后错误码、ACK/Stuff/Form/Bit/CRC 的位级语义，到时间戳错误直方图、周期干扰识别与根因域映射，系统拆解 CAN 调试为什么要先回答“哪一位在何时错了”，再谈重发或恢复。"
 tags: ["CAN", "STM32", "bxCAN", "LEC", "错误调试", "工业总线"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

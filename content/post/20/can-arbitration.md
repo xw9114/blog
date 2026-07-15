@@ -5,7 +5,7 @@ date: 2026-04-23T19:04:40+08:00
 draft: false
 description: "从显性/隐性位、同步采样点、位填充到错误封闭，系统拆解 CAN 总线为何能在冲突中完成非破坏性仲裁。"
 tags: ["CAN", "STM32", "总线", "工业通信", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

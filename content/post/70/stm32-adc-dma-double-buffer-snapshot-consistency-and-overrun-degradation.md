@@ -5,7 +5,7 @@ date: 2026-06-24T09:18:00+08:00
 draft: false
 description: "从采样保持、电荷注入、DMA half/full transfer 到控制环读取撕裂与降级策略，系统拆解多通道 ADC 双缓冲为何决定控制回路是否读到同一时刻的物理世界。"
 tags: ["STM32", "ADC", "DMA", "双缓冲", "控制系统", "实时系统", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "控制与融合"]
 image: ""
 ---
 

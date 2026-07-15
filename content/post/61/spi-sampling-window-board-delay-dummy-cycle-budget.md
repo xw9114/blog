@@ -5,7 +5,7 @@ date: 2026-06-16T08:31:15+08:00
 draft: false
 description: "从半周期采样窗、器件 tCO/tSU、板级传播延迟到首字节 Dummy Cycle 映射，系统拆解高速 SPI 读事务为什么常死在时域预算坍缩而不是模式编号。"
 tags: ["SPI", "STM32", "Dummy Cycle", "时序", "高速接口", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

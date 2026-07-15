@@ -5,7 +5,7 @@ date: 2026-05-16T10:04:10+08:00
 draft: false
 description: "从命令相位、Dummy Clock、DMA 搬运节拍、CS 保持时间到一字节回读错位恢复，系统拆解 SPI 连续事务为什么本质上是一份帧边界与采样相位合同。"
 tags: ["SPI", "STM32", "DMA", "时序", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 

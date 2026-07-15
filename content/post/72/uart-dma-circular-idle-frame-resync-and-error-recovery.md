@@ -5,7 +5,7 @@ date: 2026-06-27T14:59:56+08:00
 draft: false
 description: "从 UART 过采样、波特率误差、DMA 环形缓冲写指针到 IDLE 空闲线判帧与 ORE/FE 异常恢复，系统拆解异步串口在无帧时钟条件下如何维持边界与数据一致性。"
 tags: ["UART", "DMA", "STM32", "IDLE", "环形缓冲", "串口通信", "嵌入式"]
-categories: ["技能档案"]
+categories: ["技能档案", "工业通信"]
 image: ""
 ---
 
