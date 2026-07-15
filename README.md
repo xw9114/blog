@@ -61,6 +61,7 @@ http://localhost:1313/
 | --- | --- |
 | `AI_API_KEY` | AI 服务密钥，服务端读取，不暴露给浏览器。 |
 | `AI_MODEL` | 可选，覆盖默认模型名称。 |
+| `AI_API_ENDPOINT` | 可选，覆盖默认的 OpenAI-compatible API 地址。 |
 | `BLOG_AI_ALLOWED_ORIGIN` | 可选，限制允许调用 AI API 的站点来源。 |
 
 ## 怎么用
