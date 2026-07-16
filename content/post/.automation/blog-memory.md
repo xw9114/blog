@@ -573,3 +573,14 @@
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从错误枚举回到物理故障域”的叙述风格。
   - 实现约束: 代码采用 STM32 HAL bxCAN 风格，围绕 `ρ_i = N_i / N_sum`、`r_trouble ≈ ΔTEC / (ΔREC + 1)`、`Δt_err[n] = t_err[n] - t_err[n-1]`、`f_suspect ≈ 10^6 / median(Δt_us)` 与 `score = clamp(1 - σ / (μ + ε), 0, 1)` 展开，同时实现 ESR 锁存、1 MHz 时间戳、发送上下文标记、错误直方图、周期性评分与根因域启发式分类。
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/91/can-lec-fingerprint-timestamp-histogram-and-root-cause-traceback.md" "auto(blog): skill-can-lec-fingerprint-timestamp-histogram-and-root-cause-traceback"`
+
+
+- 2026-07-16 09:10:05 +08:00
+  - 输出文章: `D:/blog/content/post/skill-kalman-joseph-covariance-psd-guard-and-finite-precision-rounding/index.md`
+  - 技术维度: 控制理论与多维传感 (Control & Fusion)
+  - 一级主题: 卡尔曼滤波 (Kalman Filter) 的数学推演与先验信任
+  - 二级技术切面: Joseph 形式协方差更新、正定性守卫与有限字长舍入
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生新的二级技术切面；考虑最近五篇文章刚好完成了控制、MCU、视觉、高阶电机与工业总线的一轮轮转，而控制维度自 `2026-07-10` 以来未再展开，本轮优先回补技术跨度；在 Kalman 主题内，历史文章已经覆盖了连续噪声离散化与 `Q/R` 量纲统一、NIS 门控与协方差恢复、延迟测量与固定滞后回放，因此本轮刻意避开旧文已写过的“调参”和“异步观测”切口，转而聚焦“为什么同一套 Kalman 方程在 PC 上稳定、到了 float32 MCU 上却会因协方差数值退化而失真”这条更底层的数值合同链，确保标题、slug、公式主线与代码结构都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从协方差几何回到有限字长信任合同”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `Q_d = [[q_g Δt + q_b Δt^3 / 3, -q_b Δt^2 / 2], [-q_b Δt^2 / 2, q_b Δt]]`、`S = H P H^T + R`、`NIS = y^2 / S`、`P^+ = (I - K H) P^- (I - K H)^T + K R K^T` 与 `λ_min = 0.5 * [(a + d) - sqrt((a - d)^2 + 4 b^2)]` 展开，同时实现 2x2 协方差对称化、Joseph 更新、特征值地板 PSD 修复、角度环绕与 bias 限幅，以及基于 1 kHz 定时回调的 IMU 融合入口。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/skill-kalman-joseph-covariance-psd-guard-and-finite-precision-rounding/index.md" "auto(blog): skill-kalman-joseph-covariance-psd-guard-and-finite-precision-rounding"`
