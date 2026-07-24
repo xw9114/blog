@@ -584,3 +584,13 @@
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从协方差几何回到有限字长信任合同”的叙述风格。
   - 实现约束: 代码采用 STM32 HAL 风格，围绕 `Q_d = [[q_g Δt + q_b Δt^3 / 3, -q_b Δt^2 / 2], [-q_b Δt^2 / 2, q_b Δt]]`、`S = H P H^T + R`、`NIS = y^2 / S`、`P^+ = (I - K H) P^- (I - K H)^T + K R K^T` 与 `λ_min = 0.5 * [(a + d) - sqrt((a - d)^2 + 4 b^2)]` 展开，同时实现 2x2 协方差对称化、Joseph 更新、特征值地板 PSD 修复、角度环绕与 bias 限幅，以及基于 1 kHz 定时回调的 IMU 融合入口。
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/skill-kalman-joseph-covariance-psd-guard-and-finite-precision-rounding/index.md" "auto(blog): skill-kalman-joseph-covariance-psd-guard-and-finite-precision-rounding"`
+
+- 2026-07-24 22:20:31 +08:00
+  - 输出文章: `D:/blog/content/post/skill-stm32-adc-dma-dcache-coherency-half-transfer-and-cacheline-visibility/index.md`
+  - 技术维度: 嵌入式底层与系统架构 (MCU & Architecture)
+  - 一级主题: STM32 DMA 与多通道 ADC 的内存搬运哲学
+  - 二级技术切面: Cortex-M7 D-Cache 一致性、半传输提交与 Cache Line 可见性
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生新的二级技术切面；考虑最近一轮文章依次覆盖了 MCU、视觉、高阶电机、工业总线与控制，而 MCU 维度自 `2026-07-11` 以来未再展开，本轮优先回补技术跨度；在 `STM32 DMA 与多通道 ADC` 主题内，历史文章已经覆盖了源阻抗与通道串扰、双缓冲快照一致性与过载退化、注入组抢占与 regular DMA 背压，因此本轮刻意避开旧文已写过的“模拟误差链”和“提交语义”切口，转而聚焦“为什么 DMA 明明把样本搬进了 SRAM，控制环却仍然可能读到上一拍”这条更底层的 M7 缓存可见性合同，确保标题、slug、公式主线与代码结构都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从外设写入回到 CPU 可见性边界”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `A_inv = floor(A / L) * L`、`N_inv = ceil((A mod L + N) / L) * L`、`B_half = 2 * N_ch * N_f`、`T_half = N_f / f_seq`、`ρ_cache ~= T_invalidate / T_half` 与 `T_visible ~= T_dma_boundary + T_cache_maint + T_sched` 展开，同时实现 DMA 可达 SRAM 专区放置、启动前 `CleanInvalidate`、half/full transfer 回调中的 `Invalidate + DMB`、最新快照优先消费与 overwritten/stale 计数。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/skill-stm32-adc-dma-dcache-coherency-half-transfer-and-cacheline-visibility/index.md" "auto(blog): skill-stm32-adc-dma-dcache-coherency-half-transfer-and-cacheline-visibility"`
