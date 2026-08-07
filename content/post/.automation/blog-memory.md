@@ -594,3 +594,13 @@
   - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从外设写入回到 CPU 可见性边界”的叙述风格。
   - 实现约束: 代码采用 STM32 HAL 风格，围绕 `A_inv = floor(A / L) * L`、`N_inv = ceil((A mod L + N) / L) * L`、`B_half = 2 * N_ch * N_f`、`T_half = N_f / f_seq`、`ρ_cache ~= T_invalidate / T_half` 与 `T_visible ~= T_dma_boundary + T_cache_maint + T_sched` 展开，同时实现 DMA 可达 SRAM 专区放置、启动前 `CleanInvalidate`、half/full transfer 回调中的 `Invalidate + DMB`、最新快照优先消费与 overwritten/stale 计数。
   - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/skill-stm32-adc-dma-dcache-coherency-half-transfer-and-cacheline-visibility/index.md" "auto(blog): skill-stm32-adc-dma-dcache-coherency-half-transfer-and-cacheline-visibility"`
+
+- 2026-08-07 20:46:12 +08:00
+  - 输出文章: `D:/blog/content/post/skill-openmv-rolling-shutter-shear-second-moment-ellipse-and-subpixel-centroid-compensation/index.md`
+  - 技术维度: 机器视觉与边缘计算 (Vision & Edge AI)
+  - 一级主题: OpenMV 动态目标追踪与空域滤波算法
+  - 二级技术切面: 滚动快门行时差、二阶矩椭圆与亚像素质心补偿
+  - 决策说明: 一级主题池已全部覆盖，因此继续按兜底策略从已用一级主题派生新的二级技术切面；考虑最近一轮文章最后停在 MCU 维度，而视觉维度自 `2026-07-12` 的 YOLO pipeline 文章后未再展开，本轮优先回补技术跨度；在 `OpenMV 动态目标追踪` 主题内，历史文章已经覆盖了 ROI 门控、3x3 空域滤波、连通域矩质心与 alpha-beta 预测，因此本轮刻意避开旧文已写过的“算力收缩”和“轨迹门控”切口，转而聚焦高速运动下的滚动快门行时差、二阶矩形状退化与亚像素时间对齐，确保标题、slug、公式主线与代码结构都与历史文章明显区分。
+  - 风格约束: 延续 Hugo YAML Front Matter、技能概述、核心底层概念解析、代码能力展现四段结构，并保持“从逐行曝光回到可闭环测量时标”的叙述风格。
+  - 实现约束: 代码采用 STM32 HAL 风格，围绕 `t_row(y) = t_vsync + y * T_row + T_exp / 2`、`u = M10 / M00`、`v = M01 / M00`、`phi = 0.5 * atan2(2 * mu11, mu20 - mu02)`、`lambda_1,2 = 0.5 * [(mu20 + mu02) ± sqrt((mu20 - mu02)^2 + 4 * mu11^2)]`、`L_blur ~= sqrt(max(0, 12 * (lambda_1 - sigma_0^2)))` 与 `u_ref = u_raw + v_u * (t_ref - t_c)` 展开，同时实现 3x3 二项式滤波、超阈值加权矩、主轴椭圆估计、滚动快门时间对齐与形状门控。
+  - 提交动作: 完成文章与记忆写入后，按约定调用 `D:/blog/content/post/.automation/push-blog-auto.bat "content/post/skill-openmv-rolling-shutter-shear-second-moment-ellipse-and-subpixel-centroid-compensation/index.md" "auto(blog): skill-openmv-rolling-shutter-shear-second-moment-ellipse-and-subpixel-centroid-compensation"`
