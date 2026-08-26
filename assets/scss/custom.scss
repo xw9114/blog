@@ -612,7 +612,9 @@ $ref-accent: #17c48a;
 // ===== 个人资源库 =====
 
 .resource-library-page .main-container {
-    max-width: 1440px;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
 }
 
 .resource-library-page {
@@ -628,9 +630,9 @@ $ref-accent: #17c48a;
     --resource-rule: rgba(52, 68, 57, 0.16);
     --resource-surface: rgba(250, 249, 244, 0.92);
 
-    width: calc(100% - 2rem);
-    max-width: 1160px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
     padding: 2.8rem clamp(1.3rem, 3vw, 3rem) 4.5rem;
     border-inline: 1px solid var(--resource-rule);
     background: rgba(247, 248, 244, 0.68);
@@ -662,7 +664,7 @@ $ref-accent: #17c48a;
     h1 {
         max-width: 12ch;
         margin: 0.15rem 0 0;
-        font-size: clamp(2.45rem, 4vw, 4.15rem);
+        font-size: clamp(2.7rem, 4.6vw, 4.7rem);
         font-weight: 600;
         line-height: 0.98;
         letter-spacing: -0.045em;
@@ -682,7 +684,7 @@ $ref-accent: #17c48a;
     max-width: 42rem;
     margin: 1.15rem 0 0 3.2rem;
     color: var(--resource-muted);
-    font-size: 1.02rem;
+    font-size: 1.12rem;
     font-weight: 400;
     line-height: 1.75;
 }
@@ -712,7 +714,7 @@ $ref-accent: #17c48a;
         background: transparent;
         color: var(--resource-ink);
         font: inherit;
-        font-size: 0.93rem;
+        font-size: 1.04rem;
 
         &::placeholder {
             color: var(--resource-muted);
@@ -730,7 +732,7 @@ $ref-accent: #17c48a;
         border-radius: 4px;
         background: transparent;
         color: var(--resource-muted);
-        font: 500 0.72rem/1.2 var(--code-font-family);
+        font: 500 0.82rem/1.2 var(--code-font-family);
         text-align: center;
     }
 }
@@ -766,6 +768,12 @@ $ref-accent: #17c48a;
     padding-top: 2.2rem;
 }
 
+@media (min-width: 861px) {
+    .resource-library {
+        min-height: calc(100vh - 1rem);
+    }
+}
+
 .resource-index {
     align-self: start;
     position: sticky;
@@ -775,7 +783,7 @@ $ref-accent: #17c48a;
 .resource-index__label {
     margin: 0 0 1rem;
     color: var(--resource-muted);
-    font-size: 0.78rem;
+    font-size: 0.84rem;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -801,7 +809,7 @@ $ref-accent: #17c48a;
     color: var(--resource-muted);
     cursor: pointer;
     font: inherit;
-    font-size: 0.98rem;
+    font-size: 1.08rem;
     text-align: left;
     transition: color 150ms ease, padding 150ms ease;
 
@@ -839,7 +847,7 @@ $ref-accent: #17c48a;
 .resource-filter__count {
     color: var(--resource-muted);
     font-family: var(--code-font-family);
-    font-size: 0.76rem;
+    font-size: 0.82rem;
     font-weight: 400;
 }
 
@@ -867,7 +875,7 @@ $ref-accent: #17c48a;
     p {
         margin: 0;
         color: var(--resource-muted);
-        font: 500 0.72rem/1.4 var(--code-font-family);
+        font: 500 0.82rem/1.4 var(--code-font-family);
         letter-spacing: 0.04em;
     }
 }
@@ -883,7 +891,7 @@ $ref-accent: #17c48a;
     grid-template-columns: 2.1rem 3.2rem minmax(0, 1fr) auto;
     gap: 1.15rem;
     align-items: start;
-    padding: 1.5rem 0;
+    padding: 1.8rem 0;
     border-bottom: 1px solid var(--resource-rule);
     transition: background 220ms ease, padding 220ms ease;
 
@@ -954,7 +962,7 @@ $ref-accent: #17c48a;
 
     h2 {
         margin: 0;
-        font-size: 1.22rem;
+        font-size: 1.34rem;
         font-weight: 600;
         line-height: 1.35;
 
@@ -984,7 +992,7 @@ $ref-accent: #17c48a;
 .resource-item__content > p {
     margin: 0.48rem 0 0;
     color: var(--resource-muted);
-    font-size: 0.98rem;
+    font-size: 1.08rem;
     line-height: 1.68;
 }
 
@@ -1002,7 +1010,7 @@ $ref-accent: #17c48a;
 
     > span {
         color: var(--resource-moss);
-        font-size: 0.76rem;
+        font-size: 0.84rem;
         font-weight: 500;
 
         &::before {
@@ -1050,7 +1058,7 @@ $ref-accent: #17c48a;
     align-items: center;
     margin-top: 0.78rem;
     color: var(--resource-accent);
-    font-size: 0.76rem;
+    font-size: 0.88rem;
     font-weight: 600;
     text-decoration: none;
 
@@ -1174,7 +1182,7 @@ $ref-accent: #17c48a;
 
 @media (max-width: 580px) {
     .resource-library {
-        width: calc(100% - 2rem);
+        width: 100%;
         padding-top: 2rem;
     }
 
