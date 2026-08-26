@@ -1,0 +1,178 @@
+{{ define "body-class" }}resource-library-page{{ end }}
+
+{{ define "right-sidebar" }}{{ end }}
+
+{{ define "main" }}
+{{ $library := hugo.Data.resources }}
+{{ $items := $library.items | default (slice) }}
+<main class="resource-library" data-resource-library>
+    <header class="resource-library__header">
+        <div class="resource-library__heading">
+            <p class="resource-library__eyebrow">COLLECTION / {{ len $items }} ITEMS</p>
+            <h1>{{ .Title }}</h1>
+            {{ with .Description }}<p class="resource-library__intro">{{ . }}</p>{{ end }}
+        </div>
+
+        <label class="resource-search">
+            <span class="resource-search__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+            </span>
+            <span class="sr-only">搜索资源</span>
+            <input type="search" placeholder="搜索名称、简介或标签" autocomplete="off" data-resource-search>
+            <kbd>/</kbd>
+        </label>
+    </header>
+
+    <div class="resource-library__body">
+        <aside class="resource-index" aria-label="资源分类">
+            <p class="resource-index__label">分类索引</p>
+            <nav class="resource-index__nav">
+                {{ range $library.categories }}
+                {{ $count := len (where $items "category" .id) }}
+                {{ if eq .id "all" }}{{ $count = len $items }}{{ end }}
+                <button type="button" class="resource-filter{{ if eq .id "all" }} is-active{{ end }}" data-resource-filter="{{ .id }}">
+                    <span>{{ .name }}</span>
+                    <span class="resource-filter__count">{{ printf "%02d" $count }}</span>
+                </button>
+                {{ end }}
+            </nav>
+            <p class="resource-index__hint">内容维护于<br><code>data/resources.yaml</code></p>
+        </aside>
+
+        <section class="resource-collection" aria-live="polite">
+            <div class="resource-collection__bar">
+                <p><span data-resource-visible>{{ len $items }}</span> 项资源</p>
+                <p>最后检查 · {{ now.Format "2006.01" }}</p>
+            </div>
+
+            <div class="resource-list" data-resource-list>
+                {{ range $index, $item := $items }}
+                {{ $isExternal := strings.HasPrefix $item.url "http" }}
+                <article class="resource-item{{ if $item.featured }} resource-item--featured{{ end }}"
+                    data-resource-item
+                    data-category="{{ $item.category }}"
+                    data-search="{{ lower (printf "%s %s %s" $item.title $item.description (delimit ($item.tags | default (slice)) " ")) }}">
+                    <div class="resource-item__number">{{ printf "%02d" (add $index 1) }}</div>
+                    <div class="resource-item__mark resource-item__mark--{{ $item.kind | default "website" }}" aria-hidden="true">
+                        {{ if eq $item.kind "cloud" }}
+                        <svg viewBox="0 0 24 24"><path d="M7.5 18.5h10a4 4 0 0 0 .6-8A6.2 6.2 0 0 0 6.3 9.2a4.7 4.7 0 0 0 1.2 9.3Z"></path><path d="m9.5 14 2.5 2.5 2.5-2.5M12 10v6"></path></svg>
+                        {{ else if eq $item.kind "tool" }}
+                        <svg viewBox="0 0 24 24"><path d="m14.7 6.3 3-3a5 5 0 0 1-6.4 6.4l-6.6 6.6a2.1 2.1 0 0 0 3 3l6.6-6.6a5 5 0 0 0 6.4-6.4l-3 3Z"></path></svg>
+                        {{ else if eq $item.kind "internal" }}
+                        <svg viewBox="0 0 24 24"><path d="M5 4.5h10.5A3.5 3.5 0 0 1 19 8v11.5H8.5A3.5 3.5 0 0 1 5 16Z"></path><path d="M8.5 16H19M9 8h6M9 11h4"></path></svg>
+                        {{ else }}
+                        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.1 1.1"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1"></path></svg>
+                        {{ end }}
+                    </div>
+
+                    <div class="resource-item__content">
+                        <div class="resource-item__title-line">
+                            <h2><a href="{{ $item.url | safeURL }}"{{ if $isExternal }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ $item.title }}</a></h2>
+                            {{ if $item.featured }}<span class="resource-item__featured">置顶</span>{{ end }}
+                        </div>
+                        <p>{{ $item.description }}</p>
+                        {{ with $item.note }}<p class="resource-item__note">{{ . }}</p>{{ end }}
+                        <div class="resource-item__meta">
+                            {{ range $item.tags }}<span>{{ . }}</span>{{ end }}
+                            {{ with $item.access_code }}
+                            <button type="button" class="resource-code" data-copy-code="{{ . }}" title="复制提取码">
+                                提取码 <strong>{{ . }}</strong><span>复制</span>
+                            </button>
+                            {{ end }}
+                        </div>
+                    </div>
+
+                    <a class="resource-item__open" href="{{ $item.url | safeURL }}"{{ if $isExternal }} target="_blank" rel="noopener noreferrer"{{ end }} aria-label="打开 {{ $item.title }}">
+                        <span>{{ if $isExternal }}访问{{ else }}查看{{ end }}</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M14 7l5 5-5 5"></path></svg>
+                    </a>
+                </article>
+                {{ end }}
+            </div>
+
+            <div class="resource-empty" data-resource-empty hidden>
+                <span>未找到</span>
+                <h2>这里暂时没有匹配的资源</h2>
+                <p>换个关键词，或回到“全部资源”继续看看。</p>
+                <button type="button" data-resource-reset>清除筛选</button>
+            </div>
+        </section>
+    </div>
+</main>
+{{ partialCached "footer/footer" . }}
+
+<script>
+(function () {
+    var root = document.querySelector('[data-resource-library]');
+    if (!root) return;
+
+    var input = root.querySelector('[data-resource-search]');
+    var items = Array.prototype.slice.call(root.querySelectorAll('[data-resource-item]'));
+    var filters = Array.prototype.slice.call(root.querySelectorAll('[data-resource-filter]'));
+    var visible = root.querySelector('[data-resource-visible]');
+    var empty = root.querySelector('[data-resource-empty]');
+    var activeCategory = 'all';
+
+    function normalize(value) {
+        return (value || '').toLocaleLowerCase().trim();
+    }
+
+    function update() {
+        var query = normalize(input.value);
+        var count = 0;
+
+        items.forEach(function (item) {
+            var matchesCategory = activeCategory === 'all' || item.dataset.category === activeCategory;
+            var matchesQuery = !query || normalize(item.dataset.search).indexOf(query) !== -1;
+            var show = matchesCategory && matchesQuery;
+            item.hidden = !show;
+            if (show) count += 1;
+        });
+
+        visible.textContent = count;
+        empty.hidden = count !== 0;
+    }
+
+    filters.forEach(function (button) {
+        button.addEventListener('click', function () {
+            activeCategory = button.dataset.resourceFilter;
+            filters.forEach(function (candidate) {
+                candidate.classList.toggle('is-active', candidate === button);
+            });
+            update();
+        });
+    });
+
+    input.addEventListener('input', update);
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === '/' && document.activeElement !== input && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) {
+            event.preventDefault();
+            input.focus();
+        }
+    });
+
+    root.querySelector('[data-resource-reset]').addEventListener('click', function () {
+        activeCategory = 'all';
+        input.value = '';
+        filters.forEach(function (button) {
+            button.classList.toggle('is-active', button.dataset.resourceFilter === 'all');
+        });
+        update();
+        input.focus();
+    });
+
+    root.querySelectorAll('[data-copy-code]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var code = button.dataset.copyCode;
+            if (!navigator.clipboard) return;
+            navigator.clipboard.writeText(code).then(function () {
+                var label = button.querySelector('span');
+                label.textContent = '已复制';
+                window.setTimeout(function () { label.textContent = '复制'; }, 1400);
+            });
+        });
+    });
+})();
+</script>
+{{ end }}

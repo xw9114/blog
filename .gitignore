@@ -1,5 +1,9 @@
 public/
 resources/
+!content/resources/
+!content/resources/**
+!layouts/resources/
+!layouts/resources/**
 .hugo_build.lock
 themes/LoveIt/
 .img2ref.json
