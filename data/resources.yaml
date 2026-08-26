@@ -1,5 +1,5 @@
 # 资源库数据。新增资源时复制一个 item，并填写对应字段即可。
-# kind 可用：cloud（网盘）、tool（工具）、document（文档）、website（网站）、internal（站内）
+# kind 可用：cloud（网盘）、tool（工具）、document（文档）、website（网站）
 # access_code、note、featured、tags 都是可选字段。
 
 categories:
@@ -11,31 +11,7 @@ categories:
     name: 工具与服务
   - id: learning
     name: 学习收藏
-  - id: internal
-    name: 站内索引
-
-items:
-  - title: 参考速查
-    description: 编程、算法与工程知识的短篇速查手册。
-    url: /reference/
-    category: internal
-    kind: internal
-    tags: [速查, 编程]
-    featured: true
-
-  - title: 知识笔记
-    description: 按主题整理的长期笔记与知识脉络。
-    url: /notes/
-    category: internal
-    kind: internal
-    tags: [笔记, 知识]
-
-  - title: 文章归档
-    description: 按时间浏览月栖之地的全部文章。
-    url: /archives/
-    category: internal
-    kind: internal
-    tags: [文章, 归档]
+items: []
 
 # 网盘资源示例（去掉每行开头的 # 后，替换为你的真实信息）：
 #  - title: 嵌入式学习资料包

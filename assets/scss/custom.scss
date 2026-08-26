@@ -801,7 +801,7 @@ $ref-accent: #17c48a;
     gap: 1rem;
     align-items: baseline;
     width: 100%;
-    padding: 0.72rem 0;
+    padding: 1rem 0;
     border: 0;
     border-bottom: 1px solid var(--resource-rule);
     outline: 0;
@@ -847,14 +847,14 @@ $ref-accent: #17c48a;
 .resource-filter__count {
     color: var(--resource-muted);
     font-family: var(--code-font-family);
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     font-weight: 400;
 }
 
 .resource-index__hint {
-    margin: 2.2rem 0 0;
+    margin: 2.8rem 0 0;
     color: var(--resource-muted);
-    font-size: 0.72rem;
+    font-size: 0.8rem;
     line-height: 1.65;
 
     code {
