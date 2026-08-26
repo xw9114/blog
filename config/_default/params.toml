@@ -75,5 +75,10 @@ SortBy         = "default"
   indexSections = ["post", "reference"]
   contextLimit = 6
 
+[resources]
+  # 前端口令门槛；静态站点无法替代服务器鉴权，请勿用于真正的机密资料。
+  password     = "moon-archive"
+  sessionHours = 8
+
 [comments]
   enabled = false

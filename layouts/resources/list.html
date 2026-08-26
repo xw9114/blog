@@ -5,8 +5,25 @@
 {{ define "main" }}
 {{ $library := hugo.Data.resources }}
 {{ $items := $library.items | default (slice) }}
-<main class="resource-library" data-resource-library>
-    <header class="resource-library__header">
+{{ $passcode := .Site.Params.resources.password | default "moon-archive" }}
+{{ $passcodeHash := sha256 $passcode }}
+{{ $sessionHours := .Site.Params.resources.sessionHours | default 8 }}
+<main class="resource-library" data-resource-library data-resource-password-hash="{{ $passcodeHash }}" data-resource-session-hours="{{ $sessionHours }}">
+    <section class="resource-lock" data-resource-lock>
+        <p class="resource-lock__eyebrow">PRIVATE INDEX / LOCKED</p>
+        <h1>资源库已锁定</h1>
+        <p>输入口令后查看网盘资料、工具链接与学习收藏。</p>
+        <form class="resource-lock__form" data-resource-unlock-form>
+            <label for="resource-passcode">访问口令</label>
+            <div class="resource-lock__input-row">
+                <input id="resource-passcode" type="password" autocomplete="current-password" placeholder="输入口令" data-resource-passcode required>
+                <button type="submit">解锁</button>
+            </div>
+            <p class="resource-lock__status" data-resource-lock-status role="status" aria-live="polite"></p>
+        </form>
+    </section>
+
+    <header class="resource-library__header" data-resource-content hidden>
         <div class="resource-library__heading">
             <p class="resource-library__eyebrow">COLLECTION / {{ len $items }} ITEMS</p>
             <h1>{{ .Title }}</h1>
@@ -23,7 +40,7 @@
         </label>
     </header>
 
-    <div class="resource-library__body">
+    <div class="resource-library__body" data-resource-content hidden>
         <aside class="resource-index" aria-label="资源分类">
             <p class="resource-index__label">分类索引</p>
             <nav class="resource-index__nav">
@@ -106,12 +123,76 @@
     var root = document.querySelector('[data-resource-library]');
     if (!root) return;
 
+    var lock = root.querySelector('[data-resource-lock]');
+    var unlockForm = root.querySelector('[data-resource-unlock-form]');
+    var passcodeInput = root.querySelector('[data-resource-passcode]');
+    var lockStatus = root.querySelector('[data-resource-lock-status]');
+    var protectedContent = Array.prototype.slice.call(root.querySelectorAll('[data-resource-content]'));
+    var expectedHash = root.dataset.resourcePasswordHash;
+    var sessionHours = Number(root.dataset.resourceSessionHours) || 8;
+
     var input = root.querySelector('[data-resource-search]');
     var items = Array.prototype.slice.call(root.querySelectorAll('[data-resource-item]'));
     var filters = Array.prototype.slice.call(root.querySelectorAll('[data-resource-filter]'));
     var visible = root.querySelector('[data-resource-visible]');
     var empty = root.querySelector('[data-resource-empty]');
     var activeCategory = 'all';
+
+    function hashPasscode(value) {
+        if (!window.crypto || !window.crypto.subtle || !window.TextEncoder) {
+            return Promise.reject(new Error('当前浏览器不支持安全校验'));
+        }
+        return window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(value)).then(function (buffer) {
+            return Array.prototype.map.call(new Uint8Array(buffer), function (byte) {
+                return byte.toString(16).padStart(2, '0');
+            }).join('');
+        });
+    }
+
+    function unlock() {
+        lock.hidden = true;
+        protectedContent.forEach(function (section) { section.hidden = false; });
+        root.classList.add('is-unlocked');
+        try {
+            localStorage.setItem('resource-library-unlocked', String(Date.now()));
+        } catch (error) {
+            // 隐私模式下无法使用 localStorage 时，仍允许本次查看。
+        }
+        update();
+    }
+
+    function showLockError(message) {
+        lockStatus.textContent = message;
+        lockStatus.classList.add('is-error');
+        passcodeInput.select();
+    }
+
+    unlockForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var submitButton = unlockForm.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        lockStatus.classList.remove('is-error');
+        lockStatus.textContent = '正在验证…';
+        hashPasscode(passcodeInput.value).then(function (hash) {
+            if (hash !== expectedHash) {
+                throw new Error('口令不正确');
+            }
+            unlock();
+        }).catch(function (error) {
+            showLockError(error.message === '口令不正确' ? error.message : '暂时无法完成验证，请更换浏览器后重试');
+        }).finally(function () {
+            submitButton.disabled = false;
+        });
+    });
+
+    try {
+        var unlockedAt = Number(localStorage.getItem('resource-library-unlocked'));
+        if (unlockedAt && Date.now() - unlockedAt < sessionHours * 60 * 60 * 1000) {
+            unlock();
+        }
+    } catch (error) {
+        // 隐私模式下跳过自动解锁。
+    }
 
     function normalize(value) {
         return (value || '').toLocaleLowerCase().trim();
@@ -174,7 +255,9 @@
         });
     });
 
-    update();
+    if (!root.classList.contains('is-unlocked')) {
+        passcodeInput.focus();
+    }
 })();
 </script>
 {{ end }}
