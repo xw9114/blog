@@ -615,30 +615,38 @@ $ref-accent: #17c48a;
     max-width: 1440px;
 }
 
+.resource-library-page {
+    --site-background-image-opacity: 0.04;
+}
+
 .resource-library {
     --resource-ink: #29332d;
-    --resource-muted: #737b73;
+    --resource-muted: #4f5d52;
     --resource-accent: #a35f35;
     --resource-accent-soft: rgba(163, 95, 53, 0.09);
     --resource-moss: #627765;
     --resource-rule: rgba(52, 68, 57, 0.16);
-    --resource-surface: rgba(250, 249, 244, 0.62);
+    --resource-surface: rgba(250, 249, 244, 0.92);
 
-    width: calc(100% - 3rem);
+    width: calc(100% - 2rem);
     max-width: 1160px;
     margin: 0 auto;
-    padding: 3.2rem 0 4.5rem;
+    padding: 2.8rem clamp(1.3rem, 3vw, 3rem) 4.5rem;
+    border-inline: 1px solid var(--resource-rule);
+    background: rgba(247, 248, 244, 0.68);
+    backdrop-filter: blur(2px);
     color: var(--resource-ink);
 }
 
 [data-scheme="dark"] .resource-library {
     --resource-ink: #e6e9e2;
-    --resource-muted: #9da69d;
+    --resource-muted: #b9c2b9;
     --resource-accent: #d08b5c;
     --resource-accent-soft: rgba(208, 139, 92, 0.11);
     --resource-moss: #9cb09e;
     --resource-rule: rgba(220, 230, 220, 0.14);
-    --resource-surface: rgba(30, 35, 30, 0.58);
+    --resource-surface: rgba(30, 35, 30, 0.88);
+    background: rgba(30, 35, 30, 0.76);
 }
 
 .resource-library__header {
@@ -654,7 +662,7 @@ $ref-accent: #17c48a;
     h1 {
         max-width: 12ch;
         margin: 0.15rem 0 0;
-        font-size: clamp(2.7rem, 5vw, 4.9rem);
+        font-size: clamp(2.45rem, 4vw, 4.15rem);
         font-weight: 600;
         line-height: 0.98;
         letter-spacing: -0.045em;
@@ -754,7 +762,7 @@ $ref-accent: #17c48a;
 .resource-library__body {
     display: grid;
     grid-template-columns: 210px minmax(0, 1fr);
-    gap: clamp(2.5rem, 6vw, 6.5rem);
+    gap: clamp(2rem, 4vw, 3.5rem);
     padding-top: 2.2rem;
 }
 
@@ -767,7 +775,7 @@ $ref-accent: #17c48a;
 .resource-index__label {
     margin: 0 0 1rem;
     color: var(--resource-muted);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -793,7 +801,7 @@ $ref-accent: #17c48a;
     color: var(--resource-muted);
     cursor: pointer;
     font: inherit;
-    font-size: 0.92rem;
+    font-size: 0.98rem;
     text-align: left;
     transition: color 150ms ease, padding 150ms ease;
 
@@ -831,7 +839,7 @@ $ref-accent: #17c48a;
 .resource-filter__count {
     color: var(--resource-muted);
     font-family: var(--code-font-family);
-    font-size: 0.7rem;
+    font-size: 0.76rem;
     font-weight: 400;
 }
 
@@ -946,7 +954,7 @@ $ref-accent: #17c48a;
 
     h2 {
         margin: 0;
-        font-size: 1.08rem;
+        font-size: 1.22rem;
         font-weight: 600;
         line-height: 1.35;
 
@@ -976,8 +984,8 @@ $ref-accent: #17c48a;
 .resource-item__content > p {
     margin: 0.48rem 0 0;
     color: var(--resource-muted);
-    font-size: 0.88rem;
-    line-height: 1.62;
+    font-size: 0.98rem;
+    line-height: 1.68;
 }
 
 .resource-item__note {
@@ -994,7 +1002,7 @@ $ref-accent: #17c48a;
 
     > span {
         color: var(--resource-moss);
-        font-size: 0.68rem;
+        font-size: 0.76rem;
         font-weight: 500;
 
         &::before {
@@ -1017,7 +1025,7 @@ $ref-accent: #17c48a;
     background: transparent;
     color: var(--resource-muted);
     cursor: pointer;
-    font: 400 0.67rem/1.2 var(--code-font-family);
+    font: 400 0.74rem/1.2 var(--code-font-family);
 
     strong {
         color: var(--resource-ink);
