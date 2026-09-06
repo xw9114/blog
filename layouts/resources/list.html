@@ -108,10 +108,16 @@
             </div>
 
             <div class="resource-empty" data-resource-empty hidden>
+                {{ if eq (len $items) 0 }}
+                <span>待收录</span>
+                <h2>资源正在整理中</h2>
+                <p>新的网盘资料、工具链接与学习收藏会陆续放到这里。</p>
+                {{ else }}
                 <span>未找到</span>
                 <h2>这里暂时没有匹配的资源</h2>
                 <p>换个关键词，或回到“全部资源”继续看看。</p>
                 <button type="button" data-resource-reset>清除筛选</button>
+                {{ end }}
             </div>
         </section>
     </div>
@@ -233,15 +239,18 @@
         }
     });
 
-    root.querySelector('[data-resource-reset]').addEventListener('click', function () {
-        activeCategory = 'all';
-        input.value = '';
-        filters.forEach(function (button) {
-            button.classList.toggle('is-active', button.dataset.resourceFilter === 'all');
+    var resetButton = root.querySelector('[data-resource-reset]');
+    if (resetButton) {
+        resetButton.addEventListener('click', function () {
+            activeCategory = 'all';
+            input.value = '';
+            filters.forEach(function (button) {
+                button.classList.toggle('is-active', button.dataset.resourceFilter === 'all');
+            });
+            update();
+            input.focus();
         });
-        update();
-        input.focus();
-    });
+    }
 
     root.querySelectorAll('[data-copy-code]').forEach(function (button) {
         button.addEventListener('click', function () {

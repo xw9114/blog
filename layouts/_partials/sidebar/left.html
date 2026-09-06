@@ -1,27 +1,6 @@
 <aside class="sidebar left-sidebar sticky {{ if .Site.Params.sidebar.compact }}compact{{ end }}">
-    {{- $sidebarTitle := .Site.Title -}}
-    {{- $sidebarSubtitle := .Site.Params.sidebar.subtitle -}}
-    {{- if .IsHome -}}
-        {{- with .Site.Params.sidebar.homeTitle -}}
-            {{- $sidebarTitle = . -}}
-        {{- end -}}
-        {{- with .Site.Params.sidebar.homeSubtitle -}}
-            {{- $sidebarSubtitle = . -}}
-        {{- end -}}
-    {{- else -}}
-        {{- with .Title -}}
-            {{- $sidebarTitle = . -}}
-        {{- end -}}
-        {{- with .Params.sidebarTitle -}}
-            {{- $sidebarTitle = . -}}
-        {{- end -}}
-        {{- with .Description -}}
-            {{- $sidebarSubtitle = . -}}
-        {{- end -}}
-        {{- with .Params.sidebarSubtitle -}}
-            {{- $sidebarSubtitle = . -}}
-        {{- end -}}
-    {{- end -}}
+    {{- $sidebarTitle := .Site.Params.sidebar.homeTitle | default .Site.Title -}}
+    {{- $sidebarSubtitle := .Site.Params.sidebar.homeSubtitle | default .Site.Params.sidebar.subtitle -}}
 
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="{{ T `toggleMenu` }}">
         <span class="hamburger-box">

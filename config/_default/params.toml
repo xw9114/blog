@@ -50,7 +50,7 @@ SortBy         = "default"
     enabled = true
 
 [backgrounds]
-  opacity = 0.30
+  opacity = 0.18
 
   [backgrounds.pages]
     "/"           = "/images/backgrounds/nav/home-fuji.jpg"

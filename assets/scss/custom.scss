@@ -99,6 +99,51 @@ body > * {
     box-shadow: none;
 }
 
+.article-list {
+    .article-subtitle {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .article-tags {
+        gap: 0.8rem;
+
+        a {
+            padding: 0.55rem 1rem;
+            border: 1px solid var(--card-separator-color);
+            border-radius: 4px;
+            background: rgba(247, 248, 244, 0.72);
+            color: var(--card-text-color-secondary);
+            transition: border-color 150ms ease, color 150ms ease, transform 150ms ease;
+
+            &:hover,
+            &:focus-visible {
+                border-color: var(--accent-color);
+                background: var(--card-background);
+                color: var(--card-text-color-main);
+                transform: translateY(-1px);
+            }
+        }
+    }
+}
+
+[data-scheme="dark"] .article-list .article-tags a {
+    background: rgba(32, 36, 31, 0.72);
+}
+
+.article-tags__more {
+    display: inline-flex;
+    min-width: 2.8rem;
+    min-height: 2.8rem;
+    align-items: center;
+    justify-content: center;
+    color: var(--card-text-color-secondary);
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
 // 限制文章列表封面图高度，防止图片过大撑开卡片
 .article-image {
     img {
@@ -112,113 +157,143 @@ body > * {
 // ===== 知识参考速查列表页 =====
 
 .ref-list-container {
-    max-width: 960px;
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 2rem 1.5rem 3rem;
+    padding: 3.5rem 2.4rem 4rem;
 }
 
 .ref-list-header {
-    text-align: center;
-    padding: 2.5rem 0 3rem;
+    padding: 2rem 0 2.4rem;
+    border-bottom: 1px solid var(--card-separator-color);
+    text-align: left;
 
     h1 {
-        font-size: 2.2rem;
-        font-weight: 700;
+        font-size: 3.2rem;
+        font-weight: 600;
+        line-height: 1.15;
         margin: 0;
+        color: var(--card-text-color-main);
     }
 
     p {
-        margin-top: 0.6rem;
+        max-width: 52rem;
+        margin: 1rem 0 0;
         color: var(--card-text-color-secondary);
-        font-size: 0.95rem;
+        font-size: 1.5rem;
+        line-height: 1.7;
     }
 }
 
 .ref-list-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+    margin-top: 2rem;
 
-    @media (max-width: 640px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (max-width: 400px) {
+    @media (max-width: 760px) {
         grid-template-columns: 1fr;
     }
 }
 
 .ref-list-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--card-background);
-    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 9.6rem minmax(0, 1fr);
+    min-height: 14rem;
+    border: 1px solid var(--card-separator-color);
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: var(--shadow-l1);
+    background: color-mix(in srgb, var(--card-background) 90%, transparent);
+    box-shadow: none;
     text-decoration: none;
-    color: inherit;
-    transition: box-shadow 0.2s, transform 0.2s;
+    color: var(--card-text-color-main);
+    transition: border-color 150ms ease, background 150ms ease, transform 150ms ease;
 
     &:hover {
-        box-shadow: var(--shadow-l2);
-        transform: translateY(-4px);
+        border-color: var(--card-accent, #627765);
+        background: var(--card-background);
+        transform: translateY(-2px);
     }
 
-    // 顶部彩色横幅
+    &:focus-visible {
+        outline: 2px solid var(--card-accent, #627765);
+        outline-offset: 3px;
+    }
+
     .ref-list-card-banner {
-        background: var(--card-accent, #17c48a);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2.4rem 1rem;
-        min-height: 140px;
+        padding: 1.6rem 1rem;
+        border-right: 1px solid var(--card-separator-color);
+        background: color-mix(in srgb, var(--card-accent, #627765) 15%, var(--card-background));
 
         .ref-list-card-icon {
-            font-size: 3.2rem;
-            font-weight: 900;
-            color: #fff;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--card-accent, #627765);
             line-height: 1;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
             text-align: center;
             word-break: break-all;
         }
     }
 
-    // 卡片文字区
     .ref-list-card-body {
-        padding: 1.2rem 1.25rem 1rem;
-        flex: 1;
+        min-width: 0;
+        padding: 2rem;
         display: flex;
         flex-direction: column;
-        position: relative;
+        justify-content: center;
 
         h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin: 0 0 0.4rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0 0 0.6rem;
+            color: var(--card-text-color-main);
             line-height: 1.3;
         }
 
         p {
-            font-size: 1rem;
+            font-size: 1.4rem;
             color: var(--card-text-color-secondary);
             margin: 0;
-            line-height: 1.5;
-            flex: 1;
+            line-height: 1.6;
         }
 
         .ref-list-card-arrow {
             display: block;
-            margin-top: 0.8rem;
-            font-size: 1.05rem;
+            margin-top: 1.2rem;
+            font-size: 1.6rem;
             color: var(--card-accent, #17c48a);
-            font-weight: 700;
+            font-weight: 600;
             transition: transform 0.15s;
         }
     }
 
     &:hover .ref-list-card-arrow {
         transform: translateX(5px);
+    }
+}
+
+@media (max-width: 520px) {
+    .ref-list-container {
+        padding: 2.5rem 1.6rem 3rem;
+    }
+
+    .ref-list-header {
+        padding-top: 1rem;
+
+        h1 {
+            font-size: 2.8rem;
+        }
+    }
+
+    .ref-list-card {
+        grid-template-columns: 7.2rem minmax(0, 1fr);
+        min-height: 12.5rem;
+
+        .ref-list-card-body {
+            padding: 1.6rem;
+        }
     }
 }
 
@@ -248,15 +323,15 @@ $ref-accent: #17c48a;
         display: flex;
         align-items: center;
         gap: 0.6rem;
-        font-size: 2.8rem;
+        font-size: 3.2rem;
         font-weight: 800;
         margin-bottom: 0.4rem;
         line-height: 1;
     }
 
     .ref-page-title {
-        font-size: 2.8rem;
-        font-weight: 800;
+        font-size: 3.2rem;
+        font-weight: 600;
         margin: 0;
         line-height: 1.15;
     }
@@ -264,7 +339,8 @@ $ref-accent: #17c48a;
     .ref-page-desc {
         margin-top: 0.9rem;
         color: var(--card-text-color-secondary);
-        font-size: 0.95rem;
+        font-size: 1.5rem;
+        line-height: 1.7;
         max-width: 560px;
 
         a {
@@ -281,8 +357,8 @@ $ref-accent: #17c48a;
 // 区块标题
 .ref-content {
     h2 {
-        font-size: 1.75rem;
-        font-weight: 300;
+        font-size: 2.2rem;
+        font-weight: 600;
         margin: 2.5rem 0 1rem;
         padding-bottom: 0.6rem;
         border-bottom: 1px solid var(--card-separator-color);
@@ -295,7 +371,7 @@ $ref-accent: #17c48a;
     }
 
     h3 {
-        font-size: 0.95rem;
+        font-size: 1.6rem;
         font-weight: 600;
         margin: 0.75rem 0 0.25rem;
     }
@@ -348,11 +424,11 @@ $ref-accent: #17c48a;
         background: $ref-accent;
         color: #fff;
         padding: 0.5rem 1rem;
-        font-size: 1rem;
+        font-size: 1.3rem;
         font-weight: 600;
         font-family: var(--code-font-family);
         line-height: 1.5;
-        letter-spacing: 0.02em;
+        letter-spacing: 0;
     }
 
     .card-body {
@@ -364,13 +440,13 @@ $ref-accent: #17c48a;
         > *:last-child  { margin-bottom: 0; }
 
         p {
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             line-height: 1.7;
             margin: 0.45rem 0;
         }
 
         code {
-            font-size: 1.1rem; // 行内代码与正文同级
+            font-size: 1.4rem;
         }
 
         // 卡片内隐藏主题自动注入的 Copy 按钮
@@ -405,7 +481,7 @@ $ref-accent: #17c48a;
                 margin: 0;
                 padding: 1rem 1.1rem;
                 background: transparent;
-                font-size: 1.15rem; // 代码块比正文略大
+                font-size: 1.4rem;
                 line-height: 1.75;
                 white-space: pre;
                 word-break: normal;
@@ -437,7 +513,7 @@ $ref-accent: #17c48a;
         table {
             width: 100%;
             max-width: 100%;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
             border-collapse: collapse;
             white-space: nowrap;
 
@@ -456,7 +532,7 @@ $ref-accent: #17c48a;
                 &:first-child {
                     color: $ref-accent;
                     font-family: var(--code-font-family);
-                    font-size: 0.8rem;
+                    font-size: 1.3rem;
                 }
             }
 
@@ -471,7 +547,7 @@ $ref-accent: #17c48a;
             margin: 0.3rem 0;
 
             li {
-                font-size: 1.1rem;
+                font-size: 1.5rem;
                 line-height: 1.7;
                 word-break: break-word;
             }
@@ -501,7 +577,7 @@ $ref-accent: #17c48a;
 
 .ref-modal-box {
     background: var(--body-background);
-    border-radius: 14px;
+    border-radius: 8px;
     padding: 2.5rem 3rem;
     max-width: 1280px;
     width: 100%;
@@ -519,7 +595,7 @@ $ref-accent: #17c48a;
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 1.3rem;
+        font-size: 2rem;
         color: var(--card-text-color-secondary);
         line-height: 1;
         padding: 4px 8px;
@@ -539,7 +615,7 @@ $ref-accent: #17c48a;
         color: #fff;
         padding: 3px 16px;
         border-radius: 6px;
-        font-size: 0.85rem;
+        font-size: 1.3rem;
         font-weight: 600;
         font-family: var(--code-font-family);
         margin-bottom: 1.25rem;
@@ -549,10 +625,10 @@ $ref-accent: #17c48a;
         > *:first-child { margin-top: 0; }
         > *:last-child  { margin-bottom: 0; }
 
-        code { font-size: 1.15rem; }
+        code { font-size: 1.4rem; }
 
         pre {
-            font-size: 1.15rem;
+            font-size: 1.4rem;
             line-height: 1.7;
         }
 
@@ -564,14 +640,14 @@ $ref-accent: #17c48a;
             pre {
                 padding: 1.4rem 1.75rem;
                 margin: 0;
-                font-size: 1.15rem;
+                font-size: 1.4rem;
                 line-height: 1.7;
             }
         }
 
         table {
             width: 100%;
-            font-size: 0.9rem;
+            font-size: 1.4rem;
             border-collapse: collapse;
 
             thead th {
@@ -595,11 +671,11 @@ $ref-accent: #17c48a;
             tbody tr:last-child td { border-bottom: none; }
         }
 
-        p { font-size: 0.9rem; line-height: 1.7; }
+        p { font-size: 1.4rem; line-height: 1.7; }
 
         ul, ol {
             padding-left: 1.4rem;
-            li { font-size: 0.9rem; line-height: 1.75; }
+            li { font-size: 1.4rem; line-height: 1.75; }
         }
     }
 }
@@ -640,6 +716,10 @@ $ref-accent: #17c48a;
     color: var(--resource-ink);
 }
 
+.resource-library [data-resource-content][hidden] {
+    display: none;
+}
+
 [data-scheme="dark"] .resource-library {
     --resource-ink: #e6e9e2;
     --resource-muted: #b9c2b9;
@@ -653,11 +733,11 @@ $ref-accent: #17c48a;
 
 .resource-lock {
     display: flex;
-    min-height: calc(100vh - 8rem);
+    min-height: 70vh;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     max-width: 34rem;
-    padding: 2rem 0 4rem;
+    padding: clamp(7rem, 14vh, 12rem) 0 6rem;
     margin-left: clamp(0rem, 8vw, 8rem);
 
     &[hidden] {
@@ -666,17 +746,17 @@ $ref-accent: #17c48a;
 
     h1 {
         margin: 0.25rem 0 0;
-        font-size: clamp(2.4rem, 4vw, 4.15rem);
+        font-size: 4.2rem;
         font-weight: 600;
         line-height: 1.04;
-        letter-spacing: -0.04em;
+        letter-spacing: 0;
     }
 
     > p:not(.resource-lock__eyebrow):not(.resource-lock__status) {
         max-width: 28rem;
-        margin: 1rem 0 2.3rem;
+        margin: 1.2rem 0 2.6rem;
         color: var(--resource-muted);
-        font-size: 1.08rem;
+        font-size: 1.5rem;
         line-height: 1.7;
     }
 }
@@ -684,8 +764,8 @@ $ref-accent: #17c48a;
 .resource-lock__eyebrow {
     margin: 0;
     color: var(--resource-accent);
-    font: 600 0.84rem/1.2 var(--code-font-family);
-    letter-spacing: 0.12em;
+    font: 600 1.2rem/1.2 var(--code-font-family);
+    letter-spacing: 0;
 }
 
 .resource-lock__form {
@@ -695,7 +775,7 @@ $ref-accent: #17c48a;
         display: block;
         margin-bottom: 0.55rem;
         color: var(--resource-ink);
-        font-size: 0.9rem;
+        font-size: 1.4rem;
         font-weight: 600;
     }
 }
@@ -708,14 +788,15 @@ $ref-accent: #17c48a;
 
     input {
         min-width: 0;
-        padding: 0.85rem 0.95rem;
+        min-height: 4.4rem;
+        padding: 1rem 1.2rem;
         border: 1px solid var(--resource-rule);
         border-radius: 5px;
         outline: 0;
         background: rgba(255, 255, 255, 0.5);
         color: var(--resource-ink);
         font: inherit;
-        font-size: 1rem;
+        font-size: 1.6rem;
 
         &::placeholder {
             color: var(--resource-muted);
@@ -729,7 +810,8 @@ $ref-accent: #17c48a;
 
     button {
         min-width: 5.3rem;
-        padding: 0.85rem 1rem;
+        min-height: 4.4rem;
+        padding: 1rem 1.4rem;
         border: 1px solid var(--resource-accent);
         border-radius: 5px;
         outline: 0;
@@ -737,7 +819,7 @@ $ref-accent: #17c48a;
         color: #fff;
         cursor: pointer;
         font: inherit;
-        font-size: 0.95rem;
+        font-size: 1.4rem;
         font-weight: 600;
         transition: background 150ms ease, transform 150ms ease;
 
@@ -767,7 +849,7 @@ $ref-accent: #17c48a;
     min-height: 1.4rem;
     margin: 0.7rem 0 0;
     color: var(--resource-muted);
-    font-size: 0.82rem;
+    font-size: 1.3rem;
 
     &.is-error {
         color: var(--resource-accent);
@@ -787,10 +869,10 @@ $ref-accent: #17c48a;
     h1 {
         max-width: 12ch;
         margin: 0.15rem 0 0;
-        font-size: clamp(2.7rem, 4.6vw, 4.7rem);
+        font-size: 4.8rem;
         font-weight: 600;
         line-height: 0.98;
-        letter-spacing: -0.045em;
+        letter-spacing: 0;
     }
 }
 
@@ -798,16 +880,16 @@ $ref-accent: #17c48a;
     margin: 0;
     color: var(--resource-accent);
     font-family: var(--code-font-family);
-    font-size: 0.78rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0;
 }
 
 .resource-library__intro {
     max-width: 42rem;
     margin: 1.15rem 0 0 3.2rem;
     color: var(--resource-muted);
-    font-size: 1.12rem;
+    font-size: 1.6rem;
     font-weight: 400;
     line-height: 1.75;
 }
@@ -818,7 +900,8 @@ $ref-accent: #17c48a;
     grid-template-columns: auto 1fr auto;
     gap: 0.65rem;
     align-items: center;
-    padding: 0.72rem 0;
+    min-height: 4.4rem;
+    padding: 0.9rem 0;
     border-bottom: 1px solid var(--resource-ink);
     cursor: text;
 
@@ -837,7 +920,7 @@ $ref-accent: #17c48a;
         background: transparent;
         color: var(--resource-ink);
         font: inherit;
-        font-size: 1.04rem;
+        font-size: 1.6rem;
 
         &::placeholder {
             color: var(--resource-muted);
@@ -855,7 +938,7 @@ $ref-accent: #17c48a;
         border-radius: 4px;
         background: transparent;
         color: var(--resource-muted);
-        font: 500 0.82rem/1.2 var(--code-font-family);
+        font: 500 1.2rem/1.2 var(--code-font-family);
         text-align: center;
     }
 }
@@ -906,9 +989,9 @@ $ref-accent: #17c48a;
 .resource-index__label {
     margin: 0 0 1rem;
     color: var(--resource-muted);
-    font-size: 0.84rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0;
     text-transform: uppercase;
 }
 
@@ -924,7 +1007,7 @@ $ref-accent: #17c48a;
     gap: 1rem;
     align-items: baseline;
     width: 100%;
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     border: 0;
     border-bottom: 1px solid var(--resource-rule);
     outline: 0;
@@ -932,7 +1015,7 @@ $ref-accent: #17c48a;
     color: var(--resource-muted);
     cursor: pointer;
     font: inherit;
-    font-size: 1.08rem;
+    font-size: 1.6rem;
     text-align: left;
     transition: color 150ms ease, padding 150ms ease;
 
@@ -942,7 +1025,7 @@ $ref-accent: #17c48a;
         left: 0;
         width: 0;
         height: 1px;
-        margin-top: 1.68rem;
+        margin-top: 2.25rem;
         background: var(--resource-accent);
         transition: width 220ms ease;
     }
@@ -970,14 +1053,14 @@ $ref-accent: #17c48a;
 .resource-filter__count {
     color: var(--resource-muted);
     font-family: var(--code-font-family);
-    font-size: 0.88rem;
+    font-size: 1.3rem;
     font-weight: 400;
 }
 
 .resource-index__hint {
     margin: 2.8rem 0 0;
     color: var(--resource-muted);
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     line-height: 1.65;
 
     code {
@@ -998,8 +1081,8 @@ $ref-accent: #17c48a;
     p {
         margin: 0;
         color: var(--resource-muted);
-        font: 500 0.82rem/1.4 var(--code-font-family);
-        letter-spacing: 0.04em;
+        font: 500 1.2rem/1.4 var(--code-font-family);
+        letter-spacing: 0;
     }
 }
 
@@ -1048,7 +1131,7 @@ $ref-accent: #17c48a;
 .resource-item__number {
     padding-top: 0.38rem;
     color: var(--resource-muted);
-    font: 400 0.68rem/1 var(--code-font-family);
+    font: 400 1.2rem/1 var(--code-font-family);
 }
 
 .resource-item__mark {
@@ -1085,7 +1168,7 @@ $ref-accent: #17c48a;
 
     h2 {
         margin: 0;
-        font-size: 1.34rem;
+        font-size: 1.8rem;
         font-weight: 600;
         line-height: 1.35;
 
@@ -1107,21 +1190,21 @@ $ref-accent: #17c48a;
     border: 1px solid rgba(163, 95, 53, 0.28);
     border-radius: 3px;
     color: var(--resource-accent);
-    font-size: 0.62rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    letter-spacing: 0.06em;
+    letter-spacing: 0;
 }
 
 .resource-item__content > p {
     margin: 0.48rem 0 0;
     color: var(--resource-muted);
-    font-size: 1.08rem;
+    font-size: 1.5rem;
     line-height: 1.68;
 }
 
 .resource-item__note {
     color: var(--resource-accent) !important;
-    font-size: 0.78rem !important;
+    font-size: 1.3rem !important;
 }
 
 .resource-item__meta {
@@ -1133,7 +1216,7 @@ $ref-accent: #17c48a;
 
     > span {
         color: var(--resource-moss);
-        font-size: 0.84rem;
+        font-size: 1.3rem;
         font-weight: 500;
 
         &::before {
@@ -1156,12 +1239,12 @@ $ref-accent: #17c48a;
     background: transparent;
     color: var(--resource-muted);
     cursor: pointer;
-    font: 400 0.74rem/1.2 var(--code-font-family);
+    font: 400 1.2rem/1.2 var(--code-font-family);
 
     strong {
         color: var(--resource-ink);
         font-weight: 600;
-        letter-spacing: 0.08em;
+        letter-spacing: 0;
     }
 
     span {
@@ -1181,7 +1264,7 @@ $ref-accent: #17c48a;
     align-items: center;
     margin-top: 0.78rem;
     color: var(--resource-accent);
-    font-size: 0.88rem;
+    font-size: 1.4rem;
     font-weight: 600;
     text-decoration: none;
 
@@ -1210,20 +1293,20 @@ $ref-accent: #17c48a;
 
     > span {
         color: var(--resource-accent);
-        font: 600 0.72rem/1 var(--code-font-family);
-        letter-spacing: 0.12em;
+        font: 600 1.2rem/1 var(--code-font-family);
+        letter-spacing: 0;
     }
 
     h2 {
         margin: 0.65rem 0 0;
-        font-size: 1.45rem;
+        font-size: 2rem;
         font-weight: 600;
     }
 
     p {
         margin: 0.5rem 0 1.3rem;
         color: var(--resource-muted);
-        font-size: 0.88rem;
+        font-size: 1.4rem;
     }
 
     button {
@@ -1235,7 +1318,7 @@ $ref-accent: #17c48a;
         color: var(--resource-accent);
         cursor: pointer;
         font: inherit;
-        font-size: 0.78rem;
+        font-size: 1.4rem;
         font-weight: 600;
         line-height: 1.2;
 
@@ -1248,8 +1331,17 @@ $ref-accent: #17c48a;
 
 @media (max-width: 860px) {
     .resource-lock {
-        min-height: 62vh;
+        min-height: auto;
+        padding: 4.5rem 0 5rem;
         margin-left: 0;
+
+        h1 {
+            font-size: 3.2rem;
+        }
+    }
+
+    .resource-library__heading h1 {
+        font-size: 3.8rem;
     }
 
     .resource-library__header {
@@ -1283,7 +1375,7 @@ $ref-accent: #17c48a;
         flex: 0 0 auto;
         width: auto;
         gap: 0.45rem;
-        padding: 0.55rem 0.7rem;
+        padding: 0.9rem 1.1rem;
         border: 1px solid var(--resource-rule);
         border-radius: 5px;
 
@@ -1293,7 +1385,7 @@ $ref-accent: #17c48a;
 
         &:hover,
         &:focus-visible {
-            padding-left: 0.7rem;
+            padding-left: 1.1rem;
         }
 
         &.is-active {
@@ -1398,9 +1490,9 @@ $ref-accent: #17c48a;
     justify-content: center;
     width: 100%;
     height: 100%;
-    font-size: 0.95rem;
+    font-size: 1.2rem;
     font-weight: 800;
-    letter-spacing: 0.04em;
+    letter-spacing: 0;
 }
 
 .blog-ai__panel {
@@ -1449,9 +1541,9 @@ $ref-accent: #17c48a;
 
 .blog-ai__eyebrow {
     color: var(--blog-ai-accent) !important;
-    font-size: 0.98rem !important;
+    font-size: 1.2rem !important;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
     text-transform: uppercase;
 }
 
@@ -1510,7 +1602,7 @@ $ref-accent: #17c48a;
     flex-wrap: wrap;
     gap: 0.4rem;
     align-items: center;
-    font-size: 1.08rem;
+    font-size: 1.3rem;
 
     span {
         color: var(--blog-ai-muted);
