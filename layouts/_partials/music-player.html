@@ -1,6 +1,7 @@
 {{- with hugo.Data.music -}}
-{{- if and .enabled .tracks -}}
-    {{- $firstTrack := index .tracks 0 -}}
+{{- if and .enabled .artists -}}
+    {{- $firstArtist := index .artists 0 -}}
+    {{- $firstTrack := index $firstArtist.tracks 0 -}}
     <details class="music-shelf" data-music-shelf open>
         <summary class="music-shelf__summary">
             <span class="music-shelf__record" aria-hidden="true"></span>
@@ -13,23 +14,50 @@
 
         <div class="music-shelf__body">
             <div class="music-shelf__artists" role="group" aria-label="选择歌手">
-                {{- range $index, $track := .tracks -}}
+                {{- range $artistIndex, $artist := .artists -}}
                     <button
-                        class="music-shelf__artist{{ if eq $index 0 }} is-active{{ end }}"
+                        class="music-shelf__artist{{ if eq $artistIndex 0 }} is-active{{ end }}"
                         type="button"
-                        data-music-track
-                        data-track-id="{{ $track.spotifyId }}"
-                        data-track-title="{{ $track.title }}"
-                        data-track-artist="{{ $track.artist }}"
-                        aria-pressed="{{ if eq $index 0 }}true{{ else }}false{{ end }}"
-                    >{{ $track.artist }}</button>
+                        data-music-artist
+                        data-artist-index="{{ $artistIndex }}"
+                        aria-controls="music-tracks-{{ $artistIndex }}"
+                        aria-pressed="{{ if eq $artistIndex 0 }}true{{ else }}false{{ end }}"
+                    >{{ $artist.name }}</button>
+                {{- end -}}
+            </div>
+
+            <div class="music-shelf__songs" aria-label="歌曲列表">
+                {{- range $artistIndex, $artist := .artists -}}
+                    <div
+                        class="music-shelf__song-group"
+                        id="music-tracks-{{ $artistIndex }}"
+                        data-music-track-group
+                        data-artist-index="{{ $artistIndex }}"
+                        {{ if ne $artistIndex 0 }}hidden{{ end }}
+                    >
+                        {{- range $trackIndex, $track := $artist.tracks -}}
+                            <button
+                                class="music-shelf__song{{ if and (eq $artistIndex 0) (eq $trackIndex 0) }} is-active{{ end }}"
+                                type="button"
+                                data-music-track
+                                data-artist-index="{{ $artistIndex }}"
+                                data-track-id="{{ $track.spotifyId }}"
+                                data-track-title="{{ $track.title }}"
+                                data-track-artist="{{ $artist.name }}"
+                                aria-pressed="{{ if and (eq $artistIndex 0) (eq $trackIndex 0) }}true{{ else }}false{{ end }}"
+                            >
+                                <span aria-hidden="true">{{ printf "%02d" (add $trackIndex 1) }}</span>
+                                <strong>{{ $track.title }}</strong>
+                            </button>
+                        {{- end -}}
+                    </div>
                 {{- end -}}
             </div>
 
             <div class="music-shelf__track">
                 <span class="music-shelf__track-copy">
                     <small>当前选曲</small>
-                    <strong data-music-label>{{ $firstTrack.artist }} · {{ $firstTrack.title }}</strong>
+                    <strong data-music-label>{{ $firstArtist.name }} · {{ $firstTrack.title }}</strong>
                 </span>
                 <a
                     class="music-shelf__play"
@@ -37,7 +65,7 @@
                     href="https://open.spotify.com/track/{{ $firstTrack.spotifyId }}"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="在 Spotify 打开 {{ $firstTrack.artist }}《{{ $firstTrack.title }}》"
+                    aria-label="在 Spotify 打开 {{ $firstArtist.name }}《{{ $firstTrack.title }}》"
                 >
                     <span class="music-shelf__play-icon" aria-hidden="true"></span>
                     <span>Spotify 播放</span>

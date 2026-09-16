@@ -1,16 +1,44 @@
 enabled: true
 title: 唱片架
 subtitle: Spotify 选曲
-tracks:
-  - artist: 周杰伦
-    title: 晴天
-    spotifyId: 5pIcwtJYNJx93l420oR2Vm
-  - artist: 方大同
-    title: 特别的人
-    spotifyId: 0VTzUEuHYD8s7CgQ15cDPo
-  - artist: 马思唯
-    title: Coco Elva Tia
-    spotifyId: 5iC7FWLjwoQkiLrB2ogP3S
-  - artist: ASEN
-    title: DAY1 (2020)
-    spotifyId: 6ni2eYdPpvJQ4QWrJ6sclG
+artists:
+  - name: 周杰伦
+    tracks:
+      - title: 晴天
+        spotifyId: 5pIcwtJYNJx93l420oR2Vm
+      - title: 七里香
+        spotifyId: 57w29bSwdIZ6gr6xXOqwc1
+      - title: 青花瓷
+        spotifyId: 10VuSw48iPN2UK2xX9Y6P0
+      - title: 告白气球
+        spotifyId: 2tqF9MPNdYdJU70U0ULO23
+  - name: 方大同
+    tracks:
+      - title: 特别的人
+        spotifyId: 0VTzUEuHYD8s7CgQ15cDPo
+      - title: 爱爱爱
+        spotifyId: 59lBAMCis4C6NsPdUV35Vz
+      - title: 红豆
+        spotifyId: 5TkQbhQm9BXONk2agDo4w9
+      - title: Love Song
+        spotifyId: 2XEtdVgbgltXfzVQppAkbi
+  - name: 马思唯
+    tracks:
+      - title: Coco Elva Tia
+        spotifyId: 5iC7FWLjwoQkiLrB2ogP3S
+      - title: Crush On You
+        spotifyId: 62PSNt68BxMaxl9U50PIdW
+      - title: House Music
+        spotifyId: 1x52cX1Dbzu9pYFtS4NCai
+      - title: 黑色星期五
+        spotifyId: 3fs4yKpf8KLQRDnzJB70Jk
+  - name: ASEN
+    tracks:
+      - title: DAY1 (2020)
+        spotifyId: 6ni2eYdPpvJQ4QWrJ6sclG
+      - title: What U Gon Do
+        spotifyId: 0MMQy8iOElRSuuG1QtNjW4
+      - title: 懂不？
+        spotifyId: 3OVWQXnyWydE49HNYQcN2V
+      - title: 在雨后醒来
+        spotifyId: 2byqpbZs2QnBvX6ngnG20R
