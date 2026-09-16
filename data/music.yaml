@@ -1,0 +1,16 @@
+enabled: true
+title: 唱片架
+subtitle: Spotify 选曲
+tracks:
+  - artist: 周杰伦
+    title: 晴天
+    spotifyId: 5pIcwtJYNJx93l420oR2Vm
+  - artist: 方大同
+    title: 特别的人
+    spotifyId: 0VTzUEuHYD8s7CgQ15cDPo
+  - artist: 马思唯
+    title: Coco Elva Tia
+    spotifyId: 5iC7FWLjwoQkiLrB2ogP3S
+  - artist: ASEN
+    title: DAY1 (2020)
+    spotifyId: 6ni2eYdPpvJQ4QWrJ6sclG
