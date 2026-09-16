@@ -20,12 +20,11 @@ function savePreference(key: string, value: string): void {
 function initMusicShelf(shelf: HTMLDetailsElement): void {
     if (shelf.dataset.ready === 'true') return;
 
-    const frame = shelf.querySelector<HTMLIFrameElement>('[data-music-frame]');
     const label = shelf.querySelector<HTMLElement>('[data-music-label]');
     const link = shelf.querySelector<HTMLAnchorElement>('[data-music-link]');
     const buttons = Array.from(shelf.querySelectorAll<HTMLButtonElement>('[data-music-track]'));
 
-    if (!frame || !label || !link || buttons.length === 0) return;
+    if (!label || !link || buttons.length === 0) return;
 
     const activateTrack = (button: HTMLButtonElement): void => {
         const trackId = button.dataset.trackId;
@@ -40,12 +39,6 @@ function initMusicShelf(shelf: HTMLDetailsElement): void {
             item.setAttribute('aria-pressed', String(active));
         });
 
-        if (frame.dataset.trackId !== trackId) {
-            frame.src = `https://open.spotify.com/embed/track/${encodeURIComponent(trackId)}?utm_source=generator&theme=0`;
-            frame.dataset.trackId = trackId;
-        }
-
-        frame.title = `Spotify 播放器：${artist}《${title}》`;
         label.textContent = `${artist} · ${title}`;
         link.href = `https://open.spotify.com/track/${encodeURIComponent(trackId)}`;
         link.setAttribute('aria-label', `在 Spotify 打开 ${artist}《${title}》`);

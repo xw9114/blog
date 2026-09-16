@@ -1,7 +1,6 @@
 {{- with hugo.Data.music -}}
 {{- if and .enabled .tracks -}}
     {{- $firstTrack := index .tracks 0 -}}
-    {{- $embedURL := printf "https://open.spotify.com/embed/track/%s?utm_source=generator&theme=0" $firstTrack.spotifyId -}}
     <details class="music-shelf" data-music-shelf open>
         <summary class="music-shelf__summary">
             <span class="music-shelf__record" aria-hidden="true"></span>
@@ -27,31 +26,23 @@
                 {{- end -}}
             </div>
 
-            <div class="music-shelf__player">
-                <iframe
-                    data-music-frame
-                    data-track-id="{{ $firstTrack.spotifyId }}"
-                    src="{{ $embedURL | safeURL }}"
-                    title="Spotify 播放器：{{ $firstTrack.artist }}《{{ $firstTrack.title }}》"
-                    width="100%"
-                    height="152"
-                    frameborder="0"
-                    loading="lazy"
-                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    allowfullscreen
-                ></iframe>
-            </div>
-
-            <p class="music-shelf__now">
-                <span data-music-label>{{ $firstTrack.artist }} · {{ $firstTrack.title }}</span>
+            <div class="music-shelf__track">
+                <span class="music-shelf__track-copy">
+                    <small>当前选曲</small>
+                    <strong data-music-label>{{ $firstTrack.artist }} · {{ $firstTrack.title }}</strong>
+                </span>
                 <a
+                    class="music-shelf__play"
                     data-music-link
                     href="https://open.spotify.com/track/{{ $firstTrack.spotifyId }}"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="在 Spotify 打开 {{ $firstTrack.artist }}《{{ $firstTrack.title }}》"
-                >Spotify ↗</a>
-            </p>
+                >
+                    <span class="music-shelf__play-icon" aria-hidden="true"></span>
+                    <span>Spotify 播放</span>
+                </a>
+            </div>
         </div>
     </details>
 {{- end -}}

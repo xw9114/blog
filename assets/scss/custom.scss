@@ -1886,52 +1886,82 @@ body.show-menu .music-shelf {
     }
 }
 
-.music-shelf__player {
-    min-height: 152px;
-    overflow: hidden;
-    border: 1px solid rgba(31, 34, 30, 0.12);
-    border-radius: 8px;
-    background: #282828;
-    box-shadow: 0 8px 22px rgba(35, 31, 27, 0.14);
-
-    iframe {
-        display: block;
-        border: 0;
-    }
+.music-shelf__track {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.8rem;
+    align-items: end;
+    margin-top: 0.25rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--music-shelf-line);
 }
 
-.music-shelf__now {
+.music-shelf__track-copy {
+    min-width: 0;
     display: flex;
-    gap: 0.65rem;
-    justify-content: space-between;
-    align-items: baseline;
-    margin: 0.65rem 0 0;
-    color: var(--card-text-color-secondary);
-    font-size: 1.08rem;
-    line-height: 1.35;
+    flex-direction: column;
+    gap: 0.18rem;
 
-    span {
-        min-width: 0;
+    small {
+        color: var(--card-text-color-secondary);
+        font-size: 1.02rem;
+        font-weight: 400;
+        line-height: 1.25;
+    }
+
+    strong {
         overflow: hidden;
+        color: var(--card-text-color-main);
+        font-size: 1.17rem;
+        font-weight: 600;
+        line-height: 1.35;
         text-overflow: ellipsis;
         white-space: nowrap;
     }
+}
 
-    a {
-        flex: 0 0 auto;
-        color: var(--music-shelf-accent);
-        font-weight: 600;
-        text-decoration: none;
+.music-shelf__play {
+    display: inline-flex;
+    gap: 0.42rem;
+    align-items: center;
+    padding: 0.3rem 0;
+    color: var(--music-shelf-accent);
+    font-size: 1.08rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 150ms ease, transform 150ms ease;
 
-        &:hover {
-            text-decoration: underline;
-            text-underline-offset: 0.2em;
-        }
+    &:hover {
+        color: color-mix(in srgb, var(--music-shelf-accent) 78%, var(--card-text-color-main));
+        transform: translateX(2px);
+    }
 
-        &:focus-visible {
-            outline: 2px solid var(--music-shelf-accent);
-            outline-offset: 2px;
-        }
+    &:focus-visible {
+        border-radius: 4px;
+        outline: 2px solid var(--music-shelf-accent);
+        outline-offset: 3px;
+    }
+}
+
+.music-shelf__play-icon {
+    position: relative;
+    width: 1.7rem;
+    height: 1.7rem;
+    flex: 0 0 auto;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 54%;
+        border-top: 0.32rem solid transparent;
+        border-bottom: 0.32rem solid transparent;
+        border-left: 0.48rem solid currentColor;
+        transform: translate(-42%, -50%);
     }
 }
 
