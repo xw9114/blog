@@ -2,6 +2,7 @@
 {{- if and .enabled .artists -}}
     {{- $firstArtist := index .artists 0 -}}
     {{- $firstTrack := index $firstArtist.tracks 0 -}}
+    {{- $firstAvailable := os.FileExists (printf "static/%s" $firstTrack.src) -}}
     <details class="music-shelf" data-music-shelf open>
         <summary class="music-shelf__summary">
             <span class="music-shelf__record" aria-hidden="true"></span>
@@ -13,6 +14,8 @@
         </summary>
 
         <div class="music-shelf__body">
+            <audio data-music-audio preload="metadata"></audio>
+
             <div class="music-shelf__artists" role="group" aria-label="选择歌手">
                 {{- range $artistIndex, $artist := .artists -}}
                     <button
@@ -36,18 +39,23 @@
                         {{ if ne $artistIndex 0 }}hidden{{ end }}
                     >
                         {{- range $trackIndex, $track := $artist.tracks -}}
+                            {{- $available := os.FileExists (printf "static/%s" $track.src) -}}
                             <button
-                                class="music-shelf__song{{ if and (eq $artistIndex 0) (eq $trackIndex 0) }} is-active{{ end }}"
+                                class="music-shelf__song{{ if and (eq $artistIndex 0) (eq $trackIndex 0) }} is-active{{ end }}{{ if not $available }} is-unavailable{{ end }}"
                                 type="button"
                                 data-music-track
                                 data-artist-index="{{ $artistIndex }}"
-                                data-track-id="{{ $track.spotifyId }}"
+                                data-track-id="{{ $track.id }}"
                                 data-track-title="{{ $track.title }}"
                                 data-track-artist="{{ $artist.name }}"
+                                data-track-src="{{ if $available }}{{ $track.src | relURL }}{{ end }}"
+                                data-track-file="static/{{ $track.src }}"
+                                data-track-available="{{ $available }}"
                                 aria-pressed="{{ if and (eq $artistIndex 0) (eq $trackIndex 0) }}true{{ else }}false{{ end }}"
                             >
                                 <span aria-hidden="true">{{ printf "%02d" (add $trackIndex 1) }}</span>
                                 <strong>{{ $track.title }}</strong>
+                                <em>{{ if $available }}就绪{{ else }}待添加{{ end }}</em>
                             </button>
                         {{- end -}}
                     </div>
@@ -59,18 +67,27 @@
                     <small>当前选曲</small>
                     <strong data-music-label>{{ $firstArtist.name }} · {{ $firstTrack.title }}</strong>
                 </span>
-                <a
-                    class="music-shelf__play"
-                    data-music-link
-                    href="https://open.spotify.com/track/{{ $firstTrack.spotifyId }}"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="在 Spotify 打开 {{ $firstArtist.name }}《{{ $firstTrack.title }}》"
-                >
-                    <span class="music-shelf__play-icon" aria-hidden="true"></span>
-                    <span>Spotify 播放</span>
-                </a>
+                <div class="music-shelf__transport" aria-label="播放控制">
+                    <button type="button" data-music-previous aria-label="上一首"><span aria-hidden="true">│◀</span></button>
+                    <button class="music-shelf__play" type="button" data-music-play aria-label="播放" {{ if not $firstAvailable }}disabled{{ end }}>
+                        <span class="music-shelf__play-shape" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" data-music-next aria-label="下一首"><span aria-hidden="true">▶│</span></button>
+                </div>
             </div>
+
+            <div class="music-shelf__timeline">
+                <input data-music-progress type="range" min="0" max="1000" step="1" value="0" aria-label="播放进度" disabled>
+                <p><span data-music-elapsed>0:00</span><span data-music-duration>0:00</span></p>
+            </div>
+
+            <div class="music-shelf__options">
+                <button type="button" data-music-shuffle aria-pressed="false">随机</button>
+                <button type="button" data-music-repeat aria-pressed="false">单曲循环</button>
+                <label><span>音量</span><input data-music-volume type="range" min="0" max="1" step="0.05" value="0.8" aria-label="音量"></label>
+            </div>
+
+            <p class="music-shelf__status" data-music-status data-state="{{ if $firstAvailable }}ready{{ else }}waiting{{ end }}">{{ if $firstAvailable }}准备播放{{ else }}等待文件：{{ path.Base $firstTrack.src }}{{ end }}</p>
         </div>
     </details>
 {{- end -}}

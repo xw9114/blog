@@ -1,44 +1,61 @@
 enabled: true
 title: 唱片架
-subtitle: Spotify 选曲
+subtitle: 本地音乐
+# 将有使用权限的 MP3 放入 static/ 下对应的 src 路径，重新构建后会自动启用。
 artists:
   - name: 周杰伦
     tracks:
-      - title: 晴天
-        spotifyId: 5pIcwtJYNJx93l420oR2Vm
-      - title: 七里香
-        spotifyId: 57w29bSwdIZ6gr6xXOqwc1
-      - title: 青花瓷
-        spotifyId: 10VuSw48iPN2UK2xX9Y6P0
-      - title: 告白气球
-        spotifyId: 2tqF9MPNdYdJU70U0ULO23
+      - id: jay-chou-sunny-day
+        title: 晴天
+        src: music/jay-chou/sunny-day.mp3
+      - id: jay-chou-qilixiang
+        title: 七里香
+        src: music/jay-chou/qilixiang.mp3
+      - id: jay-chou-blue-and-white-porcelain
+        title: 青花瓷
+        src: music/jay-chou/blue-and-white-porcelain.mp3
+      - id: jay-chou-love-confession
+        title: 告白气球
+        src: music/jay-chou/love-confession.mp3
   - name: 方大同
     tracks:
-      - title: 特别的人
-        spotifyId: 0VTzUEuHYD8s7CgQ15cDPo
-      - title: 爱爱爱
-        spotifyId: 59lBAMCis4C6NsPdUV35Vz
-      - title: 红豆
-        spotifyId: 5TkQbhQm9BXONk2agDo4w9
-      - title: Love Song
-        spotifyId: 2XEtdVgbgltXfzVQppAkbi
+      - id: khalil-fong-special-person
+        title: 特别的人
+        src: music/khalil-fong/special-person.mp3
+      - id: khalil-fong-love-love-love
+        title: 爱爱爱
+        src: music/khalil-fong/love-love-love.mp3
+      - id: khalil-fong-red-bean
+        title: 红豆
+        src: music/khalil-fong/red-bean.mp3
+      - id: khalil-fong-love-song
+        title: Love Song
+        src: music/khalil-fong/love-song.mp3
   - name: 马思唯
     tracks:
-      - title: Coco Elva Tia
-        spotifyId: 5iC7FWLjwoQkiLrB2ogP3S
-      - title: Crush On You
-        spotifyId: 62PSNt68BxMaxl9U50PIdW
-      - title: House Music
-        spotifyId: 1x52cX1Dbzu9pYFtS4NCai
-      - title: 黑色星期五
-        spotifyId: 3fs4yKpf8KLQRDnzJB70Jk
+      - id: masiwei-coco-elva-tia
+        title: Coco Elva Tia
+        src: music/masiwei/coco-elva-tia.mp3
+      - id: masiwei-crush-on-you
+        title: Crush On You
+        src: music/masiwei/crush-on-you.mp3
+      - id: masiwei-house-music
+        title: House Music
+        src: music/masiwei/house-music.mp3
+      - id: masiwei-black-friday
+        title: 黑色星期五
+        src: music/masiwei/black-friday.mp3
   - name: ASEN
     tracks:
-      - title: DAY1 (2020)
-        spotifyId: 6ni2eYdPpvJQ4QWrJ6sclG
-      - title: What U Gon Do
-        spotifyId: 0MMQy8iOElRSuuG1QtNjW4
-      - title: 懂不？
-        spotifyId: 3OVWQXnyWydE49HNYQcN2V
-      - title: 在雨后醒来
-        spotifyId: 2byqpbZs2QnBvX6ngnG20R
+      - id: asen-day1-2020
+        title: DAY1 (2020)
+        src: music/asen/day1-2020.mp3
+      - id: asen-what-u-gon-do
+        title: What U Gon Do
+        src: music/asen/what-u-gon-do.mp3
+      - id: asen-dong-bu
+        title: 懂不？
+        src: music/asen/dong-bu.mp3
+      - id: asen-wake-after-rain
+        title: 在雨后醒来
+        src: music/asen/wake-after-rain.mp3
